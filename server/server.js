@@ -8,6 +8,7 @@ app.get('/api/hello', (req, res) => {
 	res.send({ express: 'Hello From Express' });
 });
 
+// send the react app
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('*', function(req, res) {
