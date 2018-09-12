@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+
+// pages
+import Home from './components/pages/Home/Home';
+import Login from './components/pages/Login/Login';
+
+// components
+import Navigation from './components/organisms/Navigation/Navigation';
+import { Button } from 'semantic-ui-react';
 
 class App extends Component {
 	constructor(props) {
@@ -28,13 +36,18 @@ class App extends Component {
 
 	render() {
 		return (
-			<div className="App">
-				<header className="App-header">
-					<img src={logo} className="App-logo" alt="logo" />
-					<h1 className="App-title">Welcome to React</h1>
-				</header>
-				<p className="App-intro">{this.state.response}</p>
-			</div>
+			<Router>
+				<div className="app">
+					<Navigation />
+
+					<div className="router">
+						<Route path="/" exact component={Home} />
+						<Route path="/login" exact component={Login} />
+					</div>
+
+					<p className="App-intro">{this.state.response}</p>
+				</div>
+			</Router>
 		);
 	}
 }
