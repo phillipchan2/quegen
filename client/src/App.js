@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import axios from 'axios';
 
 // pages
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
+import Register from './components/pages/Register/Register';
 
 // components
 import Navigation from './components/organisms/Navigation/Navigation';
@@ -15,24 +17,45 @@ class App extends Component {
 		super(props);
 
 		this.state = {
-			response: ''
+			user: {},
+			isAuthenticated: false
 		};
 	}
 
 	componentDidMount() {
-		this.callApi()
-			.then(res => this.setState({ response: res.express }))
-			.catch(err => console.log(err));
+		const jwtoken = localStorage.getItem('jwtoken');
+
+		if (jwtoken) {
+			axios
+				.get(`/auth/verify`, {
+					headers: {
+						token: jwtoken
+					}
+				})
+				.then(res => {
+					console.log(res);
+
+					if (res.data.success) {
+						this.setState({
+							isAuthenticated: true,
+							user: res.data.user
+						});
+					}
+				});
+		}
+
+		console.log(jwtoken);
 	}
 
-	callApi = async () => {
-		const response = await fetch('/api/hello');
-		const body = await response.json();
+	handleSuccessfulLogin(user, token) {
+		this.setState({
+			isAuthenticated: true,
+			user: user
+		});
 
-		if (response.status !== 200) throw Error(body.message);
-
-		return body;
-	};
+		localStorage.setItem('jwtoken', token);
+		console.log(user, token);
+	}
 
 	render() {
 		return (
@@ -42,10 +65,19 @@ class App extends Component {
 
 					<div className="router">
 						<Route path="/" exact component={Home} />
-						<Route path="/login" exact component={Login} />
+						<Route
+							path="/login"
+							render={props => (
+								<Login
+									{...props}
+									successfulLogin={this.handleSuccessfulLogin.bind(
+										this
+									)}
+								/>
+							)}
+						/>
+						<Route path="/register" exact component={Register} />
 					</div>
-
-					<p className="App-intro">{this.state.response}</p>
 				</div>
 			</Router>
 		);
