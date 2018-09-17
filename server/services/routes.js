@@ -15,8 +15,10 @@ router.get('/hi', (req, res, next) => {
 ************************************
 */
 
-// login routes
+// authorization routes
 router.use('/auth', require('../components/Auth/AuthRoutes'));
+
+// public api routes
 
 // protected routes middleware
 router.use((req, res, next) => {
@@ -69,6 +71,11 @@ router.use((req, res, next) => {
 router.use(
 	'/categorySet',
 	require('../components/CategorySet/CategorySetRoutes')
+);
+
+router.use(
+	'/questionnaire',
+	require('../components/Questionnaire/QuestionnaireRoutes')
 );
 
 module.exports = router;
