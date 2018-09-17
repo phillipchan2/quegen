@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const findOrCreate = require('mongoose-find-or-create');
-const passportLocalMongoose = require('passport-local-mongoose');
 var bcrypt = require('bcrypt');
 
 var userSchema = new mongoose.Schema({

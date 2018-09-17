@@ -1,11 +1,12 @@
 const express = require('express');
+const app = express();
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const User = require('./UserModel');
 const config = require('../../config/config');
 const userUtils = require('../../utils/userUtils');
 
-router.post('/register', function(req, res, next) {
+router.post('/register', (req, res, next) => {
 	User.findOne({ email: req.body.email }, (err, user) => {
 		if (req.body.email && req.body.password) {
 			if (user) {
@@ -35,7 +36,7 @@ router.post('/register', function(req, res, next) {
 	});
 });
 
-router.post('/login', function(req, res, next) {
+router.post('/login', (req, res, next) => {
 	if (!req.body.email || !req.body.password) {
 		return res.json({
 			success: false,
@@ -82,7 +83,7 @@ router.post('/login', function(req, res, next) {
 	});
 });
 
-router.get('/verify', function(req, res, next) {
+router.get('/verify', (req, res, next) => {
 	var token = req.headers.token;
 
 	if (token) {
@@ -118,56 +119,6 @@ router.get('/verify', function(req, res, next) {
 			message: 'Authentication Error: Invalid/No JWtoken Provided'
 		});
 	}
-});
-
-// protected routes middleware
-// everything below is protected
-router.use(function(req, res, next) {
-	var token =
-		req.body.token ||
-		req.query.token ||
-		req.headers['x-access-token'] ||
-		req.headers.token;
-
-	if (token) {
-		jwt.verify(token, config.jwt_secret, function(err, decoded) {
-			if (err) {
-				res.json({
-					success: false,
-					message: 'Error: JWtoken invalid for route'
-				});
-			}
-			// success:
-			else {
-				let decoded = jwt.decode(token);
-
-				// find the user and pass the entire user for the rest of the routes
-				User.findOne({ email: decoded.email }, function(err, user) {
-					if (!user) {
-						res.json({
-							success: false,
-							message: 'User not found'
-						});
-					} else {
-						req.user = userUtils.formatSafeUser(user._doc);
-						next();
-					}
-				});
-			}
-		});
-	} else {
-		res.status(403).json({
-			succes: false,
-			message: 'Unauthorized to view this resource'
-		});
-	}
-});
-
-router.get('/protectedRoute', function(req, res, next) {
-	res.json({
-		hi: 'hello',
-		user: req.user
-	});
 });
 
 module.exports = router;

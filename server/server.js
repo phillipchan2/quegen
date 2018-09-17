@@ -12,14 +12,10 @@ app.use(parser.urlencoded({ extended: false }));
 require('./services/db');
 
 // auth routes
-const auth = require('./components/Auth/AuthRoutes');
 
-app.use('/auth', auth);
+app.use('/', require('./services/routes'));
 
-// API calls
-app.get('/api/hello', (req, res) => {
-	res.send({ express: 'Hello From Express' });
-});
+// app.use('/auth', require('./components/Auth/AuthRoutes'));
 
 // send the react app
 app.use(express.static(path.join(__dirname, '../client/build')));
