@@ -90,7 +90,7 @@ router.get('/verify', (req, res, next) => {
 		jwt.verify(token, config.jwt_secret, function(err, decoded) {
 			console.log(decoded);
 			if (err) {
-				res.json({
+				res.status(400).json({
 					success: false,
 					message: 'Authentication Error: Invalid/No JWtoken Provided'
 				});
@@ -98,7 +98,7 @@ router.get('/verify', (req, res, next) => {
 				// make sure user still exists
 				User.findOne({ email: decoded.email }, function(err, user) {
 					if (!user) {
-						res.json({
+						res.status(400).json({
 							success: false,
 							message: 'User not found'
 						});

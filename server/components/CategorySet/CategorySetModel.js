@@ -1,12 +1,22 @@
 const mongoose = require('mongoose');
+const Mixed = mongoose.Schema.Types.Mixed;
 
 var categorySchema = new mongoose.Schema({
-	name: String,
-	resultDescription: String
+	name: {
+		type: String,
+		required: true
+	},
+	resultDescription: {
+		type: String,
+		required: true
+	}
 });
 
 var categorySetSchema = new mongoose.Schema({
-	name: String,
+	name: {
+		type: String,
+		required: true
+	},
 	categories: [categorySchema]
 });
 
