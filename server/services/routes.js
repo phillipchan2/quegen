@@ -67,8 +67,8 @@ router.use((req, res, next) => {
 */
 
 router.use(
-	'/categorySets',
-	require('../components/CategorySets/CategorySetsRoutes')
+	'/categorySet',
+	require('../components/CategorySet/CategorySetRoutes')
 );
 
 module.exports = router;

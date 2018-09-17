@@ -5,12 +5,11 @@ var categorySchema = new mongoose.Schema({
 	resultDescription: String
 });
 
-var categorySetsSchema = new mongoose.Schema({
+var categorySetSchema = new mongoose.Schema({
 	name: String,
-	description: String,
 	categories: [categorySchema]
 });
 
-var CategorySets = mongoose.model('CategorySets', categorySetsSchema);
+var CategorySet = mongoose.model('CategorySet', categorySetSchema);
 
-module.exports = CategorySets;
+module.exports = CategorySet;
