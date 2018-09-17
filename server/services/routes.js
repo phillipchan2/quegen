@@ -1,5 +1,4 @@
 const express = require('express');
-const app = express();
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const config = require('../config/config');
@@ -10,10 +9,16 @@ router.get('/hi', (req, res, next) => {
 	res.send('hello');
 });
 
+/*
+************************************
+    Unprotected Routes
+************************************
+*/
+
 // login routes
 router.use('/auth', require('../components/Auth/AuthRoutes'));
 
-// protected routes from here on out
+// protected routes middleware
 router.use((req, res, next) => {
 	var token =
 		req.body.token ||
@@ -54,6 +59,12 @@ router.use((req, res, next) => {
 		});
 	}
 });
+
+/*
+************************************
+    Protected Routes
+************************************
+*/
 
 router.use(
 	'/categorySets',
