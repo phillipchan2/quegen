@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const Mixed = mongoose.Schema.Types.Mixed;
 
 var categorySchema = new mongoose.Schema({
 	name: {
