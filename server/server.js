@@ -11,16 +11,22 @@ app.use(parser.urlencoded({ extended: false }));
 // db
 require('./services/db');
 
-// auth routes
+// routes
+app.use('/api', require('./services/routes'));
 
-app.use('/', require('./services/routes'));
+app.use(
+	'/questionnaires',
+	express.static(path.join(__dirname, '../questionnaires/build'))
+);
 
-// app.use('/auth', require('./components/Auth/AuthRoutes'));
+app.get('/questionnaires/*', (req, res) => {
+	res.sendFile(path.join(__dirname, '../questionnaires/build', 'index.html'));
+});
 
 // send the react app
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use('/', express.static(path.join(__dirname, '../client/build')));
 
-app.get('*', function(req, res) {
+app.get('/*', function(req, res) {
 	res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 

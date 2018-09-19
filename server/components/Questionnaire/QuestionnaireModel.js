@@ -1,9 +1,14 @@
 const mongoose = require('mongoose');
+const Mixed = mongoose.SchemaType.Mixed;
 
 var questionSchema = new mongoose.Schema({
-	name: {
+	label: {
 		type: String,
 		required: true
+	},
+	appliesToCategory: {
+		type: [Number],
+		required: false
 	}
 });
 

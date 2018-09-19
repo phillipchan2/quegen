@@ -27,7 +27,7 @@ class Login extends Component {
 	}
 
 	handleSubmit() {
-		axios.post(`/auth/login`, this.state).then(res => {
+		axios.post(`/api/auth/login`, this.state).then(res => {
 			if (res.data.success) {
 				this.setState({
 					loginSuccess: true
