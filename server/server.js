@@ -14,16 +14,6 @@ require('./services/db');
 // routes
 app.use('/api', require('./services/routes'));
 
-app.use(
-	'/questionnaires',
-	express.static(path.join(__dirname, '../questionnaires/build'))
-);
-
-app.get('/questionnaires/*', (req, res) => {
-	res.sendFile(path.join(__dirname, '../questionnaires/build', 'index.html'));
-});
-
-// send the react app
 app.use('/', express.static(path.join(__dirname, '../client/build')));
 
 app.get('/*', function(req, res) {
