@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import axios from 'axios';
+import { Provider, inject, observer } from 'mobx-react';
+
+// services
+import AuthStore from './stores/AuthStore';
 
 // pages
 import Home from './components/pages/Home/Home';
@@ -59,27 +63,33 @@ class App extends Component {
 
 	render() {
 		return (
-			<Router>
-				<div className="app">
-					<Navigation />
+			<Provider authStore={new AuthStore()}>
+				<Router>
+					<div className="app">
+						<Navigation />
 
-					<div className="router">
-						<Route path="/" exact component={Home} />
-						<Route
-							path="/login"
-							render={props => (
-								<Login
-									{...props}
-									successfulLogin={this.handleSuccessfulLogin.bind(
-										this
-									)}
-								/>
-							)}
-						/>
-						<Route path="/register" exact component={Register} />
+						<div className="router">
+							<Route path="/" exact component={Home} />
+							<Route
+								path="/login"
+								render={props => (
+									<Login
+										{...props}
+										successfulLogin={this.handleSuccessfulLogin.bind(
+											this
+										)}
+									/>
+								)}
+							/>
+							<Route
+								path="/register"
+								exact
+								component={Register}
+							/>
+						</div>
 					</div>
-				</div>
-			</Router>
+				</Router>
+			</Provider>
 		);
 	}
 }
