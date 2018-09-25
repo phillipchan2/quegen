@@ -1,17 +1,15 @@
 // libraries
 import React, { Component } from 'react';
-import { Provider, inject, observer } from 'mobx-react';
+import { inject, observer } from 'mobx-react';
 
-// services
-import AuthStore from '../../../stores/AuthStore';
-
-@inject('authStore')
+@inject('AuthStore')
 @observer
 class Home extends Component {
+	componentDidMount() {}
 	render() {
 		return (
 			<div>
-				Home Page {this.props.authStore.isAuthenticated ? 'yup' : 'no'}
+				Home Page {this.props.AuthStore.isAuthenticated ? 'yup' : 'no'}
 			</div>
 		);
 	}

@@ -1,20 +1,24 @@
 import React, { Component } from 'react';
 import './App.css';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import axios from 'axios';
-import { Provider, inject, observer } from 'mobx-react';
+import { Provider } from 'mobx-react';
 
 // services
 import AuthStore from './stores/AuthStore';
+import CategorySetStore from './stores/CategorySetStore';
+
+// service components
+import Init from './components/services/Init';
+import ProtectedRoute from './components/services/ProtectedRoute';
 
 // pages
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
+import CategorySets from './components/pages/CategorySets/CategorySets';
 
 // components
 import Navigation from './components/organisms/Navigation/Navigation';
-import { Button } from 'semantic-ui-react';
 
 class App extends Component {
 	constructor(props) {
@@ -26,60 +30,39 @@ class App extends Component {
 		};
 	}
 
-	componentDidMount() {
-		const jwtoken = localStorage.getItem('jwtoken');
-
-		if (jwtoken) {
-			axios
-				.get(`/auth/verify`, {
-					headers: {
-						token: jwtoken
-					}
-				})
-				.then(res => {
-					console.log(res);
-
-					if (res.data.success) {
-						this.setState({
-							isAuthenticated: true,
-							user: res.data.user
-						});
-					}
-				});
-		}
-
-		console.log(jwtoken);
-	}
-
-	handleSuccessfulLogin(user, token) {
-		this.setState({
-			isAuthenticated: true,
-			user: user
-		});
-
-		localStorage.setItem('jwtoken', token);
-		console.log(user, token);
-	}
-
 	render() {
 		return (
-			<Provider authStore={new AuthStore()}>
+			<Provider
+				AuthStore={new AuthStore()}
+				CategorySetStore={new CategorySetStore()}
+			>
 				<Router>
 					<div className="app">
+						<Init />
 						<Navigation />
 
 						<div className="router">
-							<Route path="/" exact component={Home} />
+							<ProtectedRoute
+								isAuthenticated={true}
+								path="/"
+								component={Home}
+							/>
+
+							<ProtectedRoute
+								isAuthenticated={true}
+								path="/home"
+								component={Home}
+							/>
+
+							<ProtectedRoute
+								isAuthenticated={true}
+								path="/categorysets"
+								component={CategorySets}
+							/>
+
 							<Route
 								path="/login"
-								render={props => (
-									<Login
-										{...props}
-										successfulLogin={this.handleSuccessfulLogin.bind(
-											this
-										)}
-									/>
-								)}
+								render={props => <Login {...props} />}
 							/>
 							<Route
 								path="/register"

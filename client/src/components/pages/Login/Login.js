@@ -1,10 +1,14 @@
 // libraries
 import React, { Component } from 'react';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
+import { Redirect } from 'react-router-dom';
 
 // components
 import { Button, Header, Form, Message } from 'semantic-ui-react';
 
+@inject('AuthStore')
+@observer
 class Login extends Component {
 	constructor(props) {
 		super(props);
@@ -33,7 +37,9 @@ class Login extends Component {
 					loginSuccess: true
 				});
 
-				this.props.successfulLogin(res.data.user, res.data.token);
+				this.props.AuthStore.login(res.data.user, res.data.token);
+
+				// this.props.successfulLogin(res.data.user, res.data.token);
 			} else {
 				this.setState({
 					loginSuccess: false,
@@ -44,46 +50,50 @@ class Login extends Component {
 	}
 
 	render() {
-		return (
-			<div className="login-page">
-				<header style={{ marginBottom: '1rem' }}>
-					<Header as="h1">Login</Header>
-					{this.state.errorMessage ? (
-						<Message warning>
-							<p>{this.state.errorMessage}</p>
-						</Message>
-					) : (
-						''
-					)}
-				</header>
-				<Form>
-					<Form.Field>
-						<label>Email</label>
-						<input
-							onChange={this.handleChange.bind(this)}
-							name="email"
-							placeholder="Email"
-						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Password</label>
-						<input
-							type="password"
-							onChange={this.handleChange.bind(this)}
-							name="password"
-							placeholder="Enter Your Password"
-						/>
-					</Form.Field>
-					<Button
-						onClick={this.handleSubmit.bind(this)}
-						type="submit"
-					>
-						Login
-					</Button>{' '}
-					Don't have an account? Register for one
-				</Form>
-			</div>
-		);
+		if (this.props.AuthStore.isAuthenticated) {
+			return <Redirect to="/questionnaires" />;
+		} else {
+			return (
+				<div className="login-page">
+					<header style={{ marginBottom: '1rem' }}>
+						<Header as="h1">Login</Header>
+						{this.state.errorMessage ? (
+							<Message warning>
+								<p>{this.state.errorMessage}</p>
+							</Message>
+						) : (
+							''
+						)}
+					</header>
+					<Form>
+						<Form.Field>
+							<label>Email</label>
+							<input
+								onChange={this.handleChange.bind(this)}
+								name="email"
+								placeholder="Email"
+							/>
+						</Form.Field>
+						<Form.Field>
+							<label>Password</label>
+							<input
+								type="password"
+								onChange={this.handleChange.bind(this)}
+								name="password"
+								placeholder="Enter Your Password"
+							/>
+						</Form.Field>
+						<Button
+							onClick={this.handleSubmit.bind(this)}
+							type="submit"
+						>
+							Login
+						</Button>{' '}
+						Don't have an account? Register for one
+					</Form>
+				</div>
+			);
+		}
 	}
 }
 

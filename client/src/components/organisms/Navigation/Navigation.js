@@ -1,10 +1,13 @@
 // libraries
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { inject, observer } from 'mobx-react';
 
 // components
 import { Menu } from 'semantic-ui-react';
 
+@inject('AuthStore')
+@observer
 class Navigation extends Component {
 	render() {
 		return (
@@ -17,7 +20,10 @@ class Navigation extends Component {
 				</Menu.Item>
 
 				<Menu.Menu position="right">
-					<Menu.Item name="logout" onClick={this.handleItemClick} />
+					<Menu.Item
+						name="logout"
+						onClick={this.props.AuthStore.logout}
+					/>
 				</Menu.Menu>
 			</Menu>
 		);
