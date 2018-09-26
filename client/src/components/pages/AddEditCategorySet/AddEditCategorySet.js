@@ -2,7 +2,16 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // components
-import { Button, Form } from 'semantic-ui-react';
+import {
+	Button,
+	Divider,
+	Form,
+	Header,
+	Icon,
+	Menu,
+	Message,
+	Segment
+} from 'semantic-ui-react';
 
 class AddEditCategorySet extends Component {
 	constructor(props) {
@@ -26,13 +35,51 @@ class AddEditCategorySet extends Component {
 					}
 				})
 				.then(res => {
-					console.log(res.data.data);
+					console.log(res);
+					if (res.data.success) {
+						this.setState({
+							currentCategorySet: res.data.data
+						});
+					} else {
+						var newState = this.state;
 
-					this.setState({
-						currentCategorySet: res.data.data
-					});
+						newState.currentCategorySet = {
+							name: '',
+							categories: []
+						};
+
+						this.setState(newState);
+					}
 				});
 		}
+	}
+
+	handleAddCategoryClick() {
+		var newCategories = this.state.currentCategorySet.categories;
+
+		var newCategory = {
+			name: '',
+			resultDescription: ''
+		};
+
+		newCategories.push(newCategory);
+
+		this.setState({
+			categories: newCategories
+		});
+	}
+
+	handleCategoryChange(e) {
+		var index = e.target.parentNode.parentNode.parentNode.dataset.index;
+		var key = e.target.name;
+		var value = e.target.value;
+		var newState = this.state;
+
+		console.log(index);
+
+		newState['currentCategorySet']['categories'][index][key] = value;
+
+		this.setState(newState);
 	}
 
 	handleChange(e) {
@@ -42,11 +89,20 @@ class AddEditCategorySet extends Component {
 
 		obj[key] = value;
 
-		console.log(obj);
-
 		this.setState({
 			currentCategorySet: obj
 		});
+	}
+
+	handleDeleteCategory(e) {
+		var index =
+			e.target.parentNode.parentNode.parentNode.parentNode.dataset.index;
+
+		var newState = this.state;
+
+		newState.currentCategorySet.categories.splice(index, 1);
+
+		this.setState(newState);
 	}
 
 	handleSubmit() {
@@ -59,13 +115,36 @@ class AddEditCategorySet extends Component {
 				}
 			})
 			.then(res => {
-				console.log(res.data.data);
+				if (res.data.success) {
+					this.setState({
+						updateSuccess: true,
+						errorMessage: ''
+					});
+				} else {
+					this.setState({
+						errorMessage:
+							'Error submitting. Make sure all fields are filled'
+					});
+				}
 			});
 	}
 
 	render() {
 		return (
 			<div>
+				{this.state.updateSuccess ? (
+					<Message>Successfully Updated!</Message>
+				) : (
+					''
+				)}
+				{this.state.errorMessage ? (
+					<Message negative>
+						<Message.Header>Error</Message.Header>
+						<p>{this.state.errorMessage}</p>
+					</Message>
+				) : (
+					''
+				)}
 				<Form>
 					<Form.Field>
 						<label>Name</label>
@@ -76,8 +155,66 @@ class AddEditCategorySet extends Component {
 							onChange={this.handleChange.bind(this)}
 						/>
 					</Form.Field>
-					<Button onClick={this.handleSubmit.bind(this)}>Save</Button>
 				</Form>
+				<Divider />
+				<Header as="h3">Categories</Header>
+				<Button onClick={this.handleAddCategoryClick.bind(this)}>
+					Add Category
+				</Button>
+				{this.state.currentCategorySet.categories
+					? this.state.currentCategorySet.categories.map(
+							(category, index) => {
+								return (
+									<Segment data-index={index}>
+										<Menu secondary>
+											<Menu.Menu position="right">
+												<Menu.Item>
+													<Button
+														basic
+														onClick={this.handleDeleteCategory.bind(
+															this
+														)}
+													>
+														<Icon name="trash" />
+														Delete
+													</Button>
+												</Menu.Item>
+											</Menu.Menu>
+										</Menu>
+										<Form>
+											<Form.Field>
+												<label>Category Name</label>
+												<input
+													name="name"
+													placeholder="Category"
+													value={category.name}
+													onChange={this.handleCategoryChange.bind(
+														this
+													)}
+												/>
+											</Form.Field>
+											<Form.Field>
+												<label>
+													Result Description
+												</label>
+												<textarea
+													name="resultDescription"
+													placeholder="Category"
+													value={
+														category.resultDescription
+													}
+													onChange={this.handleCategoryChange.bind(
+														this
+													)}
+												/>
+											</Form.Field>
+										</Form>
+									</Segment>
+								);
+							}
+					  )
+					: 'No Categories Yet'}
+				<Button onClick={this.handleSubmit.bind(this)}>Save</Button>
 			</div>
 		);
 	}

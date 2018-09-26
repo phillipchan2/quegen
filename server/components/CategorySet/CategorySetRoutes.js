@@ -25,16 +25,16 @@ router.get('/:id', (req, res, next) => {
 				data: categorySet
 			});
 		} else {
-			res.status(400).json({
+			res.status(200).json({
 				success: false,
 				message: 'Not Found'
 			});
 		}
 	});
 });
-
 router.delete('/', (req, res, next) => {
 	var id = req.body._id;
+	console.log(req.body);
 
 	CategorySet.findOneAndDelete(
 		{
@@ -65,15 +65,20 @@ router.post('/', (req, res, next) => {
 			},
 			updateParams,
 			(err, query) => {
-				if (query) {
+				if (!err) {
 					if (query) {
 						res.json({ success: true, data: query });
 					} else {
-						res.status(400).json({
+						res.status(200).json({
 							success: false,
 							message: 'Not found'
 						});
 					}
+				} else {
+					res.status(200).json({
+						success: false,
+						message: err
+					});
 				}
 			}
 		);
@@ -86,7 +91,10 @@ router.post('/', (req, res, next) => {
 			if (!err) {
 				res.json({ success: true, categorySet: categorySet });
 			} else {
-				res.status(400).json({ success: false, message: err });
+				res.status(200).json({
+					success: false,
+					err
+				});
 			}
 		});
 	}
