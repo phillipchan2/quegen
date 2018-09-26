@@ -1,17 +1,17 @@
 import { observable, action } from 'mobx';
 import axios from 'axios';
 
-class CategorySetStore {
+class QuestionnaireStore {
 	@observable
-	categorySets = [];
+	questionnaires = [];
 
 	@action
-	getCategorySets() {
+	getQuestionnaires() {
 		const jwtoken = localStorage.getItem('jwtoken');
 
 		if (jwtoken) {
 			axios
-				.get(`/api/categorySet/`, {
+				.get(`/api/questionnaire/`, {
 					headers: {
 						token: jwtoken
 					}
@@ -20,11 +20,11 @@ class CategorySetStore {
 					console.log(res);
 
 					if (res.data.success) {
-						this.categorySets = res.data.data;
+						this.questionnaires = res.data.data;
 					}
 				});
 		}
 	}
 }
 
-export default CategorySetStore;
+export default QuestionnaireStore;

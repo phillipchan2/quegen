@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // components
-import { Button, Divider } from 'semantic-ui-react';
+import { Button, Divider, Header } from 'semantic-ui-react';
 import CategorySetsList from '../../organisms/CategorySetsList/CategorySetsList';
 import { Link } from 'react-router-dom';
 
@@ -10,6 +10,7 @@ class CategorySets extends Component {
 		return (
 			<div>
 				<header>
+					<Header as="h1">Category Sets</Header>
 					<Button>
 						<Link to={`/categorySet/new`}>New Category Set</Link>
 					</Button>

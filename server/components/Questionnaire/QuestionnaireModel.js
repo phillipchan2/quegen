@@ -28,6 +28,10 @@ var questionnaireSchema = new mongoose.Schema({
 		type: String,
 		required: false
 	},
+	published: {
+		type: Boolean,
+		default: false
+	},
 	questions: [questionSchema],
 	responses: [responseSchema]
 });

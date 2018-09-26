@@ -15,6 +15,9 @@ class Navigation extends Component {
 				<Menu.Item name="questionnaires">
 					<Link to={'/'}>Home</Link>
 				</Menu.Item>
+				<Menu.Item name="questionnaires">
+					<Link to={'/questionnaires'}>Questionnaires</Link>
+				</Menu.Item>
 				<Menu.Item name="category-sets">
 					<Link to={'/categorySets'}>Category Sets</Link>
 				</Menu.Item>

@@ -32,6 +32,7 @@ router.get('/:id', (req, res, next) => {
 		}
 	});
 });
+
 router.delete('/', (req, res, next) => {
 	var id = req.body._id;
 	console.log(req.body);

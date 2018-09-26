@@ -4,13 +4,13 @@ import axios from 'axios';
 
 import { Segment, Label, Header, Menu, Icon } from 'semantic-ui-react';
 
-class CategorySetCard extends Component {
-	handleDeleteCategorySet(e) {
+class QuestionnaireCard extends Component {
+	handleDeleteQuestionnaire(e) {
 		const id = e.target.parentNode.parentNode.parentNode.dataset.id;
 		const jwtoken = localStorage.getItem('jwtoken');
 
 		axios
-			.delete(`/api/categorySet/`, {
+			.delete(`/api/questionnaire/`, {
 				headers: {
 					token: jwtoken
 				},
@@ -23,26 +23,32 @@ class CategorySetCard extends Component {
 
 	render() {
 		return (
-			<Segment fluid data-id={this.props.categorySet._id}>
-				<Header>{this.props.categorySet.name}</Header>
-				{this.props.categorySet.categories
-					? this.props.categorySet.categories.map(category => {
-							return <Label>{category.name}</Label>;
-					  })
-					: 'No categories'}
+			<Segment fluid data-id={this.props.questionnaire._id}>
+				<Header>{this.props.questionnaire.name}</Header>
 
 				<Menu secondary>
 					<Menu.Menu position="right">
+						{this.props.questionnaire.published ? (
+							<Menu.Item>
+								<Icon name="check circle outline" />
+								Published
+							</Menu.Item>
+						) : (
+							<Menu.Item disabled>Not Published</Menu.Item>
+						)}
+
 						<Menu.Item>
 							<Link
-								to={`categorySet/${this.props.categorySet._id}`}
+								to={`questionnaire/${
+									this.props.questionnaire._id
+								}`}
 							>
 								<Icon name="edit" />
 								Edit
 							</Link>
 						</Menu.Item>
 						<Menu.Item
-							onClick={this.handleDeleteCategorySet.bind(this)}
+							onClick={this.handleDeleteQuestionnaire.bind(this)}
 						>
 							<Icon name="trash" />
 							Delete
@@ -54,4 +60,4 @@ class CategorySetCard extends Component {
 	}
 }
 
-export default CategorySetCard;
+export default QuestionnaireCard;

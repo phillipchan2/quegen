@@ -15,6 +15,18 @@ router.get('/', (req, res, next) => {
 	});
 });
 
+router.get('/:id', (req, res, next) => {
+	var id = req.params.id;
+
+	Questionnaire.findOne({ _id: id }, (err, questionnaire) => {
+		if (questionnaire) {
+			res.status(200).json({ success: true, data: questionnaire });
+		} else {
+			res.status(200).json({ success: false, message: 'Not Found' });
+		}
+	});
+});
+
 router.delete('/', (req, res, next) => {
 	var id = req.body.id;
 
