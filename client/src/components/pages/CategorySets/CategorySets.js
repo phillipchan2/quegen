@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 // components
-import { Button, Container, Divider } from 'semantic-ui-react';
+import { Button, Divider } from 'semantic-ui-react';
 import CategorySetsList from '../../organisms/CategorySetsList/CategorySetsList';
 
 class CategorySets extends Component {

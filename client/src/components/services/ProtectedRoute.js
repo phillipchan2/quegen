@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Redirect, Route } from 'react-router-dom';
-import { inject, observer } from 'mobx-react';
 
 // const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }) => (
 //     <Route
