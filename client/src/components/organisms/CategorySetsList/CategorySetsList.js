@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { inject, observer } from 'mobx-react';
 
+// components
+import CategorySetCard from '../../molecules/CategorySetCard/CategorySetCard';
+import { Link } from 'react-router-dom';
+
 @inject('CategorySetStore')
 @observer
 class CategorySetsList extends Component {
@@ -11,9 +15,15 @@ class CategorySetsList extends Component {
 	render() {
 		return (
 			<div>
-				category set list
 				{this.props.CategorySetStore.categorySets.map(categorySet => {
-					return <div>{categorySet.name}</div>;
+					return (
+						<Link
+							to={`categorySet/${categorySet._id}`}
+							style={{ marginBottom: '1em', display: 'block' }}
+						>
+							<CategorySetCard categorySet={categorySet} />
+						</Link>
+					);
 				})}
 			</div>
 		);

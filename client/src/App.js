@@ -16,6 +16,7 @@ import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
 import CategorySets from './components/pages/CategorySets/CategorySets';
+import AddEditCategorySet from './components/pages/AddEditCategorySet/AddEditCategorySet';
 
 // components
 import Navigation from './components/organisms/Navigation/Navigation';
@@ -58,6 +59,12 @@ class App extends Component {
 								isAuthenticated={true}
 								path="/categorysets"
 								component={CategorySets}
+							/>
+
+							<ProtectedRoute
+								isAuthenticated={true}
+								path="/categoryset/:id"
+								component={AddEditCategorySet}
 							/>
 
 							<Route

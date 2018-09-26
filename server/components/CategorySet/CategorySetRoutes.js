@@ -15,8 +15,26 @@ router.get('/', (req, res, next) => {
 	});
 });
 
+router.get('/:id', (req, res, next) => {
+	var id = req.params.id;
+
+	CategorySet.findOne({ _id: id }, (err, categorySet) => {
+		if (categorySet) {
+			res.status(200).json({
+				success: true,
+				data: categorySet
+			});
+		} else {
+			res.status(400).json({
+				success: false,
+				message: 'Not Found'
+			});
+		}
+	});
+});
+
 router.delete('/', (req, res, next) => {
-	var id = req.body.id;
+	var id = req.body._id;
 
 	CategorySet.findOneAndDelete(
 		{
@@ -33,7 +51,8 @@ router.delete('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	var id = req.body.id;
+	var id = req.body._id;
+	console.log(req.body);
 
 	if (id) {
 		let updateParams = req.body;
