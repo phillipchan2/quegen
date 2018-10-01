@@ -21,14 +21,15 @@ class AddEditQuestionnaire extends Component {
 		this.state = {
 			currentQuestionnaire: {},
 			errorMessage: '',
-			updateSuccess: false
+			updateSuccess: false,
+			categorySets: []
 		};
 	}
 
 	componentDidMount() {
-		if (this.props.match.params.id) {
-			const jwtoken = localStorage.getItem('jwtoken');
+		const jwtoken = localStorage.getItem('jwtoken');
 
+		if (this.props.match.params.id) {
 			axios
 				.get(`/api/questionnaire/${this.props.match.params.id}`, {
 					headers: {
@@ -53,6 +54,20 @@ class AddEditQuestionnaire extends Component {
 					}
 				});
 		}
+
+		axios
+			.get('/api/categorySet/', {
+				headers: {
+					token: jwtoken
+				}
+			})
+			.then(res => {
+				let categorySets = res.data.data;
+
+				this.setState({
+					categorySets: categorySets
+				});
+			});
 	}
 
 	handleAddQuestionClick() {
@@ -68,6 +83,14 @@ class AddEditQuestionnaire extends Component {
 		this.setState({
 			questions: newQuestions
 		});
+	}
+
+	handleCategorySetChange(e, { value }) {
+		var newState = this.state;
+
+		newState['currentQuestionnaire']['categorySetId'] = value;
+
+		this.setState(newState);
 	}
 
 	handleCategoryChange(e) {
@@ -182,6 +205,23 @@ class AddEditQuestionnaire extends Component {
 							placeholder="description"
 							value={this.state.currentQuestionnaire.description}
 							onChange={this.handleChange.bind(this)}
+						/>
+					</Form.Field>
+					<Form.Field>
+						<Form.Select
+							fluid
+							label="Associated Category Set"
+							options={this.state.categorySets.map(
+								categorySet => {
+									return {
+										key: 'categorySetId',
+										text: categorySet.name,
+										value: categorySet._id
+									};
+								}
+							)}
+							onChange={this.handleCategorySetChange.bind(this)}
+							placeholder="Associated Category Set"
 						/>
 					</Form.Field>
 				</Form>

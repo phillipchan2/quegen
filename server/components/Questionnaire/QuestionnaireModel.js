@@ -32,6 +32,10 @@ var questionnaireSchema = new mongoose.Schema({
 		type: Boolean,
 		default: false
 	},
+	categorySetId: {
+		type: String,
+		required: true
+	},
 	questions: [questionSchema],
 	responses: [responseSchema]
 });
