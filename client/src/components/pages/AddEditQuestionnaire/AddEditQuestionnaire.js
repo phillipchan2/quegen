@@ -5,13 +5,13 @@ import axios from 'axios';
 import {
 	Button,
 	Divider,
-	Dropdown,
 	Form,
 	Header,
 	Icon,
 	Menu,
 	Message,
-	Segment
+	Segment,
+	Dropdown
 } from 'semantic-ui-react';
 import QuestionWeighted from '../../molecules/QuestionWeighted/QuestionWeighted';
 
@@ -39,11 +39,37 @@ class AddEditQuestionnaire extends Component {
 					}
 				})
 				.then(res => {
-					console.log(res);
 					if (res.data.success) {
-						this.setState({
-							currentQuestionnaire: res.data.data
-						});
+						this.setState(
+							{
+								currentQuestionnaire: res.data.data
+							},
+							() => {
+								axios
+									.get(
+										`/api/categorySet/${
+											this.state.currentQuestionnaire
+												.categorySetId
+										}`,
+										{
+											headers: {
+												token: jwtoken
+											}
+										}
+									)
+									.then(res => {
+										let newState = this.state;
+										let categorySet = res.data.data;
+
+										console.log('categorySet', categorySet);
+
+										newState[
+											'currentCategorySet'
+										] = categorySet;
+										this.setState(newState);
+									});
+							}
+						);
 					} else {
 						var newState = this.state;
 
@@ -57,6 +83,7 @@ class AddEditQuestionnaire extends Component {
 				});
 		}
 
+		// get all category sets
 		axios
 			.get('/api/categorySet/', {
 				headers: {
@@ -78,7 +105,7 @@ class AddEditQuestionnaire extends Component {
 		var newQuestions = this.state.currentQuestionnaire.questions;
 
 		var newQuestion = {
-			name: '',
+			title: '',
 			type: questionType
 		};
 
@@ -108,19 +135,6 @@ class AddEditQuestionnaire extends Component {
 			});
 	}
 
-	handleCategoryChange(e) {
-		var index = e.target.parentNode.parentNode.parentNode.dataset.index;
-		var key = e.target.name;
-		var value = e.target.value;
-		var newState = this.state;
-
-		console.log(index);
-
-		newState['currentQuestionnaire']['questions'][index][key] = value;
-
-		this.setState(newState);
-	}
-
 	handleChange(e) {
 		var key = e.target.name;
 		var value = e.target.value;
@@ -144,9 +158,18 @@ class AddEditQuestionnaire extends Component {
 		this.setState(newState);
 	}
 
-	handleQuestionChange(questionData) {
-		console.log('changed');
-		console.log(questionData);
+	handleQuestionChange(questionData, index) {
+		var newState = this.state;
+		var currentQuestion = newState.currentQuestionnaire.questions[index];
+		var newQuestion = Object.assign(currentQuestion, questionData);
+		newQuestion.appliesToCategories = Array.from(
+			newQuestion.appliesToCategories
+		);
+		console.log(newQuestion);
+
+		newState.currentQuestionnaire.questions[index] = newQuestion;
+
+		this.setState(newState);
 	}
 
 	handleSubmit() {
@@ -164,6 +187,12 @@ class AddEditQuestionnaire extends Component {
 						updateSuccess: true,
 						errorMessage: ''
 					});
+
+					setTimeout(() => {
+						this.setState({
+							updateSuccess: false
+						});
+					}, 3000);
 				} else {
 					this.setState({
 						errorMessage:
@@ -228,18 +257,20 @@ class AddEditQuestionnaire extends Component {
 						/>
 					</Form.Field>
 					<Form.Field>
-						<Form.Select
+						<Dropdown
 							fluid
+							selection
 							label="Associated Category Set"
 							options={this.state.categorySets.map(
 								categorySet => {
 									return {
-										key: 'categorySetId',
+										key: categorySet._id,
 										text: categorySet.name,
 										value: categorySet._id
 									};
 								}
 							)}
+							defaultValue={this.state.currentCategorySet._id}
 							onChange={this.handleCategorySetChange.bind(this)}
 							placeholder="Associated Category Set"
 						/>
@@ -278,15 +309,15 @@ class AddEditQuestionnaire extends Component {
 											case 'weighted':
 												return (
 													<QuestionWeighted
+														index={index}
 														question={question}
 														categorySet={
 															this.state
 																.currentCategorySet
 														}
-														handleChange={
+														handleChange={this.handleQuestionChange.bind(
 															this
-																.handleQuestionChange
-														}
+														)}
 													/>
 												);
 											default:

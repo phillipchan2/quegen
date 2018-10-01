@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
-const Mixed = mongoose.SchemaType.Mixed;
+const Mixed = mongoose.Schema.Types.Mixed;
 
 var questionSchema = new mongoose.Schema({
 	title: {
 		type: String,
 		required: true
 	},
-	appliesToCategory: {
-		type: [Number],
+	appliesToCategories: {
+		type: Mixed,
 		required: false
 	},
 	type: {

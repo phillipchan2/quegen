@@ -8,8 +8,10 @@ class QuestionWeighted extends Component {
 		super(props);
 
 		this.state = {
-			appliesToCategories: new Set(),
-			title: this.props.title
+			appliesToCategories: new Set(
+				this.props.question.appliesToCategories
+			),
+			title: this.props.question.title
 		};
 	}
 
@@ -28,14 +30,14 @@ class QuestionWeighted extends Component {
 				appliesToCategories: newAppliesToCategories
 			},
 			() => {
-				this.props.handleChange(this.state);
+				this.props.handleChange(this.state, this.props.index);
 			}
 		);
 	}
 
 	handleTitleChange(e) {
 		this.setState({ title: e.target.value }, () => {
-			this.props.handleChange(this.state);
+			this.props.handleChange(this.state, this.props.index);
 		});
 	}
 
@@ -75,6 +77,9 @@ class QuestionWeighted extends Component {
 									value={category._id}
 									onChange={this.handleCategorySelect.bind(
 										this
+									)}
+									checked={this.state.appliesToCategories.has(
+										category._id
 									)}
 									key={category._id}
 								/>

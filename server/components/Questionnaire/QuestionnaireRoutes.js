@@ -45,7 +45,7 @@ router.delete('/', (req, res, next) => {
 });
 
 router.post('/', (req, res, next) => {
-	var id = req.body.id;
+	var id = req.body._id;
 
 	if (id) {
 		let updateParams = req.body;
