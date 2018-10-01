@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Mixed = mongoose.SchemaType.Mixed;
 
 var questionSchema = new mongoose.Schema({
-	label: {
+	title: {
 		type: String,
 		required: true
 	},

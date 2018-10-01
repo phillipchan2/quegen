@@ -13,6 +13,7 @@ import {
 	Message,
 	Segment
 } from 'semantic-ui-react';
+import QuestionWeighted from '../../molecules/QuestionWeighted/QuestionWeighted';
 
 class AddEditQuestionnaire extends Component {
 	constructor(props) {
@@ -22,7 +23,8 @@ class AddEditQuestionnaire extends Component {
 			currentQuestionnaire: {},
 			errorMessage: '',
 			updateSuccess: false,
-			categorySets: []
+			categorySets: [],
+			currentCategorySet: {}
 		};
 	}
 
@@ -70,12 +72,14 @@ class AddEditQuestionnaire extends Component {
 			});
 	}
 
-	handleAddQuestionClick() {
+	handleAddQuestionClick(e) {
+		const questionType = e.target.dataset.type;
+
 		var newQuestions = this.state.currentQuestionnaire.questions;
 
 		var newQuestion = {
 			name: '',
-			resultDescription: ''
+			type: questionType
 		};
 
 		newQuestions.push(newQuestion);
@@ -86,11 +90,22 @@ class AddEditQuestionnaire extends Component {
 	}
 
 	handleCategorySetChange(e, { value }) {
+		const jwtoken = localStorage.getItem('jwtoken');
 		var newState = this.state;
 
-		newState['currentQuestionnaire']['categorySetId'] = value;
+		axios
+			.get(`/api/categorySet/${value}`, {
+				headers: {
+					token: jwtoken
+				}
+			})
+			.then(res => {
+				let categorySet = res.data.data;
 
-		this.setState(newState);
+				newState['currentQuestionnaire']['categorySetId'] = value;
+				newState['currentCategorySet'] = categorySet;
+				this.setState(newState);
+			});
 	}
 
 	handleCategoryChange(e) {
@@ -127,6 +142,11 @@ class AddEditQuestionnaire extends Component {
 		newState.currentQuestionnaire.questions.splice(index, 1);
 
 		this.setState(newState);
+	}
+
+	handleQuestionChange(questionData) {
+		console.log('changed');
+		console.log(questionData);
 	}
 
 	handleSubmit() {
@@ -227,73 +247,59 @@ class AddEditQuestionnaire extends Component {
 				</Form>
 				<Divider />
 				<Header as="h3">Questions</Header>
-				<Menu secondary vertical>
-					<Dropdown item text="Add Question">
-						<Dropdown.Menu>
-							<Dropdown.Header>Question Type</Dropdown.Header>
-							<Dropdown.Item
-								onClick={this.handleAddQuestionClick.bind(this)}
-							>
-								Weighted
-							</Dropdown.Item>
-							<Dropdown.Item>Text</Dropdown.Item>
-							<Dropdown.Item>Multiple Choice</Dropdown.Item>
-						</Dropdown.Menu>
-					</Dropdown>
-				</Menu>
-				{this.state.currentQuestionnaire.questions
-					? this.state.currentQuestionnaire.questions.map(
-							(category, index) => {
-								return (
-									<Segment data-index={index}>
-										<Menu secondary>
-											<Menu.Menu position="right">
-												<Menu.Item>
-													<Button
-														basic
-														onClick={this.handleDeleteQuestion.bind(
+
+				{this.state.currentCategorySet._id ? (
+					<div>
+						<Menu secondary vertical>
+							<Dropdown item text="Add Question">
+								<Dropdown.Menu>
+									<Dropdown.Header>
+										Question Type
+									</Dropdown.Header>
+									<Dropdown.Item
+										data-type="weighted"
+										onClick={this.handleAddQuestionClick.bind(
+											this
+										)}
+									>
+										Weighted
+									</Dropdown.Item>
+									<Dropdown.Item>Text</Dropdown.Item>
+									<Dropdown.Item>
+										Multiple Choice
+									</Dropdown.Item>
+								</Dropdown.Menu>
+							</Dropdown>
+						</Menu>
+						{this.state.currentQuestionnaire.questions.length > 0
+							? this.state.currentQuestionnaire.questions.map(
+									(question, index) => {
+										switch (question.type) {
+											case 'weighted':
+												return (
+													<QuestionWeighted
+														question={question}
+														categorySet={
+															this.state
+																.currentCategorySet
+														}
+														handleChange={
 															this
-														)}
-													>
-														<Icon name="trash" />
-														Delete
-													</Button>
-												</Menu.Item>
-											</Menu.Menu>
-										</Menu>
-										<Form>
-											<Form.Field>
-												<label>Category Name</label>
-												<input
-													name="name"
-													placeholder="Category"
-													value={category.name}
-													onChange={this.handleCategoryChange.bind(
-														this
-													)}
-												/>
-											</Form.Field>
-											<Form.Field>
-												<label>
-													Result Description
-												</label>
-												<textarea
-													name="resultDescription"
-													placeholder="Category"
-													value={
-														category.resultDescription
-													}
-													onChange={this.handleCategoryChange.bind(
-														this
-													)}
-												/>
-											</Form.Field>
-										</Form>
-									</Segment>
-								);
-							}
-					  )
-					: 'No questions Yet'}
+																.handleQuestionChange
+														}
+													/>
+												);
+											default:
+												return 'Question';
+										}
+									}
+							  )
+							: 'No Questions Yet'}
+					</div>
+				) : (
+					'Please select an associated category set first'
+				)}
+
 				<Button onClick={this.handleSubmit.bind(this)}>Save</Button>
 			</div>
 		);

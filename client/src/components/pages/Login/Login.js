@@ -43,7 +43,7 @@ class Login extends Component {
 			} else {
 				this.setState({
 					loginSuccess: false,
-					errorMessage: res.data.message
+					errorMessage: 'Error Logging In'
 				});
 			}
 		});
