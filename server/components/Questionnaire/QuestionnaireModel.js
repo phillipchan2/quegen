@@ -9,6 +9,10 @@ var questionSchema = new mongoose.Schema({
 	appliesToCategory: {
 		type: [Number],
 		required: false
+	},
+	type: {
+		type: String,
+		required: true
 	}
 });
 
