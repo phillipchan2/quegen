@@ -8,7 +8,9 @@ import {
 	Form,
 	Header,
 	Icon,
+	Accordion,
 	Menu,
+	Label,
 	Message,
 	Segment,
 	Dropdown
