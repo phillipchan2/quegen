@@ -60,7 +60,7 @@ class QuestionWeighted extends Component {
 	render() {
 		const { activeIndex } = this.state;
 		return (
-			<Accordion as={Menu} vertical fluid>
+			<Accordion as={Menu} vertical fluid data-id={this.props.key}>
 				<Accordion.Title
 					active={activeIndex === 0}
 					content={

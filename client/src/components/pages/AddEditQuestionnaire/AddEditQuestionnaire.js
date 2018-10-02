@@ -15,6 +15,7 @@ import {
 	Segment,
 	Dropdown
 } from 'semantic-ui-react';
+import Sortable from 'react-sortablejs';
 import QuestionWeighted from '../../molecules/QuestionWeighted/QuestionWeighted';
 
 class AddEditQuestionnaire extends Component {
@@ -204,7 +205,13 @@ class AddEditQuestionnaire extends Component {
 			});
 	}
 
+	componentDidUpdate(prevProps, prevState) {
+		console.log('prevProps', prevProps);
+		console.log('prevState', prevState);
+	}
+
 	render() {
+		let sortable = null;
 		return (
 			<div>
 				{this.state.updateSuccess ? (
@@ -220,7 +227,6 @@ class AddEditQuestionnaire extends Component {
 				) : (
 					''
 				)}
-
 				<Menu secondary>
 					<Menu.Menu position="left">
 						<Header as="h3">Questionnaire</Header>
@@ -280,7 +286,6 @@ class AddEditQuestionnaire extends Component {
 				</Form>
 				<Divider />
 				<Header as="h3">Questions</Header>
-
 				{this.state.currentCategorySet._id ? (
 					<div>
 						<Menu secondary vertical>
@@ -304,14 +309,28 @@ class AddEditQuestionnaire extends Component {
 								</Dropdown.Menu>
 							</Dropdown>
 						</Menu>
-						{this.state.currentQuestionnaire.questions.length > 0
-							? this.state.currentQuestionnaire.questions.map(
+						{this.state.currentQuestionnaire.questions.length >
+						0 ? (
+							<Sortable
+								options={{}}
+								tag="div"
+								ref={c => {
+									if (c) {
+										sortable = c.sortable;
+									}
+								}}
+								onChange={(order, sortable, evt) => {
+									console.log(order);
+								}}
+							>
+								{this.state.currentQuestionnaire.questions.map(
 									(question, index) => {
 										switch (question.type) {
 											case 'weighted':
 												return (
 													<QuestionWeighted
 														index={index}
+														key={question._id}
 														question={question}
 														categorySet={
 															this.state
@@ -326,8 +345,11 @@ class AddEditQuestionnaire extends Component {
 												return 'Question';
 										}
 									}
-							  )
-							: 'No Questions Yet'}
+								)}
+							</Sortable>
+						) : (
+							'No Questions Yet'
+						)}
 					</div>
 				) : (
 					'Please select an associated category set first'
