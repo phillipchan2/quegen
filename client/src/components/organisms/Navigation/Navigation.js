@@ -23,10 +23,16 @@ class Navigation extends Component {
 				</Menu.Item>
 
 				<Menu.Menu position="right">
-					<Menu.Item
-						name="logout"
-						onClick={this.props.AuthStore.logout}
-					/>
+					{this.props.AuthStore.isAuthenticated ? (
+						<Menu.Item
+							name="logout"
+							onClick={this.props.AuthStore.logout}
+						/>
+					) : (
+						<Link to={'/login'}>
+							<Menu.Item name="login" />
+						</Link>
+					)}
 				</Menu.Menu>
 			</Menu>
 		);
