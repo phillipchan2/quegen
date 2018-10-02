@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { inject, observer } from 'mobx-react';
-import { Redirect } from 'react-router-dom';
+import { Redirect, Link } from 'react-router-dom';
 
 // components
 import { Button, Header, Form, Message } from 'semantic-ui-react';
@@ -89,7 +89,8 @@ class Login extends Component {
 						>
 							Login
 						</Button>{' '}
-						Don't have an account? Register for one
+						Don't have an account?{' '}
+						<Link to={'/register'}>Register for one</Link>
 					</Form>
 				</div>
 			);

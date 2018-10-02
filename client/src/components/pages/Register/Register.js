@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // components
-import { Button, Form } from 'semantic-ui-react';
+import { Button, Form, Header, Message } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 
 class Register extends Component {
 	constructor(props) {
@@ -44,7 +45,16 @@ class Register extends Component {
 	render() {
 		return (
 			<div className="register-page">
-				<header>Register for account</header>
+				<header style={{ marginBottom: '1rem' }}>
+					<Header as="h1">Register</Header>
+					{this.state.errorMessage ? (
+						<Message warning>
+							<p>{this.state.errorMessage}</p>
+						</Message>
+					) : (
+						''
+					)}
+				</header>
 				<Form>
 					<Form.Field>
 						<label>Email</label>
@@ -67,9 +77,9 @@ class Register extends Component {
 						onClick={this.handleSubmit.bind(this)}
 						type="submit"
 					>
-						Login
+						Register
 					</Button>{' '}
-					Don't have an account? Register for one
+					Already have an account? <Link to={'/login'}>Login</Link>
 				</Form>
 			</div>
 		);

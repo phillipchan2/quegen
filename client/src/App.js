@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 // services
@@ -48,56 +48,55 @@ class App extends Component {
 						<Navigation />
 
 						<div className="router">
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/"
-								component={Home}
-							/>
+							<Switch>
+								<ProtectedRoute
+									exact={true}
+									path="/"
+									component={Home}
+								/>
 
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/home"
-								component={Home}
-							/>
+								<ProtectedRoute
+									exact={true}
+									path="/home"
+									component={Home}
+								/>
 
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/categorysets"
-								component={CategorySets}
-							/>
+								<ProtectedRoute
+									exact={true}
+									path="/categorysets"
+									component={CategorySets}
+								/>
 
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/categoryset/:id"
-								component={AddEditCategorySet}
-							/>
+								<ProtectedRoute
+									exact={true}
+									path="/categoryset/:id"
+									component={AddEditCategorySet}
+								/>
 
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/questionnaires/"
-								component={Questionnaires}
-							/>
+								<ProtectedRoute
+									exact={true}
+									path="/questionnaires/"
+									component={Questionnaires}
+								/>
 
-							<ProtectedRoute
-								isAuthenticated={true}
-								path="/questionnaire/:id"
-								component={AddEditQuestionnaire}
-							/>
+								<ProtectedRoute
+									exact={true}
+									path="/questionnaire/:id"
+									component={AddEditQuestionnaire}
+								/>
 
-							<Route
-								path="/questionnaire/view/:id"
-								component={Questionnaire}
-							/>
+								<Route
+									path="/questionnaire/view/:id"
+									component={Questionnaire}
+								/>
 
-							<Route
-								path="/login"
-								render={props => <Login {...props} />}
-							/>
-							<Route
-								path="/register"
-								exact
-								component={Register}
-							/>
+								<Route path="/login" component={Login} />
+								<Route
+									path="/register"
+									exact
+									component={Register}
+								/>
+							</Switch>
 						</div>
 					</div>
 				</Router>

@@ -15,7 +15,12 @@ class CategorySetsList extends Component {
 		return (
 			<div>
 				{this.props.CategorySetStore.categorySets.map(categorySet => {
-					return <CategorySetCard categorySet={categorySet} />;
+					return (
+						<CategorySetCard
+							key={categorySet._id}
+							categorySet={categorySet}
+						/>
+					);
 				})}
 			</div>
 		);

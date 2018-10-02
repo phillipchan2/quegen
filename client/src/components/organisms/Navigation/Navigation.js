@@ -12,15 +12,21 @@ class Navigation extends Component {
 	render() {
 		return (
 			<Menu secondary className="app-nav">
-				<Menu.Item name="questionnaires">
-					<Link to={'/'}>Home</Link>
-				</Menu.Item>
-				<Menu.Item name="questionnaires">
-					<Link to={'/questionnaires'}>Questionnaires</Link>
-				</Menu.Item>
-				<Menu.Item name="category-sets">
-					<Link to={'/categorySets'}>Category Sets</Link>
-				</Menu.Item>
+				{this.props.AuthStore.isAuthenticated ? (
+					<React.Fragment>
+						<Menu.Item name="questionnaires">
+							<Link to={'/'}>Home</Link>
+						</Menu.Item>
+						<Menu.Item name="questionnaires">
+							<Link to={'/questionnaires'}>Questionnaires</Link>
+						</Menu.Item>
+						<Menu.Item name="category-sets">
+							<Link to={'/categorySets'}>Category Sets</Link>
+						</Menu.Item>
+					</React.Fragment>
+				) : (
+					''
+				)}
 
 				<Menu.Menu position="right">
 					{this.props.AuthStore.isAuthenticated ? (
