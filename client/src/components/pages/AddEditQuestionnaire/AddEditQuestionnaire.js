@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 // components
 import {
@@ -232,7 +233,15 @@ class AddEditQuestionnaire extends Component {
 						<Header as="h3">Questionnaire</Header>
 					</Menu.Menu>
 					<Menu.Menu position="right">
-						<Menu.Item>www.link.com</Menu.Item>
+						<Menu.Item>
+							<Link
+								to={`/questionnaires/${
+									this.state.currentQuestionnaire._id
+								}`}
+							>{`/ questionnaires / ${
+								this.state.currentQuestionnaire._id
+							}`}</Link>
+						</Menu.Item>
 						<Menu.Item name="logout" onClick={this.handleItemClick}>
 							{this.state.currentQuestionnaire.published ? (
 								<Button disabled>

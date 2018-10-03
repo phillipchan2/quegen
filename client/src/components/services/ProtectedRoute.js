@@ -14,7 +14,7 @@ class ProtectedRoute extends Component {
 				{...this.props}
 			/>
 		) : (
-			<Redirect to="/login" />
+			<Redirect to="/admin/login" />
 		);
 	}
 }

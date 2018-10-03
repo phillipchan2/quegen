@@ -15,13 +15,17 @@ class Navigation extends Component {
 				{this.props.AuthStore.isAuthenticated ? (
 					<React.Fragment>
 						<Menu.Item name="questionnaires">
-							<Link to={'/'}>Home</Link>
+							<Link to={'/admin'}>Home</Link>
 						</Menu.Item>
 						<Menu.Item name="questionnaires">
-							<Link to={'/questionnaires'}>Questionnaires</Link>
+							<Link to={'/admin/questionnaires'}>
+								Questionnaires
+							</Link>
 						</Menu.Item>
 						<Menu.Item name="category-sets">
-							<Link to={'/categorySets'}>Category Sets</Link>
+							<Link to={`/admin/categorySets`}>
+								Category Sets
+							</Link>
 						</Menu.Item>
 					</React.Fragment>
 				) : (
@@ -35,7 +39,7 @@ class Navigation extends Component {
 							onClick={this.props.AuthStore.logout}
 						/>
 					) : (
-						<Link to={'/login'}>
+						<Link to={'/admin/login'}>
 							<Menu.Item name="login" />
 						</Link>
 					)}

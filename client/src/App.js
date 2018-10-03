@@ -9,10 +9,11 @@ import CategorySetStore from './stores/CategorySetStore';
 import QuestionnaireStore from './stores/QuestionnaireStore';
 
 // service components
-import Init from './components/services/Init';
 import ProtectedRoute from './components/services/ProtectedRoute';
+import Init from './components/services/Init';
 
 // pages
+import Admin from './components/pages/Admin/Admin';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
@@ -22,19 +23,7 @@ import Questionnaire from './components/pages/Questionnaire/Questionnaire';
 import AddEditCategorySet from './components/pages/AddEditCategorySet/AddEditCategorySet';
 import AddEditQuestionnaire from './components/pages/AddEditQuestionnaire/AddEditQuestionnaire';
 
-// components
-import Navigation from './components/organisms/Navigation/Navigation';
-
 class App extends Component {
-	constructor(props) {
-		super(props);
-
-		this.state = {
-			user: {},
-			isAuthenticated: false
-		};
-	}
-
 	render() {
 		return (
 			<Provider
@@ -45,58 +34,46 @@ class App extends Component {
 				<Router>
 					<div className="app">
 						<Init />
-						<Navigation />
-
 						<div className="router">
-							<Switch>
-								<ProtectedRoute
-									exact={true}
-									path="/"
-									component={Home}
-								/>
+							<Route path="/" component={Home} />
 
-								<ProtectedRoute
-									exact={true}
-									path="/home"
-									component={Home}
-								/>
+							<ProtectedRoute path="/admin" component={Admin} />
 
-								<ProtectedRoute
-									exact={true}
-									path="/categorysets"
-									component={CategorySets}
-								/>
+							<ProtectedRoute
+								path="/admin/categorysets"
+								component={CategorySets}
+							/>
 
-								<ProtectedRoute
-									exact={true}
-									path="/categoryset/:id"
-									component={AddEditCategorySet}
-								/>
+							<ProtectedRoute
+								path="/admin/categoryset/:id"
+								component={AddEditCategorySet}
+							/>
 
-								<ProtectedRoute
-									exact={true}
-									path="/questionnaires/"
-									component={Questionnaires}
-								/>
+							<ProtectedRoute
+								path="/admin/questionnaires/"
+								component={Questionnaires}
+							/>
 
-								<ProtectedRoute
-									exact={true}
-									path="/questionnaire/:id"
-									component={AddEditQuestionnaire}
-								/>
+							<ProtectedRoute
+								path="/admin/questionnaire/:id"
+								component={AddEditQuestionnaire}
+							/>
 
-								<Route
-									path="/questionnaire/view/:id"
-									component={Questionnaire}
-								/>
+							<Route
+								path="/admin/questionnaire/view/:id"
+								component={Questionnaire}
+							/>
 
-								<Route path="/login" component={Login} />
-								<Route
-									path="/register"
-									exact
-									component={Register}
-								/>
-							</Switch>
+							<Route
+								path="/questionnaires/:id"
+								component={Questionnaire}
+							/>
+
+							<Route path="/admin/login" component={Login} />
+							<Route
+								path="/admin/register"
+								component={Register}
+							/>
 						</div>
 					</div>
 				</Router>

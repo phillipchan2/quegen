@@ -39,7 +39,7 @@ class AuthStore {
 					}
 				})
 				.then(res => {
-					console.log(res);
+					console.log('login', res);
 
 					if (res.data.success) {
 						this.login(res.data.user, jwtoken);

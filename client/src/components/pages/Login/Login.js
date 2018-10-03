@@ -38,8 +38,6 @@ class Login extends Component {
 				});
 
 				this.props.AuthStore.login(res.data.user, res.data.token);
-
-				// this.props.successfulLogin(res.data.user, res.data.token);
 			} else {
 				this.setState({
 					loginSuccess: false,
@@ -50,8 +48,9 @@ class Login extends Component {
 	}
 
 	render() {
+		console.log(this.props.match);
 		if (this.props.AuthStore.isAuthenticated) {
-			return <Redirect to="/questionnaires" />;
+			return <Redirect to="/admin" />;
 		} else {
 			return (
 				<div className="login-page">
