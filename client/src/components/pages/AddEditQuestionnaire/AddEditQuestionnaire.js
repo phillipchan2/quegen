@@ -238,7 +238,7 @@ class AddEditQuestionnaire extends Component {
 								to={`/questionnaires/${
 									this.state.currentQuestionnaire._id
 								}`}
-							>{`/ questionnaires / ${
+							>{`/questionnaires/${
 								this.state.currentQuestionnaire._id
 							}`}</Link>
 						</Menu.Item>

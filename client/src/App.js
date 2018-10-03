@@ -17,11 +17,7 @@ import Admin from './components/pages/Admin/Admin';
 import Home from './components/pages/Home/Home';
 import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
-import CategorySets from './components/pages/CategorySets/CategorySets';
-import Questionnaires from './components/pages/Questionnaires/Questionnaires';
 import Questionnaire from './components/pages/Questionnaire/Questionnaire';
-import AddEditCategorySet from './components/pages/AddEditCategorySet/AddEditCategorySet';
-import AddEditQuestionnaire from './components/pages/AddEditQuestionnaire/AddEditQuestionnaire';
 
 class App extends Component {
 	render() {
@@ -35,29 +31,9 @@ class App extends Component {
 					<div className="app">
 						<Init />
 						<div className="router">
-							<Route path="/" component={Home} />
+							<Route exact path="/" component={Home} />
 
 							<ProtectedRoute path="/admin" component={Admin} />
-
-							<ProtectedRoute
-								path="/admin/categorysets"
-								component={CategorySets}
-							/>
-
-							<ProtectedRoute
-								path="/admin/categoryset/:id"
-								component={AddEditCategorySet}
-							/>
-
-							<ProtectedRoute
-								path="/admin/questionnaires/"
-								component={Questionnaires}
-							/>
-
-							<ProtectedRoute
-								path="/admin/questionnaire/:id"
-								component={AddEditQuestionnaire}
-							/>
 
 							<Route
 								path="/admin/questionnaire/view/:id"

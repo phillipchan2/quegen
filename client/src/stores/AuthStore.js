@@ -2,6 +2,13 @@ import { observable, action, computed } from 'mobx';
 import axios from 'axios';
 
 class AuthStore {
+	constructor() {
+		const jwtoken = localStorage.getItem('jwtoken');
+
+		if (jwtoken) {
+			this.isAuthenticated = true;
+		}
+	}
 	@observable
 	isAuthenticated = false;
 
@@ -43,8 +50,12 @@ class AuthStore {
 
 					if (res.data.success) {
 						this.login(res.data.user, jwtoken);
+					} else {
+						this.logout();
 					}
 				});
+		} else {
+			this.logout();
 		}
 	}
 }
