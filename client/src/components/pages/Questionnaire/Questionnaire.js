@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 // components
-import moduleName from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
 
 class Questionnaire extends Component {
