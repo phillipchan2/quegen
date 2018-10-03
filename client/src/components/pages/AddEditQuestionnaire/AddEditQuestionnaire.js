@@ -228,13 +228,13 @@ class AddEditQuestionnaire extends Component {
 				) : (
 					''
 				)}
-				<Menu secondary>
-					<Menu.Menu position="left">
-						<Header as="h3">Questionnaire</Header>
-					</Menu.Menu>
+				<Menu secondary style={{ marginLeft: 0 }}>
+					<Header as="h2">Questionnaire</Header>
+
 					<Menu.Menu position="right">
 						<Menu.Item>
 							<Link
+								target="_blank"
 								to={`/questionnaires/${
 									this.state.currentQuestionnaire._id
 								}`}

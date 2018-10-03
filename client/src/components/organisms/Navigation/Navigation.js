@@ -11,7 +11,7 @@ import { Menu } from 'semantic-ui-react';
 class Navigation extends Component {
 	render() {
 		return (
-			<Menu secondary className="app-nav">
+			<Menu secondary className="app-nav" style={{ paddingLeft: 0 }}>
 				{this.props.AuthStore.isAuthenticated ? (
 					<React.Fragment>
 						<Menu.Item name="questionnaires">

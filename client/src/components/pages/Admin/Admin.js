@@ -17,30 +17,31 @@ import AddEditQuestionnaire from '../../pages/AddEditQuestionnaire/AddEditQuesti
 class Admin extends Component {
 	render() {
 		return (
-			<div>
-				<Navigation />
-				Admin Page
-				<ProtectedRoute
-					path={`${this.props.match.url}/categorySets`}
-					component={CategorySets}
-					exact
-				/>
-				<ProtectedRoute
-					path={`${this.props.match.url}/categoryset/:id`}
-					component={AddEditCategorySet}
-				/>
-				<ProtectedRoute
-					path={`${this.props.match.url}/categoryset/:id`}
-					component={AddEditCategorySet}
-				/>
-				<ProtectedRoute
-					path={`${this.props.match.url}/questionnaires/`}
-					component={Questionnaires}
-				/>
-				<ProtectedRoute
-					path={`${this.props.match.url}/questionnaire/:id`}
-					component={AddEditQuestionnaire}
-				/>
+			<div class="admin-page">
+				<div className="admin-container">
+					<Navigation />
+					<ProtectedRoute
+						path={`${this.props.match.url}/categorySets`}
+						component={CategorySets}
+						exact
+					/>
+					<ProtectedRoute
+						path={`${this.props.match.url}/categoryset/:id`}
+						component={AddEditCategorySet}
+					/>
+					<ProtectedRoute
+						path={`${this.props.match.url}/categoryset/:id`}
+						component={AddEditCategorySet}
+					/>
+					<ProtectedRoute
+						path={`${this.props.match.url}/questionnaires/`}
+						component={Questionnaires}
+					/>
+					<ProtectedRoute
+						path={`${this.props.match.url}/questionnaire/:id`}
+						component={AddEditQuestionnaire}
+					/>
+				</div>
 			</div>
 		);
 	}
