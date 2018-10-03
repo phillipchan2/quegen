@@ -17,7 +17,7 @@ import {
 	Dropdown
 } from 'semantic-ui-react';
 import Sortable from 'react-sortablejs';
-import QuestionWeighted from '../../molecules/QuestionWeighted/QuestionWeighted';
+import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted';
 
 class AddEditQuestionnaire extends Component {
 	constructor(props) {
@@ -337,7 +337,7 @@ class AddEditQuestionnaire extends Component {
 										switch (question.type) {
 											case 'weighted':
 												return (
-													<QuestionWeighted
+													<EditQuestionWeighted
 														index={index}
 														key={question._id}
 														question={question}
