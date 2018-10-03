@@ -26,7 +26,9 @@ class ViewQuestionWeighted extends Component {
 		const { value } = this.state;
 		return (
 			<Form.Group inline>
-				<label>{this.props.question.title}</label>
+				<label>
+					{this.props.index + 1}. {this.props.question.title}
+				</label>
 				<Form.Field
 					control={Radio}
 					label="Yes"

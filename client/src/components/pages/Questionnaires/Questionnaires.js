@@ -11,7 +11,9 @@ class Questionnaires extends Component {
 			<div>
 				<Header as="h1">Questionnaires</Header>
 				<Button>
-					<Link to={`/questionnaire/new`}>New Questionnaire</Link>
+					<Link to={`/admin/questionnaire/new`}>
+						New Questionnaire
+					</Link>
 				</Button>
 				<Divider />
 				<QuestionnairesList />
