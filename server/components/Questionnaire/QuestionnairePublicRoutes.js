@@ -28,40 +28,41 @@ router.post('/:id/submit', (req, res, next) => {
 	if (id) {
 		let response = req.body;
 
-		console.log(response);
-
 		Questionnaire.findOne(
 			{
 				_id: id
 			},
 			(err, questionnaire) => {
 				if (!err) {
-					var category = QuestionnaireImpl.giveCategory();
+					var category = QuestionnaireImpl.giveCategoryWithMostResponses(
+						questionnaire,
+						response
+					);
 
 					console.log('category', category);
 
 					res.json({
 						success: true
 					});
-					// questionnaire.responses.push(response);
-					// questionnaire.save(err => {
-					// 	if (!err) {
-					// 		res.status(200).json({
-					// 			success: true,
-					// 			data: questionnaire
-					// 		});
-					// 	} else {
-					// 		res.status(400).json({
-					// 			success: false,
-					// 			message: err
-					// 		});
-					// 	}
-					// });
-				} else {
-					res.status(400).json({
-						success: false,
-						message: err
-					});
+					// 	questionnaire.responses.push(response);
+					// 	questionnaire.save(err => {
+					// 		if (!err) {
+					// 			res.status(200).json({
+					// 				success: true,
+					// 				data: questionnaire
+					// 			});
+					// 		} else {
+					// 			res.status(400).json({
+					// 				success: false,
+					// 				message: err
+					// 			});
+					// 		}
+					// 	});
+					// } else {
+					// 	res.status(400).json({
+					// 		success: false,
+					// 		message: err
+					// 	});
 				}
 			}
 		);
