@@ -12,13 +12,26 @@ class Questionnaire extends Component {
 		this.state = {
 			questionnaire: {
 				questions: []
-			},
-			responses: [{}]
+			}
 		};
 	}
 
-	questionAnswered(response) {
-		console.log(response);
+	questionAnswered(responseFromQuestion) {
+		let newState = this.state;
+
+		var index = newState.responses.findIndex(response => {
+			return response._id === responseFromQuestion._id;
+		});
+
+		newState.responses[index] = Object.assign(
+			newState.responses[index],
+			responseFromQuestion,
+			{
+				answered: true
+			}
+		);
+
+		this.setState(newState);
 	}
 
 	componentDidMount() {
@@ -26,7 +39,15 @@ class Questionnaire extends Component {
 			const questionnaire = res.data.data;
 
 			this.setState({
-				questionnaire: questionnaire
+				questionnaire: questionnaire,
+				responses: questionnaire.questions.map(question => {
+					return {
+						_id: question._id,
+						answered: false,
+						value: undefined,
+						type: question.type
+					};
+				})
 			});
 		});
 	}
@@ -39,7 +60,9 @@ class Questionnaire extends Component {
 						case 'weighted':
 							return (
 								<ViewQuestionWeighted
-									questionAnswered={this.questionAnswered}
+									questionAnswered={this.questionAnswered.bind(
+										this
+									)}
 									question={question}
 								/>
 							);
