@@ -48,6 +48,16 @@ class QuestionnaireCard extends Component {
 								Edit
 							</Link>
 						</Menu.Item>
+						<Menu.Item>
+							<Link
+								to={`questionnaire/${
+									this.props.questionnaire._id
+								}/responses`}
+							>
+								<Icon name="table" />
+								View Responses
+							</Link>
+						</Menu.Item>
 						<Menu.Item
 							onClick={this.handleDeleteQuestionnaire.bind(this)}
 						>

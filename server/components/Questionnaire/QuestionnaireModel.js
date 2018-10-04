@@ -21,7 +21,11 @@ var questionResponseSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	value: String
+	value: String,
+	type: {
+		type: String,
+		required: true
+	}
 });
 
 var responseSchema = new mongoose.Schema({
@@ -34,6 +38,7 @@ var responseSchema = new mongoose.Schema({
 		required: true
 	},
 	category: String,
+	submittedOn: Date,
 	responses: [questionResponseSchema]
 });
 

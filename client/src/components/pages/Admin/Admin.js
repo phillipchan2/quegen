@@ -11,6 +11,7 @@ import CategorySets from '../../pages/CategorySets/CategorySets';
 import AddEditCategorySet from '../../pages/AddEditCategorySet/AddEditCategorySet';
 import Questionnaires from '../../pages/Questionnaires/Questionnaires';
 import AddEditQuestionnaire from '../../pages/AddEditQuestionnaire/AddEditQuestionnaire';
+import QuestionnaireResponses from '../../pages/QuestionnaireResponses/QuestionnaireResponses';
 
 class Admin extends Component {
 	render() {
@@ -36,8 +37,15 @@ class Admin extends Component {
 						component={Questionnaires}
 					/>
 					<ProtectedRoute
+						exact
 						path={`${this.props.match.url}/questionnaire/:id`}
 						component={AddEditQuestionnaire}
+					/>
+					<ProtectedRoute
+						path={`${
+							this.props.match.url
+						}/questionnaire/:id/responses/`}
+						component={QuestionnaireResponses}
 					/>
 				</div>
 			</div>

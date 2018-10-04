@@ -33,7 +33,7 @@ class Questionnaire extends Component {
 			},
 			response: {
 				email: 'phillipchan1@gmail.com',
-				name: 'phil',
+				name: '',
 				responses: []
 			},
 			errorMessage: '',
@@ -43,9 +43,10 @@ class Questionnaire extends Component {
 	}
 
 	handleChange(e) {
-		this.setState({
-			[e.target.name]: e.target.value
-		});
+		let newState = this.state;
+
+		newState.response[e.target.name] = e.target.value;
+		this.setState(newState);
 	}
 
 	handleSubmit() {
@@ -57,7 +58,9 @@ class Questionnaire extends Component {
 			axios
 				.post(
 					`/api/quizzes/${this.props.match.params.id}/submit`,
-					this.state.response
+					Object.assign(this.state.response, {
+						submittedOn: new Date()
+					})
 				)
 				.then(res => {
 					if (res.data.success) {
@@ -88,6 +91,8 @@ class Questionnaire extends Component {
 
 	questionAnswered(responseFromQuestion) {
 		let newState = this.state;
+
+		console.log(responseFromQuestion);
 
 		var index = newState.response.responses.findIndex(response => {
 			return response._id === responseFromQuestion._id;

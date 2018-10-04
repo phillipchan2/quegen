@@ -8,7 +8,8 @@ class ViewQuestionWeighted extends Component {
 
 		this.state = {
 			_id: this.props.question._id,
-			value: null
+			value: null,
+			type: 'weighted'
 		};
 	}
 
