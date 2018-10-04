@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Questionnaire = require('./QuestionnaireModel');
+const CategorySet = require('../CategorySet/CategorySetModel');
 const QuestionnaireImpl = require('./QuestionnaireImpl');
 
 router.get('/:id', (req, res, next) => {
@@ -34,35 +35,51 @@ router.post('/:id/submit', (req, res, next) => {
 			},
 			(err, questionnaire) => {
 				if (!err) {
-					var category = QuestionnaireImpl.giveCategoryWithMostResponses(
+					var categoryIdWithMostReponses = QuestionnaireImpl.getCategoryIdWithMostResponses(
 						questionnaire,
 						response
 					);
 
-					console.log('category', category);
+					CategorySet.findOne(
+						{
+							'categories._id': categoryIdWithMostReponses
+						},
+						(err, categorySet) => {
+							console.log('categorySet', categorySet);
+							let category = categorySet.categories.find(
+								category => {
+									return (
+										category._id ==
+										categoryIdWithMostReponses
+									);
+								}
+							);
 
-					res.json({
-						success: true
+							response.category = category.name;
+
+							console.log(response);
+
+							questionnaire.responses.push(response);
+							questionnaire.save(err => {
+								if (!err) {
+									res.status(200).json({
+										success: true,
+										data: category
+									});
+								} else {
+									res.status(400).json({
+										success: false,
+										message: err
+									});
+								}
+							});
+						}
+					);
+				} else {
+					res.status(400).json({
+						success: false,
+						message: err
 					});
-					// 	questionnaire.responses.push(response);
-					// 	questionnaire.save(err => {
-					// 		if (!err) {
-					// 			res.status(200).json({
-					// 				success: true,
-					// 				data: questionnaire
-					// 			});
-					// 		} else {
-					// 			res.status(400).json({
-					// 				success: false,
-					// 				message: err
-					// 			});
-					// 		}
-					// 	});
-					// } else {
-					// 	res.status(400).json({
-					// 		success: false,
-					// 		message: err
-					// 	});
 				}
 			}
 		);

@@ -33,6 +33,7 @@ var responseSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	category: String,
 	responses: [questionResponseSchema]
 });
 

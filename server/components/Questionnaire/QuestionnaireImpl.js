@@ -1,23 +1,37 @@
-var giveCategoryWithMostResponses = (questionnaire, response) => {
+var getCategoryIdWithMostResponses = (questionnaire, response) => {
 	var tally = [];
 
-	response.responses.forEach(response => {
+	console.log(response.responses);
+	console.log(questionnaire.questions);
+
+	response.responses.forEach((response, responseIndex) => {
 		var question = questionnaire.questions.find(question => {
 			return question._id == response._id;
 		});
 
-		question.appliesToCategories.forEach(category => {
-			if (!tally[category]) {
-				tally[category] = {
-					tally: 1
-				};
-			} else {
-				tally[category].tally++;
+		question.appliesToCategories.forEach((category, index) => {
+			if (response.value === true) {
+				let indexOfCategoryInTally = tally.findIndex(itemInTally => {
+					return itemInTally._id === category;
+				});
+
+				if (indexOfCategoryInTally === -1) {
+					tally.push({
+						_id: category,
+						tally: 1
+					});
+				} else {
+					tally[indexOfCategoryInTally].tally++;
+				}
 			}
 		});
 	});
 
-	return tally;
+	var categoryIdWithMostTallies = tally.reduce((total, currentValue) => {
+		return currentValue > total ? currentValue : total;
+	});
+
+	return categoryIdWithMostTallies._id;
 };
 
-module.exports = { giveCategoryWithMostResponses };
+module.exports = { getCategoryIdWithMostResponses };
