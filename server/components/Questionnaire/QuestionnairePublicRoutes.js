@@ -45,7 +45,6 @@ router.post('/:id/submit', (req, res, next) => {
 							'categories._id': categoryIdWithMostReponses
 						},
 						(err, categorySet) => {
-							console.log('categorySet', categorySet);
 							let category = categorySet.categories.find(
 								category => {
 									return (
@@ -56,8 +55,6 @@ router.post('/:id/submit', (req, res, next) => {
 							);
 
 							response.category = category.name;
-
-							console.log(response);
 
 							questionnaire.responses.push(response);
 							questionnaire.save(err => {

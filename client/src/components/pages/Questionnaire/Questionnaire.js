@@ -16,8 +16,6 @@ class Questionnaire extends Component {
 			}
 		});
 
-		console.log(unansweredQuestions);
-
 		if (unansweredQuestions.length > 0) {
 			return unansweredQuestions;
 		} else {
@@ -61,7 +59,9 @@ class Questionnaire extends Component {
 				)
 				.then(res => {
 					if (res.data.success) {
-						submitSuccess: true;
+						this.setState({
+							submitSuccess: true
+						});
 					} else {
 						this.setState({
 							submitSuccess: false,

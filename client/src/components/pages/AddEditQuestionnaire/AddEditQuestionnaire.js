@@ -9,11 +9,8 @@ import {
 	Form,
 	Header,
 	Icon,
-	Accordion,
 	Menu,
-	Label,
 	Message,
-	Segment,
 	Dropdown
 } from 'semantic-ui-react';
 import Sortable from 'react-sortablejs';
@@ -204,11 +201,6 @@ class AddEditQuestionnaire extends Component {
 					});
 				}
 			});
-	}
-
-	componentDidUpdate(prevProps, prevState) {
-		console.log('prevProps', prevProps);
-		console.log('prevState', prevState);
 	}
 
 	render() {

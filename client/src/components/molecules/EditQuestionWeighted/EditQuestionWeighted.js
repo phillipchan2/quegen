@@ -76,9 +76,7 @@ class QuestionWeighted extends Component {
 					}
 					index={0}
 					onClick={this.handleClick}
-				>
-					more content
-				</Accordion.Title>
+				/>
 				<Accordion.Content
 					active={activeIndex === 0}
 					content={
@@ -127,7 +125,6 @@ class QuestionWeighted extends Component {
 													checked={this.state.appliesToCategories.has(
 														category._id
 													)}
-													key={category._id}
 												/>
 											);
 										}

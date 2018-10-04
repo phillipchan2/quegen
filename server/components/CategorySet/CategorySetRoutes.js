@@ -35,7 +35,6 @@ router.get('/:id', (req, res, next) => {
 
 router.delete('/', (req, res, next) => {
 	var id = req.body._id;
-	console.log(req.body);
 
 	CategorySet.findOneAndDelete(
 		{
@@ -53,7 +52,6 @@ router.delete('/', (req, res, next) => {
 
 router.post('/', (req, res, next) => {
 	var id = req.body._id;
-	console.log(req.body);
 
 	if (id) {
 		let updateParams = req.body;

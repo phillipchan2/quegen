@@ -1,9 +1,6 @@
 var getCategoryIdWithMostResponses = (questionnaire, response) => {
 	var tally = [];
 
-	console.log(response.responses);
-	console.log(questionnaire.questions);
-
 	response.responses.forEach((response, responseIndex) => {
 		var question = questionnaire.questions.find(question => {
 			return question._id == response._id;

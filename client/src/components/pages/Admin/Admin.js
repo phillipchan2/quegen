@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // service components
 import ProtectedRoute from '../../services/ProtectedRoute';
-import Init from '../../services/Init';
 
 // components
 import Navigation from '../../organisms/Navigation/Navigation';
@@ -17,7 +15,7 @@ import AddEditQuestionnaire from '../../pages/AddEditQuestionnaire/AddEditQuesti
 class Admin extends Component {
 	render() {
 		return (
-			<div class="admin-page">
+			<div className="admin-page">
 				<div className="admin-container">
 					<Navigation />
 					<ProtectedRoute

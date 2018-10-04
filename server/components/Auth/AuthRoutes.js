@@ -88,7 +88,6 @@ router.get('/verify', (req, res, next) => {
 
 	if (token) {
 		jwt.verify(token, config.jwt_secret, function(err, decoded) {
-			console.log(decoded);
 			if (err) {
 				res.status(400).json({
 					success: false,

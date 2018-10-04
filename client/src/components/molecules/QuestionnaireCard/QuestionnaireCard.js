@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-import { Segment, Label, Header, Menu, Icon } from 'semantic-ui-react';
+import { Segment, Header, Menu, Icon } from 'semantic-ui-react';
 
 class QuestionnaireCard extends Component {
 	handleDeleteQuestionnaire(e) {
@@ -59,5 +60,9 @@ class QuestionnaireCard extends Component {
 		);
 	}
 }
+
+QuestionnaireCard.propTypes = {
+	questionnaire: PropTypes.object.isRequired
+};
 
 export default QuestionnaireCard;
