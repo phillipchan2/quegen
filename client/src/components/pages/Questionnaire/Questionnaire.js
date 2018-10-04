@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // components
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
-import { Button, Form, Message } from 'semantic-ui-react';
+import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
 
 class Questionnaire extends Component {
 	checkUnansweredQuestions() {
@@ -27,6 +27,7 @@ class Questionnaire extends Component {
 		super(props);
 
 		this.state = {
+			modalOpen: false,
 			questionnaire: {
 				questions: []
 			},
@@ -36,6 +37,7 @@ class Questionnaire extends Component {
 				responses: []
 			},
 			errorMessage: '',
+			resultCategory: {},
 			submitSuccess: false
 		};
 	}
@@ -59,8 +61,12 @@ class Questionnaire extends Component {
 				)
 				.then(res => {
 					if (res.data.success) {
+						let category = res.data.data;
+
 						this.setState({
-							submitSuccess: true
+							submitSuccess: true,
+							resultCategory: category,
+							modalOpen: true
 						});
 					} else {
 						this.setState({
@@ -68,7 +74,6 @@ class Questionnaire extends Component {
 							errorMessage: 'Error Submitting'
 						});
 					}
-					console.log(res);
 				});
 		} else {
 			this.setState({
@@ -98,6 +103,10 @@ class Questionnaire extends Component {
 
 		this.setState(newState);
 	}
+
+	handleOpen = () => this.setState({ modalOpen: true });
+
+	handleClose = () => this.setState({ modalOpen: false });
 
 	componentDidMount() {
 		axios.get(`/api/quizzes/${this.props.match.params.id}`).then(res => {
@@ -129,6 +138,37 @@ class Questionnaire extends Component {
 				) : (
 					''
 				)}
+
+				<Modal
+					trigger={
+						<Button onClick={this.handleOpen}>Show Modal</Button>
+					}
+					open={this.state.modalOpen}
+					onClose={this.handleClose}
+					basic
+					size="small"
+				>
+					<Header
+						icon="browser"
+						content={`You are a ${this.state.resultCategory.name}!`}
+					/>
+					<Modal.Content>
+						<p>{this.state.resultCategory.resultDescription}</p>
+						<p>
+							You'll be getting an email later with more
+							information
+						</p>
+					</Modal.Content>
+					<Modal.Actions>
+						<Button
+							color="green"
+							onClick={this.handleClose}
+							inverted
+						>
+							<Icon name="checkmark" /> Got it
+						</Button>
+					</Modal.Actions>
+				</Modal>
 
 				<Form>
 					<Form.Field>
