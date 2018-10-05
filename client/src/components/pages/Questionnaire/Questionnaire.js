@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import Moment from 'react-moment';
+import moment from 'moment';
 
 // components
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
@@ -59,7 +61,7 @@ class Questionnaire extends Component {
 				.post(
 					`/api/quizzes/${this.props.match.params.id}/submit`,
 					Object.assign(this.state.response, {
-						submittedOn: new Date()
+						submittedOn: moment()
 					})
 				)
 				.then(res => {

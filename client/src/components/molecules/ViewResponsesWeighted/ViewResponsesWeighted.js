@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Moment from 'react-moment';
 import PropTypes from 'prop-types';
 
 // components
@@ -18,7 +19,11 @@ class ViewResponsesWeighted extends Component {
 			},
 			{
 				Header: 'Submitted On',
-				accessor: 'submittedOn'
+				accessor: 'submittedOn',
+				sort: 'desc',
+				render: props => (
+					<Moment format={'YYYY/MM/DD'} date={props.value} />
+				)
 			}
 		];
 		return (
