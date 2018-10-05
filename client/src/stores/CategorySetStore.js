@@ -17,8 +17,6 @@ class CategorySetStore {
 					}
 				})
 				.then(res => {
-					console.log(res);
-
 					if (res.data.success) {
 						this.categorySets = res.data.data;
 					}

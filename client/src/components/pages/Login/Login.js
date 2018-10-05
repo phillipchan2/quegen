@@ -48,12 +48,11 @@ class Login extends Component {
 	}
 
 	render() {
-		console.log(this.props.match);
 		if (this.props.AuthStore.isAuthenticated) {
 			return <Redirect to="/admin" />;
 		} else {
 			return (
-				<div className="login-page">
+				<div className="login-page" style={{ padding: '3em' }}>
 					<header style={{ marginBottom: '1rem' }}>
 						<Header as="h1">Login</Header>
 						{this.state.errorMessage ? (
@@ -89,7 +88,7 @@ class Login extends Component {
 							Login
 						</Button>{' '}
 						Don't have an account?{' '}
-						<Link to={'/register'}>Register for one</Link>
+						<Link to={'/admin/register'}>Register for one</Link>
 					</Form>
 				</div>
 			);

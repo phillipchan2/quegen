@@ -7,11 +7,7 @@ import { inject, observer } from 'mobx-react';
 class Home extends Component {
 	componentDidMount() {}
 	render() {
-		return (
-			<div>
-				Home Page {this.props.AuthStore.isAuthenticated ? 'yup' : 'no'}
-			</div>
-		);
+		return <div />;
 	}
 }
 

@@ -29,10 +29,6 @@ class Admin extends Component {
 						component={AddEditCategorySet}
 					/>
 					<ProtectedRoute
-						path={`${this.props.match.url}/categoryset/:id`}
-						component={AddEditCategorySet}
-					/>
-					<ProtectedRoute
 						path={`${this.props.match.url}/questionnaires/`}
 						component={Questionnaires}
 					/>

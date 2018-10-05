@@ -10,7 +10,7 @@ router.post('/register', (req, res, next) => {
 	User.findOne({ email: req.body.email }, (err, user) => {
 		if (req.body.email && req.body.password) {
 			if (user) {
-				res.status(400).json({
+				res.status(200).json({
 					success: false,
 					message: 'User Already Exist'
 				});

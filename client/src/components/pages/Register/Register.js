@@ -10,9 +10,7 @@ class Register extends Component {
 	constructor(props) {
 		super(props);
 
-		this.state = {
-			loginSuccess: false
-		};
+		this.state = { registerSuccess: false };
 		this.handleChange.bind(this);
 	}
 
@@ -27,14 +25,18 @@ class Register extends Component {
 	}
 
 	handleSubmit() {
-		console.log(this.state);
 		axios.post(`/api/auth/register`, this.state).then(res => {
-			if (res.success) {
+			console.log(res);
+			if (res.data.success) {
 				this.setState({
 					registerSuccess: true
 				});
 
 				console.log('success resgister');
+			} else {
+				this.setState({
+					errorMessage: res.data.message
+				});
 			}
 
 			let userId = res.data;
@@ -44,12 +46,20 @@ class Register extends Component {
 	}
 	render() {
 		return (
-			<div className="register-page">
+			<div className="register-page" style={{ padding: '3em' }}>
+				{this.state.registerSuccess ? (
+					<Message>
+						Registration Successful! Please{' '}
+						<Link to={'/admin/login'}>Login Now</Link>
+					</Message>
+				) : (
+					''
+				)}
 				<header style={{ marginBottom: '1rem' }}>
 					<Header as="h1">Register</Header>
 					{this.state.errorMessage ? (
 						<Message warning>
-							<p>{this.state.errorMessage}</p>
+							<p>Error: {this.state.errorMessage}</p>
 						</Message>
 					) : (
 						''
@@ -79,7 +89,8 @@ class Register extends Component {
 					>
 						Register
 					</Button>{' '}
-					Already have an account? <Link to={'/login'}>Login</Link>
+					Already have an account?{' '}
+					<Link to={'/admin/login'}>Login</Link>
 				</Form>
 			</div>
 		);
