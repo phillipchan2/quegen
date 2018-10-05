@@ -19,6 +19,9 @@ import Login from './components/pages/Login/Login';
 import Register from './components/pages/Register/Register';
 import Questionnaire from './components/pages/Questionnaire/Questionnaire';
 
+// components
+import 'react-table/react-table.css';
+
 class App extends Component {
 	render() {
 		return (
