@@ -3,14 +3,14 @@ const config = require('../config/config');
 let dbURL;
 
 if (process.env.NODE_ENV === 'dev') {
-	dbURL = `mongodb://${config.host}/quegen`;
+	dbURL = `mongodb://${config.host}/${config.db_name}`;
 } else if (process.env.NODE_ENV === 'prod') {
 	mLabUsername = process.env.MLAB_USERNAME;
 	mLabPassword = process.env.MLAB_PASSWORD;
 
 	dbURL = `mongodb://${mLabUsername}:${mLabPassword}@${config.host}:${
 		config.port
-	}`;
+	}/${config.db_name}`;
 }
 
 console.log('dbURL', dbURL);
