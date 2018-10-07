@@ -7,6 +7,7 @@ import { Provider } from 'mobx-react';
 import AuthStore from './stores/AuthStore';
 import CategorySetStore from './stores/CategorySetStore';
 import QuestionnaireStore from './stores/QuestionnaireStore';
+import AppMessagingStore from './stores/AppMessagingStore';
 
 // service components
 import ProtectedRoute from './components/services/ProtectedRoute';
@@ -29,6 +30,7 @@ class App extends Component {
 				AuthStore={new AuthStore()}
 				CategorySetStore={new CategorySetStore()}
 				QuestionnaireStore={new QuestionnaireStore()}
+				AppMessagingStore={new AppMessagingStore()}
 			>
 				<Router>
 					<div className="app">

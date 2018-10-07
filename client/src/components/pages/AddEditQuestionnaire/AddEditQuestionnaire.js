@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
 import { Link, Redirect } from 'react-router-dom';
 
 // components
@@ -16,6 +17,8 @@ import {
 import Sortable from 'react-sortablejs';
 import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted';
 
+@inject('AppMessagingStore')
+@observer
 class AddEditQuestionnaire extends Component {
 	constructor(props) {
 		super(props);

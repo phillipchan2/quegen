@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import { inject, observer } from 'mobx-react';
 
 // service components
 import ProtectedRoute from '../../services/ProtectedRoute';
 
 // components
 import Navigation from '../../organisms/Navigation/Navigation';
+import AppMessage from '../../molecules/AppMessage/AppMessage';
 
 // pages
 import CategorySets from '../../pages/CategorySets/CategorySets';
@@ -13,6 +15,8 @@ import Questionnaires from '../../pages/Questionnaires/Questionnaires';
 import AddEditQuestionnaire from '../../pages/AddEditQuestionnaire/AddEditQuestionnaire';
 import QuestionnaireResponses from '../../pages/QuestionnaireResponses/QuestionnaireResponses';
 
+@inject('AppMessagingStore')
+@observer
 class Admin extends Component {
 	render() {
 		return (
@@ -44,6 +48,14 @@ class Admin extends Component {
 						component={QuestionnaireResponses}
 					/>
 				</div>
+
+				{this.props.AppMessagingStore.message ? (
+					<AppMessage
+						message={this.props.AppMessagingStore.message}
+					/>
+				) : (
+					'no message'
+				)}
 			</div>
 		);
 	}
