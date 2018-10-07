@@ -11,11 +11,9 @@ class CategorySets extends Component {
 			<div>
 				<header>
 					<Header as="h1">Category Sets</Header>
-					<Button>
-						<Link to={`/admin/categorySet/new`}>
-							New Category Set
-						</Link>
-					</Button>
+					<Link to={`/admin/categorySet/new`}>
+						<Button>New Category Set</Button>
+					</Link>
 				</header>
 				<Divider />
 				<CategorySetsList />

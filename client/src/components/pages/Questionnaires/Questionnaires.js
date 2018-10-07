@@ -10,11 +10,9 @@ class Questionnaires extends Component {
 		return (
 			<div>
 				<Header as="h1">Questionnaires</Header>
-				<Button>
-					<Link to={`/admin/questionnaire/new`}>
-						New Questionnaire
-					</Link>
-				</Button>
+				<Link to={`/admin/questionnaire/new`}>
+					<Button>New Questionnaire</Button>
+				</Link>
 				<Divider />
 				<QuestionnairesList />
 			</div>
