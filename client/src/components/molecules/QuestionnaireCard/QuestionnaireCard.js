@@ -42,15 +42,6 @@ class QuestionnaireCard extends Component {
 
 				<Menu secondary>
 					<Menu.Menu position="right">
-						{this.props.questionnaire.published ? (
-							<Menu.Item>
-								<Icon name="check circle outline" />
-								Published
-							</Menu.Item>
-						) : (
-							<Menu.Item disabled>Not Published</Menu.Item>
-						)}
-
 						<Menu.Item>
 							<Link
 								to={`questionnaire/${
@@ -59,6 +50,17 @@ class QuestionnaireCard extends Component {
 							>
 								<Icon name="edit" />
 								Edit
+							</Link>
+						</Menu.Item>
+						<Menu.Item>
+							<Link
+								target="_blank"
+								to={`/questionnaires/${
+									this.props.questionnaire._id
+								}`}
+							>
+								<Icon name="check file outline" />
+								View
 							</Link>
 						</Menu.Item>
 						<Menu.Item>
