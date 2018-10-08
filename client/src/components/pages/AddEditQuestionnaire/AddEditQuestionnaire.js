@@ -16,6 +16,7 @@ import {
 } from 'semantic-ui-react';
 import Sortable from 'react-sortablejs';
 import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted';
+import EditQuestionText from '../../molecules/EditQuestionText/EditQuestionText';
 
 @inject('AppMessagingStore')
 @observer
@@ -166,10 +167,12 @@ class AddEditQuestionnaire extends Component {
 		var newState = this.state;
 		var currentQuestion = newState.currentQuestionnaire.questions[index];
 		var newQuestion = Object.assign(currentQuestion, questionData);
-		newQuestion.appliesToCategories = Array.from(
-			newQuestion.appliesToCategories
-		);
-		console.log(newQuestion);
+
+		if (newQuestion.appliesToCategories) {
+			newQuestion.appliesToCategories = Array.from(
+				newQuestion.appliesToCategories
+			);
+		}
 
 		newState.currentQuestionnaire.questions[index] = newQuestion;
 
@@ -324,7 +327,14 @@ class AddEditQuestionnaire extends Component {
 											>
 												Weighted
 											</Dropdown.Item>
-											<Dropdown.Item>Text</Dropdown.Item>
+											<Dropdown.Item
+												data-type="text"
+												onClick={this.handleAddQuestionClick.bind(
+													this
+												)}
+											>
+												Text
+											</Dropdown.Item>
 											<Dropdown.Item>
 												Multiple Choice
 											</Dropdown.Item>
@@ -367,6 +377,26 @@ class AddEditQuestionnaire extends Component {
 																)}
 															/>
 														);
+													case 'text':
+														return (
+															<EditQuestionText
+																index={index}
+																key={
+																	question._id
+																}
+																question={
+																	question
+																}
+																categorySet={
+																	this.state
+																		.currentCategorySet
+																}
+																handleChange={this.handleQuestionChange.bind(
+																	this
+																)}
+															/>
+														);
+
 													default:
 														return 'Question';
 												}

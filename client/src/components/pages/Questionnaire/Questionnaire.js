@@ -5,6 +5,7 @@ import moment from 'moment';
 
 // components
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
+import ViewQuestionText from '../../molecules/ViewQuestionText/ViewQuestionText';
 import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
 
 class Questionnaire extends Component {
@@ -202,6 +203,16 @@ class Questionnaire extends Component {
 						case 'weighted':
 							return (
 								<ViewQuestionWeighted
+									questionAnswered={this.questionAnswered.bind(
+										this
+									)}
+									index={index}
+									question={question}
+								/>
+							);
+						case 'text':
+							return (
+								<ViewQuestionText
 									questionAnswered={this.questionAnswered.bind(
 										this
 									)}

@@ -1,7 +1,7 @@
-var getCategoryIdWithMostResponses = (questionnaire, response) => {
+var getCategoryIdWithMostResponses = (questionnaire, responses) => {
 	var tally = [];
 
-	response.responses.forEach((response, responseIndex) => {
+	responses.forEach((response, responseIndex) => {
 		var question = questionnaire.questions.find(question => {
 			return question._id == response._id;
 		});
@@ -31,4 +31,10 @@ var getCategoryIdWithMostResponses = (questionnaire, response) => {
 	return categoryIdWithMostTallies._id;
 };
 
-module.exports = { getCategoryIdWithMostResponses };
+var getWeightedResponses = response => {
+	return response.responses.filter(response => {
+		return response.type === 'weighted';
+	});
+};
+
+module.exports = { getCategoryIdWithMostResponses, getWeightedResponses };

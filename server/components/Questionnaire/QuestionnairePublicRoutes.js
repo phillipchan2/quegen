@@ -35,9 +35,13 @@ router.post('/:id/submit', (req, res, next) => {
 			},
 			(err, questionnaire) => {
 				if (!err) {
+					var weightedResponses = QuestionnaireImpl.getWeightedResponses(
+						response
+					);
+
 					var categoryIdWithMostReponses = QuestionnaireImpl.getCategoryIdWithMostResponses(
 						questionnaire,
-						response
+						weightedResponses
 					);
 
 					CategorySet.findOne(

@@ -10,36 +10,13 @@ import {
 	Accordion,
 	Label
 } from 'semantic-ui-react';
-
-class QuestionWeighted extends Component {
+class EditQuestionText extends Component {
 	constructor(props) {
 		super(props);
 
 		this.state = {
-			appliesToCategories: new Set(
-				this.props.question.appliesToCategories
-			),
 			title: this.props.question.title
 		};
-	}
-
-	handleCategorySelect(e) {
-		var newAppliesToCategories = new Set(this.state.appliesToCategories);
-
-		if (e.target.checked) {
-			newAppliesToCategories.add(e.target.value);
-		} else {
-			newAppliesToCategories.delete(e.target.value);
-		}
-
-		this.setState(
-			{
-				appliesToCategories: newAppliesToCategories
-			},
-			() => {
-				this.props.handleChange(this.state, this.props.index);
-			}
-		);
 	}
 
 	handleClick = (e, titleProps) => {
@@ -82,7 +59,7 @@ class QuestionWeighted extends Component {
 						<Segment data-index={this.props.index}>
 							<Menu secondary>
 								<Menu.Menu position="left">
-									Weighted Question
+									Text Question
 								</Menu.Menu>
 
 								<Menu.Menu position="right">
@@ -96,9 +73,7 @@ class QuestionWeighted extends Component {
 							</Menu>
 							<Form>
 								<Form.Field>
-									<label>
-										Question Title (yes/no question)
-									</label>
+									<label>Question Title</label>
 									<input
 										name="name"
 										placeholder="Question Title"
@@ -108,27 +83,6 @@ class QuestionWeighted extends Component {
 										)}
 									/>
 								</Form.Field>
-								<Form.Group grouped>
-									<label>Applies to these Categories:</label>
-									{this.props.categorySet.categories.map(
-										category => {
-											return (
-												<Form.Field
-													label={category.name}
-													control="input"
-													type="checkbox"
-													value={category._id}
-													onChange={this.handleCategorySelect.bind(
-														this
-													)}
-													checked={this.state.appliesToCategories.has(
-														category._id
-													)}
-												/>
-											);
-										}
-									)}
-								</Form.Group>
 							</Form>
 						</Segment>
 					}
@@ -138,4 +92,4 @@ class QuestionWeighted extends Component {
 	}
 }
 
-export default QuestionWeighted;
+export default EditQuestionText;
