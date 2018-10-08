@@ -9,7 +9,8 @@ class ViewQuestionText extends Component {
 		this.state = {
 			_id: this.props.question._id,
 			value: null,
-			type: 'text'
+			type: 'text',
+			title: this.props.question.title
 		};
 	}
 

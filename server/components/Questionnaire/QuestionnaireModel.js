@@ -25,6 +25,10 @@ var questionResponseSchema = new mongoose.Schema({
 	type: {
 		type: String,
 		required: true
+	},
+	title: {
+		type: String,
+		required: false
 	}
 });
 

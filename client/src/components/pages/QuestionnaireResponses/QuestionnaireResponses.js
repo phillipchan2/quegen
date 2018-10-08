@@ -3,7 +3,8 @@ import axios from 'axios';
 
 // components
 import { Tab } from 'semantic-ui-react';
-import ViewResponsesWeighted from '../../molecules/ViewResponsesWeighted/ViewResponsesWeighted';
+import ViewResponsesWeighted from '../../organisms/ViewResponsesWeighted/ViewResponsesWeighted';
+import ViewResponsesText from '../../organisms/ViewResponsesText/ViewResponsesText';
 
 class QuestionnaireResponses extends Component {
 	constructor(props) {
@@ -23,10 +24,23 @@ class QuestionnaireResponses extends Component {
 		let responsesText = [];
 		let newState = this.state;
 
-		// weighted tab
-		responses.forEach(response => {
-			responsesWeighted.push(response);
+		responses.forEach(submission => {
+			// weighted responses
+			responsesWeighted.push(submission);
+
+			submission.responses.forEach(response => {
+				let submissionInfo = submission;
+
+				delete submissionInfo.responses;
+
+				// text
+				if (response.type === 'text') {
+					responsesText.push(Object.assign(response, submissionInfo));
+				}
+			});
 		});
+
+		// text responses
 
 		this.setState({
 			responsesWeighted: responsesWeighted,
@@ -65,18 +79,26 @@ class QuestionnaireResponses extends Component {
 			{
 				menuItem: 'Weighted Results',
 				render: () => (
-					<ViewResponsesWeighted
-						responses={this.state.responsesWeighted}
-					/>
+					<Tab.Pane>
+						<ViewResponsesWeighted
+							responses={this.state.responsesWeighted}
+						/>
+					</Tab.Pane>
 				)
 			},
 			{
 				menuItem: 'Multiple Choice',
-				render: () => <Tab.Pane>Tab 2 Content</Tab.Pane>
+				render: () => <Tab.Pane>Multiple Choice</Tab.Pane>
 			},
 			{
 				menuItem: 'Text Based',
-				render: () => <Tab.Pane>Tab 3 Content</Tab.Pane>
+				render: () => (
+					<Tab.Pane>
+						<ViewResponsesText
+							responses={this.state.responsesText}
+						/>
+					</Tab.Pane>
+				)
 			}
 		];
 
