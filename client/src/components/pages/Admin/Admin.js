@@ -54,7 +54,7 @@ class Admin extends Component {
 						message={this.props.AppMessagingStore.message}
 					/>
 				) : (
-					'no message'
+					''
 				)}
 			</div>
 		);

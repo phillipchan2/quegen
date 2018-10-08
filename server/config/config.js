@@ -10,8 +10,6 @@ const environmentSettings = {
 	}
 };
 
-//<dbuser>:<dbpassword>@ds223763.mlab.com:23763/quegen
-
 const global = {
 	jwt_secret: 'motherspie',
 	db_name: 'quegen'

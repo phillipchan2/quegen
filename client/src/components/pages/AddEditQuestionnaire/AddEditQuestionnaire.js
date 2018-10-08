@@ -192,6 +192,10 @@ class AddEditQuestionnaire extends Component {
 						errorMessage: ''
 					});
 
+					this.props.AppMessagingStore.showAppMessage(
+						'Successfully Updated!'
+					);
+
 					setTimeout(() => {
 						this.setState({
 							updateSuccess: false
@@ -210,11 +214,6 @@ class AddEditQuestionnaire extends Component {
 		let sortable = null;
 		return (
 			<div>
-				{this.state.updateSuccess ? (
-					<Message>Successfully Updated!</Message>
-				) : (
-					''
-				)}
 				{this.state.errorMessage ? (
 					<Message negative>
 						<Message.Header>Error</Message.Header>

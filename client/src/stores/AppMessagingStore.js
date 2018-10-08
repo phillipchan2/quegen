@@ -2,7 +2,7 @@ import { observable, action, computed } from 'mobx';
 
 class AppMessagingStore {
 	@observable
-	message = 'heres a message';
+	message = '';
 
 	@action.bound
 	showAppMessage(message) {
@@ -10,7 +10,7 @@ class AppMessagingStore {
 
 		setTimeout(() => {
 			this.message = '';
-		}, 3000);
+		}, 5000);
 	}
 }
 
