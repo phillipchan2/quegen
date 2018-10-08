@@ -152,6 +152,23 @@ class AddEditCategorySet extends Component {
 					<Redirect to={'/admin/categorySets'} />
 				) : (
 					<div>
+						<Menu secondary style={{ marginLeft: 0 }}>
+							<Header as="h2">Category Set</Header>
+
+							<Menu.Menu position="right">
+								<Menu.Item
+									name="logout"
+									onClick={this.handleItemClick}
+								>
+									<Button
+										primary
+										onClick={this.handleSubmit.bind(this)}
+									>
+										Save
+									</Button>
+								</Menu.Item>
+							</Menu.Menu>
+						</Menu>
 						<Form>
 							<Form.Field>
 								<label>Name</label>
@@ -227,9 +244,6 @@ class AddEditCategorySet extends Component {
 									}
 							  )
 							: 'No Categories Yet'}
-						<Button onClick={this.handleSubmit.bind(this)}>
-							Save
-						</Button>
 					</div>
 				)}
 			</div>

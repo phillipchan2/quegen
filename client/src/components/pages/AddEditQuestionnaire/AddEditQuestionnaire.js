@@ -203,6 +203,7 @@ class AddEditQuestionnaire extends Component {
 					}, 3000);
 				} else {
 					this.setState({
+						updateSuccess: false,
 						errorMessage:
 							'Error submitting. Make sure all fields are filled'
 					});
@@ -232,28 +233,30 @@ class AddEditQuestionnaire extends Component {
 
 							<Menu.Menu position="right">
 								<Menu.Item>
-									<Link
-										target="_blank"
-										to={`/questionnaires/${
+									{this.state.currentQuestionnaire._id ? (
+										<Link
+											target="_blank"
+											to={`/questionnaires/${
+												this.state.currentQuestionnaire
+													._id
+											}`}
+										>{`/questionnaires/${
 											this.state.currentQuestionnaire._id
-										}`}
-									>{`/questionnaires/${
-										this.state.currentQuestionnaire._id
-									}`}</Link>
+										}`}</Link>
+									) : (
+										''
+									)}
 								</Menu.Item>
 								<Menu.Item
 									name="logout"
 									onClick={this.handleItemClick}
 								>
-									{this.state.currentQuestionnaire
-										.published ? (
-										<Button disabled>
-											<Icon disabled name="checkmark" />
-											Published
-										</Button>
-									) : (
-										<Button primary>Publish</Button>
-									)}
+									<Button
+										primary
+										onClick={this.handleSubmit.bind(this)}
+									>
+										Save
+									</Button>
 								</Menu.Item>
 							</Menu.Menu>
 						</Menu>
@@ -377,10 +380,6 @@ class AddEditQuestionnaire extends Component {
 						) : (
 							'Please select an associated category set first'
 						)}
-
-						<Button onClick={this.handleSubmit.bind(this)}>
-							Save
-						</Button>
 					</div>
 				)}
 			</div>
