@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
+import { Redirect } from 'react-router-dom';
 
 // components
 import {
@@ -13,6 +15,8 @@ import {
 	Segment
 } from 'semantic-ui-react';
 
+@inject('AppMessagingStore')
+@observer
 class AddEditCategorySet extends Component {
 	constructor(props) {
 		super(props);
@@ -120,6 +124,10 @@ class AddEditCategorySet extends Component {
 						updateSuccess: true,
 						errorMessage: ''
 					});
+
+					this.props.AppMessagingStore.showAppMessage(
+						'Successfully Updated!'
+					);
 				} else {
 					this.setState({
 						errorMessage:
@@ -132,11 +140,6 @@ class AddEditCategorySet extends Component {
 	render() {
 		return (
 			<div>
-				{this.state.updateSuccess ? (
-					<Message>Successfully Updated!</Message>
-				) : (
-					''
-				)}
 				{this.state.errorMessage ? (
 					<Message negative>
 						<Message.Header>Error</Message.Header>
@@ -145,76 +148,90 @@ class AddEditCategorySet extends Component {
 				) : (
 					''
 				)}
-				<Form>
-					<Form.Field>
-						<label>Name</label>
-						<input
-							name="name"
-							placeholder="Name"
-							value={this.state.currentCategorySet.name}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</Form.Field>
-				</Form>
-				<Divider />
-				<Header as="h3">Categories</Header>
-				<Button onClick={this.handleAddCategoryClick.bind(this)}>
-					Add Category
-				</Button>
-				{this.state.currentCategorySet.categories
-					? this.state.currentCategorySet.categories.map(
-							(category, index) => {
-								return (
-									<Segment data-index={index}>
-										<Menu secondary>
-											<Menu.Menu position="right">
-												<Menu.Item>
-													<Button
-														basic
-														onClick={this.handleDeleteCategory.bind(
-															this
-														)}
-													>
-														<Icon name="trash" />
-														Delete
-													</Button>
-												</Menu.Item>
-											</Menu.Menu>
-										</Menu>
-										<Form>
-											<Form.Field>
-												<label>Category Name</label>
-												<input
-													name="name"
-													placeholder="Category"
-													value={category.name}
-													onChange={this.handleCategoryChange.bind(
-														this
-													)}
-												/>
-											</Form.Field>
-											<Form.Field>
-												<label>
-													Result Description
-												</label>
-												<textarea
-													name="resultDescription"
-													placeholder="Category"
-													value={
-														category.resultDescription
-													}
-													onChange={this.handleCategoryChange.bind(
-														this
-													)}
-												/>
-											</Form.Field>
-										</Form>
-									</Segment>
-								);
-							}
-					  )
-					: 'No Categories Yet'}
-				<Button onClick={this.handleSubmit.bind(this)}>Save</Button>
+				{this.state.updateSuccess ? (
+					<Redirect to={'/admin/categorySets'} />
+				) : (
+					<div>
+						<Form>
+							<Form.Field>
+								<label>Name</label>
+								<input
+									name="name"
+									placeholder="Name"
+									value={this.state.currentCategorySet.name}
+									onChange={this.handleChange.bind(this)}
+								/>
+							</Form.Field>
+						</Form>
+						<Divider />
+						<Header as="h3">Categories</Header>
+						<Button
+							onClick={this.handleAddCategoryClick.bind(this)}
+						>
+							Add Category
+						</Button>
+						{this.state.currentCategorySet.categories
+							? this.state.currentCategorySet.categories.map(
+									(category, index) => {
+										return (
+											<Segment data-index={index}>
+												<Menu secondary>
+													<Menu.Menu position="right">
+														<Menu.Item>
+															<Button
+																basic
+																onClick={this.handleDeleteCategory.bind(
+																	this
+																)}
+															>
+																<Icon name="trash" />
+																Delete
+															</Button>
+														</Menu.Item>
+													</Menu.Menu>
+												</Menu>
+												<Form>
+													<Form.Field>
+														<label>
+															Category Name
+														</label>
+														<input
+															name="name"
+															placeholder="Category"
+															value={
+																category.name
+															}
+															onChange={this.handleCategoryChange.bind(
+																this
+															)}
+														/>
+													</Form.Field>
+													<Form.Field>
+														<label>
+															Result Description
+														</label>
+														<textarea
+															name="resultDescription"
+															placeholder="Category"
+															value={
+																category.resultDescription
+															}
+															onChange={this.handleCategoryChange.bind(
+																this
+															)}
+														/>
+													</Form.Field>
+												</Form>
+											</Segment>
+										);
+									}
+							  )
+							: 'No Categories Yet'}
+						<Button onClick={this.handleSubmit.bind(this)}>
+							Save
+						</Button>
+					</div>
+				)}
 			</div>
 		);
 	}

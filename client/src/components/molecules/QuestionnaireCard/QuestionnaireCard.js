@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
 
+// components
 import { Segment, Header, Menu, Icon } from 'semantic-ui-react';
 
+@inject('AppMessagingStore')
+@inject('QuestionnaireStore')
+@observer
 class QuestionnaireCard extends Component {
 	handleDeleteQuestionnaire(e) {
 		const id = e.target.parentNode.parentNode.parentNode.dataset.id;
 		const jwtoken = localStorage.getItem('jwtoken');
 
 		axios
-			.delete(`/api/questionnaire/`, {
+			.delete(`/api/questionnaire/${id}`, {
 				headers: {
 					token: jwtoken
 				},
@@ -19,7 +24,15 @@ class QuestionnaireCard extends Component {
 					_id: id
 				}
 			})
-			.then(res => {});
+			.then(res => {
+				if (res.data.success) {
+					this.props.QuestionnaireStore.getQuestionnaires();
+
+					this.props.AppMessagingStore.showAppMessage(
+						'Successfully Deleted'
+					);
+				}
+			});
 	}
 
 	render() {

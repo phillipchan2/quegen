@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import { inject, observer } from 'mobx-react';
 
 import { Segment, Label, Header, Menu, Icon } from 'semantic-ui-react';
 
+@inject('AppMessagingStore')
+@inject('CategorySetStore')
+@observer
 class CategorySetCard extends Component {
 	handleDeleteCategorySet(e) {
 		const id = e.target.parentNode.parentNode.parentNode.dataset.id;
@@ -18,7 +22,15 @@ class CategorySetCard extends Component {
 					_id: id
 				}
 			})
-			.then(res => {});
+			.then(res => {
+				if (res.data.success) {
+					this.props.CategorySetStore.getCategorySets();
+
+					this.props.AppMessagingStore.showAppMessage(
+						'Successfully Deleted'
+					);
+				}
+			});
 	}
 
 	render() {

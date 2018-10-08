@@ -42,8 +42,11 @@ router.get('/:id/responses', (req, res, next) => {
 	});
 });
 
-router.delete('/', (req, res, next) => {
-	var id = req.body.id;
+router.delete('/:id', (req, res, next) => {
+	// var id = req.body.id;
+	var id = req.params.id;
+
+	console.log('id', id);
 
 	Questionnaire.findOneAndDelete(
 		{
