@@ -4,7 +4,7 @@ const environmentSettings = {
 	dev: {
 		host: 'localhost'
 	},
-	prod: {
+	production: {
 		host: 'ds223763.mlab.com',
 		port: 23763
 	}
