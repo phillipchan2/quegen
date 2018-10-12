@@ -4,9 +4,10 @@ import Moment from 'react-moment';
 import moment from 'moment';
 
 // components
+import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
 import ViewQuestionText from '../../molecules/ViewQuestionText/ViewQuestionText';
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
+import ViewQuestionMultipleChoice from '../../molecules/ViewQuestionMultipleChoice/ViewQuestionMultipleChoice';
 
 class Questionnaire extends Component {
 	checkUnansweredQuestions() {
@@ -215,6 +216,16 @@ class Questionnaire extends Component {
 						case 'text':
 							return (
 								<ViewQuestionText
+									questionAnswered={this.questionAnswered.bind(
+										this
+									)}
+									index={index}
+									question={question}
+								/>
+							);
+						case 'multipleChoice':
+							return (
+								<ViewQuestionMultipleChoice
 									questionAnswered={this.questionAnswered.bind(
 										this
 									)}
