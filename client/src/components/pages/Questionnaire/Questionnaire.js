@@ -48,6 +48,10 @@ class Questionnaire extends Component {
 	handleChange(e) {
 		let newState = this.state;
 
+		this.setState({
+			[e.target.name]: e.target.value
+		});
+
 		newState.response[e.target.name] = e.target.value;
 		this.setState(newState);
 	}
@@ -141,10 +145,8 @@ class Questionnaire extends Component {
 	render() {
 		return (
 			<div className="questionnaire">
-				{this.state.errorMessage ? (
+				{this.state.errorMessage && (
 					<Message error>{this.state.errorMessage}</Message>
-				) : (
-					''
 				)}
 
 				<Modal

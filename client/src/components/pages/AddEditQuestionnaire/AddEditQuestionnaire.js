@@ -17,6 +17,7 @@ import {
 import Sortable from 'react-sortablejs';
 import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted';
 import EditQuestionText from '../../molecules/EditQuestionText/EditQuestionText';
+import EditQuestionMultipleChoice from '../../molecules/EditQuestionMultipleChoice/EditQuestionMultipleChoice';
 
 @inject('AppMessagingStore')
 @observer
@@ -335,7 +336,12 @@ class AddEditQuestionnaire extends Component {
 											>
 												Text
 											</Dropdown.Item>
-											<Dropdown.Item>
+											<Dropdown.Item
+												data-type="multipleChoice"
+												onClick={this.handleAddQuestionClick.bind(
+													this
+												)}
+											>
 												Multiple Choice
 											</Dropdown.Item>
 										</Dropdown.Menu>
@@ -390,6 +396,21 @@ class AddEditQuestionnaire extends Component {
 																categorySet={
 																	this.state
 																		.currentCategorySet
+																}
+																handleChange={this.handleQuestionChange.bind(
+																	this
+																)}
+															/>
+														);
+													case 'multipleChoice':
+														return (
+															<EditQuestionMultipleChoice
+																index={index}
+																key={
+																	question._id
+																}
+																question={
+																	question
 																}
 																handleChange={this.handleQuestionChange.bind(
 																	this

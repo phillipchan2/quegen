@@ -13,6 +13,10 @@ var questionSchema = new mongoose.Schema({
 	type: {
 		type: String,
 		required: true
+	},
+	choices: {
+		type: Mixed,
+		required: false
 	}
 });
 
