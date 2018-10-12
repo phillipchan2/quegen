@@ -9,7 +9,8 @@ class ViewQuestionMultipleChoice extends Component {
 		this.state = {
 			_id: this.props.question._id,
 			value: null,
-			type: 'multipleChoice'
+			type: 'multipleChoice',
+			title: this.props.question.title
 		};
 	}
 
