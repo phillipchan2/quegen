@@ -9,18 +9,10 @@ class ViewResponsesText extends Component {
 	render() {
 		const columns = [
 			{ Header: 'Name', accessor: 'name' },
-			{
-				Header: 'Question',
-				accessor: 'title'
-			},
-			{
-				Header: 'Email',
-				accessor: 'email'
-			},
-			{
-				Header: 'Answer',
-				accessor: 'value'
-			},
+			{ Header: 'Email', accessor: 'email' },
+			{ Header: 'Question', accessor: 'title' },
+			{ Header: 'Answer', accessor: 'value' },
+			{ Header: 'Category', accessor: 'category' },
 			{
 				Header: 'Submitted On',
 				accessor: 'submittedOn',
@@ -32,7 +24,14 @@ class ViewResponsesText extends Component {
 		];
 		return (
 			<div style={{ padding: '1em' }}>
-				<ReactTable data={this.props.responses} columns={columns} />
+				<ReactTable
+					filterable
+					data={this.props.responses}
+					defaultFilterMethod={(filter, row) =>
+						row[filter.id].startsWith(filter.value)
+					}
+					columns={columns}
+				/>
 			</div>
 		);
 	}

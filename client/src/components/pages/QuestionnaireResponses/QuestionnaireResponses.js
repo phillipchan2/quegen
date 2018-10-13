@@ -5,7 +5,6 @@ import axios from 'axios';
 import { Tab } from 'semantic-ui-react';
 import ViewResponsesWeighted from '../../organisms/ViewResponsesWeighted/ViewResponsesWeighted';
 import ViewResponsesText from '../../organisms/ViewResponsesText/ViewResponsesText';
-import ViewResponsesMultipleChoice from '../../organisms/ViewResponsesMultipleChoice/ViewResponsesMultipleChoice';
 
 class QuestionnaireResponses extends Component {
 	constructor(props) {
@@ -35,14 +34,11 @@ class QuestionnaireResponses extends Component {
 				delete submissionInfo.responses;
 
 				// text
-				if (response.type === 'text') {
+				if (
+					response.type === 'text' ||
+					response.type === 'multipleChoice'
+				) {
 					responsesText.push(Object.assign(response, submissionInfo));
-				}
-
-				if (response.type === 'multipleChoice') {
-					responsesMultipleChoice.push(
-						Object.assign(response, submissionInfo)
-					);
 				}
 			});
 		});
@@ -94,17 +90,7 @@ class QuestionnaireResponses extends Component {
 				)
 			},
 			{
-				menuItem: 'Multiple Choice',
-				render: () => (
-					<Tab.Pane>
-						<ViewResponsesMultipleChoice
-							responses={this.state.responsesMultipleChoice}
-						/>
-					</Tab.Pane>
-				)
-			},
-			{
-				menuItem: 'Text Based',
+				menuItem: 'Multiple Choice and Text Based',
 				render: () => (
 					<Tab.Pane>
 						<ViewResponsesText
