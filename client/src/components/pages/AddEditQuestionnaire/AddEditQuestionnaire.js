@@ -67,8 +67,6 @@ class AddEditQuestionnaire extends Component {
 										let newState = this.state;
 										let categorySet = res.data.data;
 
-										console.log('categorySet', categorySet);
-
 										newState[
 											'currentCategorySet'
 										] = categorySet;
