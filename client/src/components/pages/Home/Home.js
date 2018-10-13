@@ -7,7 +7,24 @@ import { inject, observer } from 'mobx-react';
 class Home extends Component {
 	componentDidMount() {}
 	render() {
-		return <div />;
+		return (
+			<div
+				style={{
+					display: 'flex',
+					alignItems: 'center',
+					justifyContent: 'center',
+					padding: '3em',
+					flexDirection: 'column'
+				}}
+			>
+				<p>
+					Welcome to Quegen. Get your special quiz link from uyour
+					moderator.
+				</p>
+
+				<p>Moderators can log in from the admin panel</p>
+			</div>
+		);
 	}
 }
 
