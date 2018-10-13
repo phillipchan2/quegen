@@ -49,7 +49,7 @@ class Login extends Component {
 
 	render() {
 		if (this.props.AuthStore.isAuthenticated) {
-			return <Redirect to="/admin" />;
+			return <Redirect to="/admin/questionnaires" />;
 		} else {
 			return (
 				<div className="login-page" style={{ padding: '3em' }}>

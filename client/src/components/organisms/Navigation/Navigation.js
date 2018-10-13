@@ -15,9 +15,6 @@ class Navigation extends Component {
 				{this.props.AuthStore.isAuthenticated ? (
 					<React.Fragment>
 						<Menu.Item name="questionnaires">
-							<Link to={'/admin'}>Home</Link>
-						</Menu.Item>
-						<Menu.Item name="questionnaires">
 							<Link to={'/admin/questionnaires'}>
 								Questionnaires
 							</Link>
