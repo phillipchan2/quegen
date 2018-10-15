@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'mobx-react';
 
 // services
@@ -36,25 +36,24 @@ class App extends Component {
 					<div className="app">
 						<Init />
 						<div className="router">
-							<Route exact path="/" component={Home} />
+							<Switch>
+								<Route exact path="/" component={Home} />
 
-							<ProtectedRoute path="/admin" component={Admin} />
+								<Route
+									path="/questionnaires/:id"
+									component={Questionnaire}
+								/>
 
-							<Route
-								path="/admin/questionnaire/view/:id"
-								component={Questionnaire}
-							/>
-
-							<Route
-								path="/questionnaires/:id"
-								component={Questionnaire}
-							/>
-
-							<Route path="/admin/login" component={Login} />
-							<Route
-								path="/admin/register"
-								component={Register}
-							/>
+								<Route path="/admin/login" component={Login} />
+								<Route
+									path="/admin/register"
+									component={Register}
+								/>
+								<ProtectedRoute
+									path="/admin"
+									component={Admin}
+								/>
+							</Switch>
 						</div>
 					</div>
 				</Router>
