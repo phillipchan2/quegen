@@ -23,7 +23,7 @@ class Admin extends Component {
 			<div className="admin-page">
 				<div className="admin-container">
 					<Navigation />
-					<ProtectedRoute path={`/`} component={Questionnaires} />
+					<ProtectedRoute path={`/`} />
 					<ProtectedRoute
 						path={`${this.props.match.url}/categorySets`}
 						component={CategorySets}

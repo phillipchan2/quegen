@@ -151,6 +151,10 @@ class AddEditQuestionnaire extends Component {
 		});
 	}
 
+	handleDelete(index) {
+		console.log(index);
+	}
+
 	handleDeleteQuestion(e) {
 		var index =
 			e.target.parentNode.parentNode.parentNode.parentNode.dataset.index;
@@ -356,7 +360,7 @@ class AddEditQuestionnaire extends Component {
 											}
 										}}
 										onChange={(order, sortable, evt) => {
-											console.log(order);
+											console.group(order, sortable);
 										}}
 									>
 										{this.state.currentQuestionnaire.questions.map(
@@ -377,6 +381,9 @@ class AddEditQuestionnaire extends Component {
 																		.currentCategorySet
 																}
 																handleChange={this.handleQuestionChange.bind(
+																	this
+																)}
+																handleDelete={this.handleDelete.bind(
 																	this
 																)}
 															/>

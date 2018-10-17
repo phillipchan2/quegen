@@ -87,7 +87,12 @@ class QuestionWeighted extends Component {
 
 								<Menu.Menu position="right">
 									<Menu.Item>
-										<Button basic>
+										<Button
+											basic
+											onClick={this.props.handleDelete(
+												this.props.index
+											)}
+										>
 											<Icon name="trash" />
 											Delete
 										</Button>
