@@ -28,7 +28,9 @@ class ViewResponsesText extends Component {
 					filterable
 					data={this.props.responses}
 					defaultFilterMethod={(filter, row) =>
-						row[filter.id].startsWith(filter.value)
+						String(row[filter.id])
+							.toLowerCase()
+							.startsWith(String(filter.value.toLowerCase()))
 					}
 					columns={columns}
 				/>
