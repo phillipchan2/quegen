@@ -166,6 +166,32 @@ class AddEditQuestionnaire extends Component {
 		this.setState(newState);
 	}
 
+	handleQuestionMove(direction, index) {
+		var newState = this.state;
+		var currentQuestion = newState.currentQuestionnaire.questions[index];
+
+		if (direction === 'up') {
+			newState.currentQuestionnaire.questions.splice(index, 1);
+			newState.currentQuestionnaire.questions.splice(
+				index - 1,
+				0,
+				currentQuestion
+			);
+
+			this.setState(newState);
+		} else if (direction === 'down') {
+			newState.currentQuestionnaire.questions.splice(index, 1);
+			newState.currentQuestionnaire.questions.splice(
+				index + 1,
+				0,
+				currentQuestion
+			);
+
+			this.setState(newState);
+		}
+		this.setState(newState);
+	}
+
 	handleQuestionChange(questionData, index) {
 		var newState = this.state;
 		var currentQuestion = newState.currentQuestionnaire.questions[index];
@@ -373,6 +399,9 @@ class AddEditQuestionnaire extends Component {
 																key={
 																	question._id
 																}
+																handleQuestionMove={this.handleQuestionMove.bind(
+																	this
+																)}
 																question={
 																	question
 																}
