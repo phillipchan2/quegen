@@ -152,7 +152,11 @@ class AddEditQuestionnaire extends Component {
 	}
 
 	handleDelete(index) {
-		console.log(index);
+		var newState = this.state;
+
+		newState.currentQuestionnaire.questions.splice(index, 1);
+
+		this.setState(newState);
 	}
 
 	handleDeleteQuestion(e) {
