@@ -18,7 +18,7 @@ class Home extends Component {
 				}}
 			>
 				<p>
-					Welcome to Quegen. Get your special quiz link from uyour
+					Welcome to Quegen. Get your special quiz link from your
 					moderator.
 				</p>
 
