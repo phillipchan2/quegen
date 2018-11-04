@@ -67,7 +67,7 @@ router.post('/login', (req, res, next) => {
 							}
 						});
 					} else {
-						res.status(400).json({
+						res.status(200).json({
 							success: false,
 							message: 'Email or Password Invalid'
 						});
@@ -75,7 +75,7 @@ router.post('/login', (req, res, next) => {
 				}
 			);
 		} else {
-			res.status(400).json({
+			res.status(200).json({
 				success: false,
 				message: 'Email or Password Invalid'
 			});

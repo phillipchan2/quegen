@@ -31,7 +31,10 @@ class Login extends Component {
 	}
 
 	handleSubmit() {
+		console.log('handle submit');
 		axios.post(`/api/auth/login`, this.state).then(res => {
+
+			console.log(res);
 			if (res.data.success) {
 				this.setState({
 					loginSuccess: true
@@ -41,7 +44,7 @@ class Login extends Component {
 			} else {
 				this.setState({
 					loginSuccess: false,
-					errorMessage: 'Error Logging In'
+					errorMessage: res.data.message
 				});
 			}
 		});
