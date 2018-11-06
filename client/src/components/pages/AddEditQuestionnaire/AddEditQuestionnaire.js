@@ -428,6 +428,12 @@ class AddEditQuestionnaire extends Component {
 																key={
 																	question._id
 																}
+																handleQuestionMove={this.handleQuestionMove.bind(
+																	this
+																)}
+																handleDelete={this.handleDelete.bind(
+																	this
+																)}
 																question={
 																	question
 																}
@@ -447,12 +453,18 @@ class AddEditQuestionnaire extends Component {
 																key={
 																	question._id
 																}
-																question={
-																	question
-																}
 																handleChange={this.handleQuestionChange.bind(
 																	this
 																)}
+																handleQuestionMove={this.handleQuestionMove.bind(
+																	this
+																)}
+																handleDelete={this.handleDelete.bind(
+																	this
+																)}
+																question={
+																	question
+																}
 															/>
 														);
 
