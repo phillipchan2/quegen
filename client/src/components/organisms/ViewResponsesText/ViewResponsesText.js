@@ -11,6 +11,7 @@ class ViewResponsesText extends Component {
 			{ Header: 'Name', accessor: 'name' },
 			{ Header: 'Email', accessor: 'email' },
 			{ Header: 'Question', accessor: 'title' },
+			{ Header: 'Number', accessor: 'phone' },
 			{ Header: 'Answer', accessor: 'value' },
 			{ Header: 'Category', accessor: 'category' },
 			{

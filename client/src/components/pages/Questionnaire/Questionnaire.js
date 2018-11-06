@@ -14,7 +14,6 @@ class Questionnaire extends Component {
 		let unansweredQuestions = [];
 
 		this.state.response.responses.forEach((response, index) => {
-			console.log(response);
 			if (response.answered !== true) {
 				unansweredQuestions.push(index);
 			}
@@ -38,6 +37,7 @@ class Questionnaire extends Component {
 			response: {
 				email: 'phillipchan1@gmail.com',
 				name: '',
+				phone: undefined,
 				responses: []
 			},
 			errorMessage: '',
@@ -59,8 +59,6 @@ class Questionnaire extends Component {
 
 	handleSubmit() {
 		var resultsOfCheckingAnswers = this.checkUnansweredQuestions();
-
-		console.log(resultsOfCheckingAnswers);
 
 		if (resultsOfCheckingAnswers === true) {
 			axios
@@ -99,8 +97,6 @@ class Questionnaire extends Component {
 
 	questionAnswered(responseFromQuestion) {
 		let newState = this.state;
-
-		console.log(responseFromQuestion);
 
 		var index = newState.response.responses.findIndex(response => {
 			return response._id === responseFromQuestion._id;
@@ -197,6 +193,15 @@ class Questionnaire extends Component {
 							placeholder="Email"
 							name="email"
 							value={this.state.response.email}
+							onChange={this.handleChange.bind(this)}
+						/>
+					</Form.Field>
+					<Form.Field>
+						<label>Phone</label>
+						<input
+							placeholder="Phone Number"
+							name="phone"
+							value={this.state.response.phone}
 							onChange={this.handleChange.bind(this)}
 						/>
 					</Form.Field>

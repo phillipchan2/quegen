@@ -41,6 +41,9 @@ var responseSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	phone: {
+		type: Number
+	},
 	name: {
 		type: String,
 		required: true
