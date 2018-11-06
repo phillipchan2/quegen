@@ -28,11 +28,11 @@ class ViewResponsesText extends Component {
 				<ReactTable
 					filterable
 					data={this.props.responses}
-					defaultFilterMethod={(filter, row) =>
-						String(row[filter.id])
-							.toLowerCase()
-							.startsWith(String(filter.value.toLowerCase()))
-					}
+					defaultFilterMethod={(filter, row) => {
+						return String(row[filter.id].toLowerCase()).includes(
+							filter.value.toLowerCase()
+						);
+					}}
 					columns={columns}
 				/>
 			</div>
