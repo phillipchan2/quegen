@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
 import moment from 'moment';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 // components
 import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
 import ViewQuestionText from '../../molecules/ViewQuestionText/ViewQuestionText';
 import ViewQuestionMultipleChoice from '../../molecules/ViewQuestionMultipleChoice/ViewQuestionMultipleChoice';
+
+import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
 
 class Questionnaire extends Component {
 	checkUnansweredQuestions() {
@@ -30,6 +33,7 @@ class Questionnaire extends Component {
 		super(props);
 
 		this.state = {
+			successfulLogin: false,
 			modalOpen: false,
 			questionnaire: {
 				questions: []
@@ -139,112 +143,130 @@ class Questionnaire extends Component {
 		});
 	}
 
+	handleSuccessfulLogin() {
+		console.log('success');
+	}
+
 	render() {
 		return (
-			<div className="questionnaire">
-				{this.state.errorMessage && (
-					<Message error>{this.state.errorMessage}</Message>
-				)}
-
-				<Modal
-					trigger={
-						<Button onClick={this.handleOpen}>Show Modal</Button>
-					}
-					open={this.state.modalOpen}
-					onClose={this.handleClose}
-					basic
-					size="small"
-				>
-					<Header
-						icon="browser"
-						content={`You are a ${this.state.resultCategory.name}!`}
-					/>
-					<Modal.Content>
-						<p>{this.state.resultCategory.resultDescription}</p>
-						<p>
-							You'll be getting an email later with more
-							information
-						</p>
-					</Modal.Content>
-					<Modal.Actions>
-						<Button
-							color="green"
-							onClick={this.handleClose}
-							inverted
-						>
-							<Icon name="checkmark" /> Got it
-						</Button>
-					</Modal.Actions>
-				</Modal>
-
-				<Form>
-					<Form.Field>
-						<label>Name</label>
-						<input
-							placeholder="Name"
-							name="name"
-							value={this.state.response.name}
-							onChange={this.handleChange.bind(this)}
+			<Router>
+				<Route
+					path="/"
+					render={props => (
+						<QuestionnaireLogin
+							{...props}
+							handleSuccessfulLogin={this.handleSuccessfulLogin.bind(
+								this
+							)}
+							password="quegen"
 						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Email</label>
-						<input
-							placeholder="Email"
-							name="email"
-							value={this.state.response.email}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Phone</label>
-						<input
-							placeholder="Phone Number"
-							name="phone"
-							value={this.state.response.phone}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</Form.Field>
-				</Form>
-				{this.state.questionnaire.questions.map((question, index) => {
-					switch (question.type) {
-						case 'weighted':
-							return (
-								<ViewQuestionWeighted
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'text':
-							return (
-								<ViewQuestionText
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'multipleChoice':
-							return (
-								<ViewQuestionMultipleChoice
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						default:
-							return 'Error - Wrong question type';
-					}
-				})}
+					)}
+				/>
+			</Router>
+			// <div className="questionnaire">
+			// 	{this.state.errorMessage && (
+			// 		<Message error>{this.state.errorMessage}</Message>
+			// 	)}
 
-				<Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
-			</div>
+			// 	<Modal
+			// 		trigger={
+			// 			<Button onClick={this.handleOpen}>Show Modal</Button>
+			// 		}
+			// 		open={this.state.modalOpen}
+			// 		onClose={this.handleClose}
+			// 		basic
+			// 		size="small"
+			// 	>
+			// 		<Header
+			// 			icon="browser"
+			// 			content={`You are a ${this.state.resultCategory.name}!`}
+			// 		/>
+			// 		<Modal.Content>
+			// 			<p>{this.state.resultCategory.resultDescription}</p>
+			// 			<p>
+			// 				You'll be getting an email later with more
+			// 				information
+			// 			</p>
+			// 		</Modal.Content>
+			// 		<Modal.Actions>
+			// 			<Button
+			// 				color="green"
+			// 				onClick={this.handleClose}
+			// 				inverted
+			// 			>
+			// 				<Icon name="checkmark" /> Got it
+			// 			</Button>
+			// 		</Modal.Actions>
+			// 	</Modal>
+
+			// 	<Form>
+			// 		<Form.Field>
+			// 			<label>Name</label>
+			// 			<input
+			// 				placeholder="Name"
+			// 				name="name"
+			// 				value={this.state.response.name}
+			// 				onChange={this.handleChange.bind(this)}
+			// 			/>
+			// 		</Form.Field>
+			// 		<Form.Field>
+			// 			<label>Email</label>
+			// 			<input
+			// 				placeholder="Email"
+			// 				name="email"
+			// 				value={this.state.response.email}
+			// 				onChange={this.handleChange.bind(this)}
+			// 			/>
+			// 		</Form.Field>
+			// 		<Form.Field>
+			// 			<label>Phone</label>
+			// 			<input
+			// 				placeholder="Phone Number"
+			// 				name="phone"
+			// 				value={this.state.response.phone}
+			// 				onChange={this.handleChange.bind(this)}
+			// 			/>
+			// 		</Form.Field>
+			// 	</Form>
+			// 	{this.state.questionnaire.questions.map((question, index) => {
+			// 		switch (question.type) {
+			// 			case 'weighted':
+			// 				return (
+			// 					<ViewQuestionWeighted
+			// 						questionAnswered={this.questionAnswered.bind(
+			// 							this
+			// 						)}
+			// 						index={index}
+			// 						question={question}
+			// 					/>
+			// 				);
+			// 			case 'text':
+			// 				return (
+			// 					<ViewQuestionText
+			// 						questionAnswered={this.questionAnswered.bind(
+			// 							this
+			// 						)}
+			// 						index={index}
+			// 						question={question}
+			// 					/>
+			// 				);
+			// 			case 'multipleChoice':
+			// 				return (
+			// 					<ViewQuestionMultipleChoice
+			// 						questionAnswered={this.questionAnswered.bind(
+			// 							this
+			// 						)}
+			// 						index={index}
+			// 						question={question}
+			// 					/>
+			// 				);
+			// 			default:
+			// 				return 'Error - Wrong question type';
+			// 		}
+			// 	})}
+
+			// 	<Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
+			// </div>
 		);
 	}
 }
