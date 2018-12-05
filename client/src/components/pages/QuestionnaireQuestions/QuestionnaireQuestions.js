@@ -19,10 +19,6 @@ class QuestionnaireQuestions extends Component {
 	}
 
 	UNSAFE_componentWillMount() {
-		console.log('will mount from questions');
-
-		console.log(this.props);
-
 		var answers = this.props.questions.map(question => {
 			return {
 				_id: question._id,
@@ -53,7 +49,6 @@ class QuestionnaireQuestions extends Component {
 
 	questionAnswered(responseFromQuestion) {
 		var answers = this.state.answers;
-		console.log(responseFromQuestion);
 
 		answers.find((answer, index) => {
 			if (answer._id === responseFromQuestion._id) {
@@ -106,7 +101,7 @@ class QuestionnaireQuestions extends Component {
 
 	render() {
 		return (
-			<div className="questionnaire">
+			<div className="questionnaire-questions">
 				{this.state.errorMessage && (
 					<Message error>{this.state.errorMessage}</Message>
 				)}

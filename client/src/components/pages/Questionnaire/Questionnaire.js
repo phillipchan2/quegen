@@ -12,20 +12,10 @@ import QuestionnaireRegistration from '../QuestionnaireRegistration/Questionnair
 import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions';
 
 class Questionnaire extends Component {
-	// the data structure which controls the flow of registration page
-
 	constructor(props) {
 		super(props);
 
 		this.handleSubmittedData = this.handleSubmittedData.bind(this);
-
-		axios.get(`/api/quizzes/${this.props.match.params.id}`).then(res => {
-			const questionnaire = res.data.data;
-
-			this.setState({
-				questionnaire: questionnaire
-			});
-		});
 
 		this.state = {
 			// holds all the submission info
@@ -35,7 +25,7 @@ class Questionnaire extends Component {
 			questionnaire: {
 				questions: []
 			},
-			// handles the flow of pages
+			// the data structure which controls the flow of registration page
 			questionnaireFlow: [
 				{
 					success: false,
@@ -84,7 +74,8 @@ class Questionnaire extends Component {
 			});
 
 			this.setState({
-				questionnaireFlow: questionnaireFlow
+				questionnaireFlow: questionnaireFlow,
+				questionnaire: questionnaire
 			});
 		});
 	}
@@ -131,43 +122,55 @@ class Questionnaire extends Component {
 
 		return (
 			<div>
-				hi
-				<ComponentToRender
-					handleSuccessfulPage={this.handleSuccessfulPage.bind(
-						this,
-						currentpageindex
-					)}
-					handleSubmittedData={this.handleSubmittedData}
-					{...page.props}
-					questionnaireId={this.props.match.params.id}
-				/>
-				<Modal
-					open={this.state.modalOpen}
-					onClose={this.handleClose}
-					basic
-					size="small"
-				>
-					<Header
-						icon="browser"
-						content={`You are a ${this.state.resultCategory.name}!`}
-					/>
-					<Modal.Content>
-						<p>{this.state.resultCategory.resultDescription}</p>
-						<p>
-							You'll be getting an email later with more
-							information
-						</p>
-					</Modal.Content>
-					<Modal.Actions>
-						<Button
-							color="green"
-							onClick={this.handleClose}
-							inverted
+				{this.state.questionnaire._id ? (
+					<div className="questionnaire">
+						<ComponentToRender
+							handleSuccessfulPage={this.handleSuccessfulPage.bind(
+								this,
+								currentpageindex
+							)}
+							handleSubmittedData={this.handleSubmittedData}
+							{...page.props}
+							questionnaireId={this.props.match.params.id}
+						/>
+						<Modal
+							open={this.state.modalOpen}
+							onClose={this.handleClose}
+							basic
+							size="small"
 						>
-							<Icon name="checkmark" /> Got it
-						</Button>
-					</Modal.Actions>
-				</Modal>
+							<Header
+								icon="browser"
+								content={`You are a ${
+									this.state.resultCategory.name
+								}!`}
+							/>
+							<Modal.Content>
+								<p>
+									{
+										this.state.resultCategory
+											.resultDescription
+									}
+								</p>
+								<p>
+									You'll be getting an email later with more
+									information
+								</p>
+							</Modal.Content>
+							<Modal.Actions>
+								<Button
+									color="green"
+									onClick={this.handleClose}
+									inverted
+								>
+									<Icon name="checkmark" /> Got it
+								</Button>
+							</Modal.Actions>
+						</Modal>
+					</div>
+				) : (
+					'Questionnnaire not found'
+				)}
 			</div>
 			//
 		);
