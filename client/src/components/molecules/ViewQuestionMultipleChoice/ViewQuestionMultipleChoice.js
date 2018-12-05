@@ -31,7 +31,7 @@ class ViewQuestionMultipleChoice extends Component {
 				<label>
 					{this.props.index + 1}. {this.props.question.title}
 				</label>
-				{this.props.question.choices.map(choice => {
+				{this.props.question.choices.map((choice, index) => {
 					return (
 						<Form.Field
 							control={Radio}
