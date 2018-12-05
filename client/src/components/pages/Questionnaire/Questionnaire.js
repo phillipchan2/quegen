@@ -80,6 +80,35 @@ class Questionnaire extends Component {
 		});
 	}
 
+	handlePageError(err) {
+		alert(err);
+	}
+
+	handleSubmit() {
+		// axios
+		// 	.post(
+		// 		`/api/quizzes/${this.props.questionnaireId}/submit`,
+		// 		Object.assign(this.state.response, {
+		// 			submittedOn: moment()
+		// 		})
+		// 	)
+		// 	.then(res => {
+		// 		if (res.data.success) {
+		// 			let category = res.data.data;
+		// 			this.setState({
+		// 				submitSuccess: true,
+		// 				resultCategory: category,
+		// 				modalOpen: true
+		// 			});
+		// 		} else {
+		// 			this.setState({
+		// 				submitSuccess: false,
+		// 				errorMessage: 'Error Submitting'
+		// 			});
+		// 		}
+		// 	});
+	}
+
 	handleSubmittedData(data) {
 		var newSubmission = Object.assign(
 			this.state.consolidatedSubmissionData,
@@ -130,6 +159,7 @@ class Questionnaire extends Component {
 								currentpageindex
 							)}
 							handleSubmittedData={this.handleSubmittedData}
+							handlePageError={this.handlePageError}
 							{...page.props}
 							questionnaireId={this.props.match.params.id}
 						/>

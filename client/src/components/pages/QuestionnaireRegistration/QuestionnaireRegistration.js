@@ -65,6 +65,7 @@ class QuestionnaireRegistration extends Component {
 QuestionnaireRegistration.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
 	handleSubmittedData: PropTypes.func,
+	handlePageError: PropTypes.func,
 	questionnaireId: PropTypes.string
 };
 

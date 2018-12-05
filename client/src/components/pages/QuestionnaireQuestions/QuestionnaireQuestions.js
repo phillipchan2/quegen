@@ -65,37 +65,14 @@ class QuestionnaireQuestions extends Component {
 
 		if (resultsOfCheckingAnswers === true) {
 			this.props.handleSubmittedData({ answers: this.state.answers });
-			// axios
-			// 	.post(
-			// 		`/api/quizzes/${this.props.questionnaireId}/submit`,
-			// 		Object.assign(this.state.response, {
-			// 			submittedOn: moment()
-			// 		})
-			// 	)
-			// 	.then(res => {
-			// 		if (res.data.success) {
-			// 			let category = res.data.data;
-
-			// 			this.setState({
-			// 				submitSuccess: true,
-			// 				resultCategory: category,
-			// 				modalOpen: true
-			// 			});
-			// 		} else {
-			// 			this.setState({
-			// 				submitSuccess: false,
-			// 				errorMessage: 'Error Submitting'
-			// 			});
-			// 		}
-			// 	});
 		} else {
-			this.setState({
-				errorMessage: `You have questions ${resultsOfCheckingAnswers.map(
-					questionNumber => {
-						return `${questionNumber + 1} `;
-					}
-				)} unanswered`
-			});
+			let errorMessage = `You have questions ${resultsOfCheckingAnswers.map(
+				questionNumber => {
+					return `${questionNumber + 1} `;
+				}
+			)} unanswered`;
+
+			this.props.handlePageError(errorMessage);
 		}
 	}
 
@@ -152,6 +129,7 @@ class QuestionnaireQuestions extends Component {
 QuestionnaireQuestions.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
 	handleSubmittedData: PropTypes.func,
+	handlePageError: PropTypes.func,
 	questionnaireId: PropTypes.string
 };
 

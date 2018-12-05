@@ -6,7 +6,6 @@ class QuestionnaireLogin extends Component {
 		super(props);
 
 		this.state = {
-			showError: false,
 			userInputtedPassword: ''
 		};
 	}
@@ -15,9 +14,9 @@ class QuestionnaireLogin extends Component {
 		if (this.state.userInputtedPassword === this.props.password) {
 			this.props.handleSuccessfulPage();
 		} else {
-			this.setState({
-				showError: true
-			});
+			let errorMessage = `Incorrect password`;
+
+			this.props.handlePageError(errorMessage);
 		}
 	}
 
@@ -52,6 +51,7 @@ class QuestionnaireLogin extends Component {
 QuestionnaireLogin.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
 	handleSubmittedData: PropTypes.func,
+	handlePageError: PropTypes.func,
 	password: PropTypes.string,
 	questionnaireId: PropTypes.string
 };
