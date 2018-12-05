@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Moment from 'react-moment';
+import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -10,7 +10,9 @@ import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuest
 import ViewQuestionText from '../../molecules/ViewQuestionText/ViewQuestionText';
 import ViewQuestionMultipleChoice from '../../molecules/ViewQuestionMultipleChoice/ViewQuestionMultipleChoice';
 
+// pages
 import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
+import QuestionnaireRegistration from '../QuestionnaireRegistration/QuestionnaireRegistration';
 
 class Questionnaire extends Component {
 	checkUnansweredQuestions() {
@@ -29,11 +31,16 @@ class Questionnaire extends Component {
 		}
 	}
 
+	// the data structure which controls the flow of registration page
+
 	constructor(props) {
 		super(props);
 
+		this.handleSubmittedData = this.handleSubmittedData.bind(this);
+
 		this.state = {
-			successfulLogin: false,
+			// holds all the submission info
+			submission: {},
 			modalOpen: false,
 			questionnaire: {
 				questions: []
@@ -46,7 +53,20 @@ class Questionnaire extends Component {
 			},
 			errorMessage: '',
 			resultCategory: {},
-			submitSuccess: false
+			submitSuccess: false,
+			questionnaireFlow: [
+				{
+					success: false,
+					component: QuestionnaireLogin,
+					props: {
+						password: 'quegen'
+					}
+				},
+				{
+					success: false,
+					component: QuestionnaireRegistration
+				}
+			]
 		};
 	}
 
@@ -117,6 +137,22 @@ class Questionnaire extends Component {
 		this.setState(newState);
 	}
 
+	handleSubmittedData(data) {
+		var newSubmission = Object.assign(this.state.submission, data);
+
+		this.setState({ submission: newSubmission });
+	}
+
+	handleSuccessfulPage(index) {
+		var currentWorkflow = this.state.questionnaireFlow;
+
+		currentWorkflow[index]['success'] = true;
+
+		this.setState({
+			questionnaireFlow: currentWorkflow
+		});
+	}
+
 	handleOpen = () => this.setState({ modalOpen: true });
 
 	handleClose = () => this.setState({ modalOpen: false });
@@ -143,26 +179,31 @@ class Questionnaire extends Component {
 		});
 	}
 
-	handleSuccessfulLogin() {
-		console.log('success');
-	}
-
 	render() {
+		var currentStopindex = 0;
+
+		var stop = this.state.questionnaireFlow.find((stop, index) => {
+			currentStopindex = index;
+
+			return stop.success === false;
+		});
+
+		var ComponentToRender = stop.component;
+
+		console.log('stop', stop);
 		return (
-			<Router>
-				<Route
-					path="/"
-					render={props => (
-						<QuestionnaireLogin
-							{...props}
-							handleSuccessfulLogin={this.handleSuccessfulLogin.bind(
-								this
-							)}
-							password="quegen"
-						/>
+			<div>
+				hi
+				<ComponentToRender
+					handleSuccess={this.handleSuccessfulPage.bind(
+						this,
+						currentStopindex
 					)}
+					handleSubmittedData={this.handleSubmittedData}
+					currentStopindex={currentStopindex}
+					{...stop.props}
 				/>
-			</Router>
+			</div>
 			// <div className="questionnaire">
 			// 	{this.state.errorMessage && (
 			// 		<Message error>{this.state.errorMessage}</Message>

@@ -13,7 +13,7 @@ class QuestionnaireLogin extends Component {
 
 	checkPassword() {
 		if (this.state.userInputtedPassword === this.props.password) {
-			this.props.handleSuccessfulLogin(true);
+			this.props.handleSuccess(this.props.currentStopIndex);
 		} else {
 			this.setState({
 				showError: true
@@ -50,8 +50,11 @@ class QuestionnaireLogin extends Component {
 }
 
 QuestionnaireLogin.propTypes = {
-	handleSuccessfulLogin: PropTypes.func,
-	password: PropTypes.string
+	handleSuccessfulPage: PropTypes.func,
+	password: PropTypes.string,
+
+	// informs questionnaire what page index this is on
+	currentStopIndex: PropTypes.number
 };
 
 export default QuestionnaireLogin;
