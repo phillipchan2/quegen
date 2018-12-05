@@ -42,7 +42,7 @@ class Questionnaire extends Component {
 					name: 'QuestionnaireLogin',
 					component: QuestionnaireLogin,
 					props: {
-						password: 'quegen'
+						password: 'q'
 					}
 				},
 				{

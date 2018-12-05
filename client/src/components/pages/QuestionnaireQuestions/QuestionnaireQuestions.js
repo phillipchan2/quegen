@@ -18,7 +18,11 @@ class QuestionnaireQuestions extends Component {
 		};
 	}
 
-	UNSAFE_componentWillReceiveProps() {
+	UNSAFE_componentWillMount() {
+		console.log('will mount from questions');
+
+		console.log(this.props);
+
 		var answers = this.props.questions.map(question => {
 			return {
 				_id: question._id,
