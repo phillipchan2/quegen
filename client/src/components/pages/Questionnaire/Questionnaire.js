@@ -4,12 +4,13 @@ import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
 
 // components
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
+import { Button, Form, Message, Icon, Header } from 'semantic-ui-react';
 
 // pages
 import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
 import QuestionnaireRegistration from '../QuestionnaireRegistration/QuestionnaireRegistration';
 import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions';
+import QuestionnaireResult from '../QuestionnaireResult/QuestionnaireResult';
 
 class Questionnaire extends Component {
 	constructor(props) {
@@ -21,7 +22,6 @@ class Questionnaire extends Component {
 			// holds all the submission info
 			consolidatedSubmissionData: {},
 			errorMessage: '',
-			modalOpen: false,
 			questionnaire: {
 				questions: []
 			},
@@ -47,6 +47,14 @@ class Questionnaire extends Component {
 					props: {
 						questions: [],
 						questionnaireId: ''
+					}
+				},
+				{
+					success: false,
+					name: 'QuestionnaireResult',
+					component: QuestionnaireResult,
+					props: {
+						resultCategory: {}
 					}
 				}
 			],
@@ -84,38 +92,58 @@ class Questionnaire extends Component {
 		alert(err);
 	}
 
-	handleSubmit() {
-		// axios
-		// 	.post(
-		// 		`/api/quizzes/${this.props.questionnaireId}/submit`,
-		// 		Object.assign(this.state.response, {
-		// 			submittedOn: moment()
-		// 		})
-		// 	)
-		// 	.then(res => {
-		// 		if (res.data.success) {
-		// 			let category = res.data.data;
-		// 			this.setState({
-		// 				submitSuccess: true,
-		// 				resultCategory: category,
-		// 				modalOpen: true
-		// 			});
-		// 		} else {
-		// 			this.setState({
-		// 				submitSuccess: false,
-		// 				errorMessage: 'Error Submitting'
-		// 			});
-		// 		}
-		// 	});
-	}
-
 	handleSubmittedData(data) {
+		const jwtoken = localStorage.getItem('jwtoken');
+
 		var newSubmission = Object.assign(
 			this.state.consolidatedSubmissionData,
-			data
+			data,
+			{
+				submittedOn: moment()
+			}
 		);
 
 		this.setState({ consolidatedSubmissionData: newSubmission });
+
+		console.log(newSubmission);
+
+		axios
+			.post(
+				`/api/quizzes/${this.props.match.params.id}/submit`,
+				newSubmission,
+				{
+					headers: {
+						token: jwtoken
+					}
+				}
+			)
+			.then(res => {
+				if (res.data.success) {
+					let category = res.data.data;
+
+					this.setState({
+						submitSuccess: true,
+						resultCategory: category
+					});
+
+					let quesitonnaireFlow = this.state.questionnaireFlow;
+
+					quesitonnaireFlow.find((page, index) => {
+						if (page.name === 'QuestionnaireQuestions') {
+							quesitonnaireFlow[index].success = true;
+
+							this.setState({
+								quesitonnaireFlow: quesitonnaireFlow
+							});
+						}
+					});
+				} else {
+					this.setState({
+						submitSuccess: false,
+						errorMessage: 'Error Submitting'
+					});
+				}
+			});
 	}
 
 	handleSuccessfulPage(index) {
@@ -163,40 +191,6 @@ class Questionnaire extends Component {
 							{...page.props}
 							questionnaireId={this.props.match.params.id}
 						/>
-						<Modal
-							open={this.state.modalOpen}
-							onClose={this.handleClose}
-							basic
-							size="small"
-						>
-							<Header
-								icon="browser"
-								content={`You are a ${
-									this.state.resultCategory.name
-								}!`}
-							/>
-							<Modal.Content>
-								<p>
-									{
-										this.state.resultCategory
-											.resultDescription
-									}
-								</p>
-								<p>
-									You'll be getting an email later with more
-									information
-								</p>
-							</Modal.Content>
-							<Modal.Actions>
-								<Button
-									color="green"
-									onClick={this.handleClose}
-									inverted
-								>
-									<Icon name="checkmark" /> Got it
-								</Button>
-							</Modal.Actions>
-						</Modal>
 					</div>
 				) : (
 					'Questionnnaire not found'

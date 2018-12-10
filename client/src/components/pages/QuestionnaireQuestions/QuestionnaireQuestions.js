@@ -14,12 +14,12 @@ class QuestionnaireQuestions extends Component {
 		super(props);
 
 		this.state = {
-			answers: []
+			responses: []
 		};
 	}
 
 	UNSAFE_componentWillMount() {
-		var answers = this.props.questions.map(question => {
+		var responses = this.props.questions.map(question => {
 			return {
 				_id: question._id,
 				answered: false,
@@ -28,13 +28,13 @@ class QuestionnaireQuestions extends Component {
 			};
 		});
 
-		this.setState({ answers: answers });
+		this.setState({ responses: responses });
 	}
 
 	areQuestionsAnswered() {
 		let unansweredQuestions = [];
 
-		this.state.answers.forEach((answer, index) => {
+		this.state.responses.forEach((answer, index) => {
 			if (answer.answered !== true) {
 				unansweredQuestions.push(index);
 			}
@@ -48,25 +48,25 @@ class QuestionnaireQuestions extends Component {
 	}
 
 	questionAnswered(responseFromQuestion) {
-		var answers = this.state.answers;
+		var responses = this.state.responses;
 
-		answers.find((answer, index) => {
+		responses.find((answer, index) => {
 			if (answer._id === responseFromQuestion._id) {
-				answers[index].answered = true;
-				answers[index].value = responseFromQuestion.value;
+				responses[index].answered = true;
+				responses[index].value = responseFromQuestion.value;
 			}
 		});
 
-		this.setState({ answers: answers });
+		this.setState({ responses: responses });
 	}
 
 	handleSubmit() {
-		var resultsOfCheckingAnswers = this.areQuestionsAnswered();
+		var resultsOfCheckingresponses = this.areQuestionsAnswered();
 
-		if (resultsOfCheckingAnswers === true) {
-			this.props.handleSubmittedData({ answers: this.state.answers });
+		if (resultsOfCheckingresponses === true) {
+			this.props.handleSubmittedData({ responses: this.state.responses });
 		} else {
-			let errorMessage = `You have questions ${resultsOfCheckingAnswers.map(
+			let errorMessage = `You have questions ${resultsOfCheckingresponses.map(
 				questionNumber => {
 					return `${questionNumber + 1} `;
 				}
