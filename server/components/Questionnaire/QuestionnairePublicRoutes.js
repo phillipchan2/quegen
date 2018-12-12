@@ -28,7 +28,6 @@ router.post('/:id/submit', (req, res, next) => {
 
 	if (id) {
 		let response = req.body;
-		console.log(response);
 
 		Questionnaire.findOne(
 			{
