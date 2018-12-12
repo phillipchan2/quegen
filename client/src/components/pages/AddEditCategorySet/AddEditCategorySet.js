@@ -63,7 +63,8 @@ class AddEditCategorySet extends Component {
 
 		var newCategory = {
 			name: '',
-			resultDescription: ''
+			resultDescription: '',
+			imageUrl: ''
 		};
 
 		newCategories.push(newCategory);
@@ -217,6 +218,21 @@ class AddEditCategorySet extends Component {
 															placeholder="Category"
 															value={
 																category.name
+															}
+															onChange={this.handleCategoryChange.bind(
+																this
+															)}
+														/>
+													</Form.Field>
+													<Form.Field>
+														<label>
+															Category Image Url
+														</label>
+														<input
+															name="imageUrl"
+															placeholder="Category"
+															value={
+																category.imageUrl
 															}
 															onChange={this.handleCategoryChange.bind(
 																this

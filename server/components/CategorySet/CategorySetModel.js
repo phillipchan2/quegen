@@ -8,6 +8,10 @@ var categorySchema = new mongoose.Schema({
 	resultDescription: {
 		type: String,
 		required: true
+	},
+	imageUrl: {
+		required: true,
+		type: String
 	}
 });
 

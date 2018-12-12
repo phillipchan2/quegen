@@ -61,7 +61,7 @@ class AuthStore {
 				if (!success) {
 					this.logout();
 				}
-			}, 3000);
+			}, 5000);
 		} else {
 			this.logout();
 		}
