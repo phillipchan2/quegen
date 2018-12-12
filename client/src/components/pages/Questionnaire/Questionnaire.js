@@ -33,7 +33,7 @@ class Questionnaire extends Component {
 					name: 'QuestionnaireLogin',
 					component: QuestionnaireLogin,
 					props: {
-						password: 'q'
+						password: ''
 					}
 				},
 				{
@@ -74,9 +74,17 @@ class Questionnaire extends Component {
 
 			var questionnaireFlow = this.state.questionnaireFlow;
 
+			// seed data for props from current Questionnaire
 			questionnaireFlow.find((page, index) => {
-				if (page.name === 'QuestionnaireQuestions') {
-					// give it questions
+				// populate password
+				if (page.name === 'QuestionnaireLogin') {
+					questionnaireFlow[index].props.password =
+						questionnaire.password;
+				}
+
+				// populate questions
+				else if (page.name === 'QuestionnaireQuestions') {
+
 					questionnaireFlow[index].props.questions =
 						questionnaire.questions;
 				}
