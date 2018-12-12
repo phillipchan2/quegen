@@ -20,7 +20,7 @@ class QuestionnaireRegistration extends Component {
 	}
 
 	handleSubmit() {
-		this.props.handleSubmittedData(this.state);
+		this.props.handleConsolidateData(this.state);
 		this.props.handleSuccessfulPage();
 	}
 
@@ -64,7 +64,7 @@ class QuestionnaireRegistration extends Component {
 
 QuestionnaireRegistration.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
-	handleSubmittedData: PropTypes.func,
+	handleSubmitData: PropTypes.func,
 	handlePageError: PropTypes.func,
 	questionnaireId: PropTypes.string
 };

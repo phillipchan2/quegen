@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
-import axios from 'axios';
-import moment from 'moment';
+import { Button, Message, } from 'semantic-ui-react';
 
 // components
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
@@ -64,7 +62,7 @@ class QuestionnaireQuestions extends Component {
 		var resultsOfCheckingresponses = this.areQuestionsAnswered();
 
 		if (resultsOfCheckingresponses === true) {
-			this.props.handleSubmittedData({ responses: this.state.responses });
+			this.props.handleSubmitData({ responses: this.state.responses });
 		} else {
 			let errorMessage = `You have questions ${resultsOfCheckingresponses.map(
 				questionNumber => {
@@ -128,7 +126,7 @@ class QuestionnaireQuestions extends Component {
 
 QuestionnaireQuestions.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
-	handleSubmittedData: PropTypes.func,
+	handleSubmitData: PropTypes.func,
 	handlePageError: PropTypes.func,
 	questionnaireId: PropTypes.string
 };

@@ -16,7 +16,8 @@ class Questionnaire extends Component {
 	constructor(props) {
 		super(props);
 
-		this.handleSubmittedData = this.handleSubmittedData.bind(this);
+		this.handleSubmitData = this.handleSubmitData.bind(this);
+		this.handleConsolidateData = this.handleConsolidateData.bind(this);
 
 		this.state = {
 			// holds all the submission info
@@ -92,7 +93,15 @@ class Questionnaire extends Component {
 		alert(err);
 	}
 
-	handleSubmittedData(data) {
+	handleConsolidateData(data) {
+		var consolidatedSubmissionData = this.state.consolidatedSubmissionData;
+
+		this.setState({
+			consolidatedSubmissionData: Object.assign(consolidatedSubmissionData, data)
+		})
+	}
+
+	handleSubmitData(data) {
 		const jwtoken = localStorage.getItem('jwtoken');
 
 		var newSubmission = Object.assign(
@@ -186,7 +195,8 @@ class Questionnaire extends Component {
 								this,
 								currentpageindex
 							)}
-							handleSubmittedData={this.handleSubmittedData}
+							handleSubmitData={this.handleSubmitData}
+							handleConsolidateData={this.handleConsolidateData}
 							handlePageError={this.handlePageError}
 							{...page.props}
 							questionnaireId={this.props.match.params.id}

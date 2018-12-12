@@ -50,7 +50,7 @@ class QuestionnaireLogin extends Component {
 
 QuestionnaireLogin.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
-	handleSubmittedData: PropTypes.func,
+	handleSubmitData: PropTypes.func,
 	handlePageError: PropTypes.func,
 	password: PropTypes.string,
 	questionnaireId: PropTypes.string
