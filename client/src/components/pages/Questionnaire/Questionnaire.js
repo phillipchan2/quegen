@@ -78,8 +78,14 @@ class Questionnaire extends Component {
 			questionnaireFlow.find((page, index) => {
 				// populate password
 				if (page.name === 'QuestionnaireLogin') {
-					questionnaireFlow[index].props.password =
+
+					// if there is a password
+					if (questionnaire.password) {
+						questionnaireFlow[index].props.password =
 						questionnaire.password;
+					} else {
+						questionnaireFlow[index].success = true
+					}
 				}
 
 				// populate questions
