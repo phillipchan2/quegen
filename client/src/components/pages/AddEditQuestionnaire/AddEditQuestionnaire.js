@@ -319,6 +319,15 @@ class AddEditQuestionnaire extends Component {
 								/>
 							</Form.Field>
 							<Form.Field>
+								<label>Password (password that users have to enter to access)</label>
+								<input
+									name="password"
+									placeholder="password"
+									value={this.state.currentQuestionnaire.password}
+									onChange={this.handleChange.bind(this)}
+								/>
+							</Form.Field>
+							<Form.Field>
 								<Dropdown
 									fluid
 									selection
@@ -428,6 +437,12 @@ class AddEditQuestionnaire extends Component {
 																key={
 																	question._id
 																}
+																handleQuestionMove={this.handleQuestionMove.bind(
+																	this
+																)}
+																handleDelete={this.handleDelete.bind(
+																	this
+																)}
 																question={
 																	question
 																}
@@ -447,12 +462,18 @@ class AddEditQuestionnaire extends Component {
 																key={
 																	question._id
 																}
-																question={
-																	question
-																}
 																handleChange={this.handleQuestionChange.bind(
 																	this
 																)}
+																handleQuestionMove={this.handleQuestionMove.bind(
+																	this
+																)}
+																handleDelete={this.handleDelete.bind(
+																	this
+																)}
+																question={
+																	question
+																}
 															/>
 														);
 

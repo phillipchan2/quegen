@@ -19,9 +19,9 @@ mongoose.connect(
 	dbURL,
 	err => {
 		if (err) {
-			console.log('Failed to connect to mongodb at ' + db);
+			console.log('Failed to connect to mongodb at ' + dbURL);
 		} else {
-			console.log('Successfully connected to mongodb at ' + db);
+			console.log('Successfully connected to mongodb at ' + dbURL);
 		}
 	}
 );

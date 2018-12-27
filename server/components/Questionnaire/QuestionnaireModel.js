@@ -41,6 +41,9 @@ var responseSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
+	phone: {
+		type: Number
+	},
 	name: {
 		type: String,
 		required: true
@@ -68,7 +71,8 @@ var questionnaireSchema = new mongoose.Schema({
 		required: true
 	},
 	questions: [questionSchema],
-	responses: [responseSchema]
+	responses: [responseSchema],
+	password: String
 });
 
 var Questionnaire = mongoose.model('Questionnaire', questionnaireSchema);

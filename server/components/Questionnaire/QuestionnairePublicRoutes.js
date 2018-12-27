@@ -68,7 +68,7 @@ router.post('/:id/submit', (req, res, next) => {
 										data: category
 									});
 								} else {
-									res.status(400).json({
+									res.status(200).json({
 										success: false,
 										message: err
 									});

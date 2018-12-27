@@ -85,7 +85,38 @@ class EditQuestionMultipleChoice extends Component {
 
 								<Menu.Menu position="right">
 									<Menu.Item>
-										<Button basic>
+										<Button
+											onClick={() =>
+												this.props.handleQuestionMove(
+													'up',
+													this.props.index
+												)
+											}
+										>
+											<Icon name="angle up" /> Move Up
+										</Button>
+									</Menu.Item>
+									<Menu.Item>
+										<Button
+											onClick={() =>
+												this.props.handleQuestionMove(
+													'down',
+													this.props.index
+												)
+											}
+										>
+											<Icon name="angle down" /> Move Down
+										</Button>
+									</Menu.Item>
+									<Menu.Item>
+										<Button
+											basic
+											onClick={() =>
+												this.props.handleDelete(
+													this.props.index
+												)
+											}
+										>
 											<Icon name="trash" />
 											Delete
 										</Button>

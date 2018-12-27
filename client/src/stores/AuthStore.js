@@ -37,6 +37,7 @@ class AuthStore {
 	@action
 	verifyToken() {
 		const jwtoken = localStorage.getItem('jwtoken');
+		let success = false;
 
 		if (jwtoken) {
 			axios
@@ -49,11 +50,18 @@ class AuthStore {
 					console.log('login', res);
 
 					if (res.data.success) {
+						success = true;
 						this.login(res.data.user, jwtoken);
 					} else {
 						this.logout();
 					}
 				});
+
+			setTimeout(() => {
+				if (!success) {
+					this.logout();
+				}
+			}, 5000);
 		} else {
 			this.logout();
 		}

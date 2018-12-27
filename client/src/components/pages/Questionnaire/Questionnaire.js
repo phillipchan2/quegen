@@ -1,245 +1,231 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import Moment from 'react-moment';
+import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
 
 // components
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
-import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
-import ViewQuestionText from '../../molecules/ViewQuestionText/ViewQuestionText';
-import ViewQuestionMultipleChoice from '../../molecules/ViewQuestionMultipleChoice/ViewQuestionMultipleChoice';
+import { Button, Form, Message, Icon, Header } from 'semantic-ui-react';
+
+// pages
+import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
+import QuestionnaireRegistration from '../QuestionnaireRegistration/QuestionnaireRegistration';
+import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions';
+import QuestionnaireResult from '../QuestionnaireResult/QuestionnaireResult';
 
 class Questionnaire extends Component {
-	checkUnansweredQuestions() {
-		let unansweredQuestions = [];
-
-		this.state.response.responses.forEach((response, index) => {
-			console.log(response);
-			if (response.answered !== true) {
-				unansweredQuestions.push(index);
-			}
-		});
-
-		if (unansweredQuestions.length > 0) {
-			return unansweredQuestions;
-		} else {
-			return true;
-		}
-	}
-
 	constructor(props) {
 		super(props);
 
+		this.handleSubmitData = this.handleSubmitData.bind(this);
+		this.handleConsolidateData = this.handleConsolidateData.bind(this);
+
 		this.state = {
-			modalOpen: false,
+			// holds all the submission info
+			consolidatedSubmissionData: {},
+			errorMessage: '',
 			questionnaire: {
 				questions: []
 			},
-			response: {
-				email: 'phillipchan1@gmail.com',
-				name: '',
-				responses: []
-			},
-			errorMessage: '',
+			// the data structure which controls the flow of registration page
+			questionnaireFlow: [
+				{
+					success: false,
+					name: 'QuestionnaireLogin',
+					component: QuestionnaireLogin,
+					props: {
+						password: ''
+					}
+				},
+				{
+					success: false,
+					name: 'QuestionnaireRegistration',
+					component: QuestionnaireRegistration
+				},
+				{
+					success: false,
+					name: 'QuestionnaireQuestions',
+					component: QuestionnaireQuestions,
+					props: {
+						questions: [],
+						questionnaireId: ''
+					}
+				},
+				{
+					success: false,
+					name: 'QuestionnaireResult',
+					component: QuestionnaireResult,
+					props: {
+						resultCategory: {}
+					}
+				}
+			],
 			resultCategory: {},
 			submitSuccess: false
 		};
 	}
 
-	handleChange(e) {
-		let newState = this.state;
-
-		this.setState({
-			[e.target.name]: e.target.value
-		});
-
-		newState.response[e.target.name] = e.target.value;
-		this.setState(newState);
-	}
-
-	handleSubmit() {
-		var resultsOfCheckingAnswers = this.checkUnansweredQuestions();
-
-		console.log(resultsOfCheckingAnswers);
-
-		if (resultsOfCheckingAnswers === true) {
-			axios
-				.post(
-					`/api/quizzes/${this.props.match.params.id}/submit`,
-					Object.assign(this.state.response, {
-						submittedOn: moment()
-					})
-				)
-				.then(res => {
-					if (res.data.success) {
-						let category = res.data.data;
-
-						this.setState({
-							submitSuccess: true,
-							resultCategory: category,
-							modalOpen: true
-						});
-					} else {
-						this.setState({
-							submitSuccess: false,
-							errorMessage: 'Error Submitting'
-						});
-					}
-				});
-		} else {
-			this.setState({
-				errorMessage: `You have questions ${resultsOfCheckingAnswers.map(
-					questionNumber => {
-						return `${questionNumber + 1} `;
-					}
-				)} unanswered`
-			});
-		}
-	}
-
-	questionAnswered(responseFromQuestion) {
-		let newState = this.state;
-
-		console.log(responseFromQuestion);
-
-		var index = newState.response.responses.findIndex(response => {
-			return response._id === responseFromQuestion._id;
-		});
-
-		newState.response.responses[index] = Object.assign(
-			newState.response.responses[index],
-			responseFromQuestion,
-			{
-				answered: true
-			}
-		);
-
-		this.setState(newState);
-	}
+	handleClose = () => this.setState({ modalOpen: false });
 
 	handleOpen = () => this.setState({ modalOpen: true });
 
-	handleClose = () => this.setState({ modalOpen: false });
+	// seed data
+	UNSAFE_componentWillMount() {
+		axios.get(`/api/quizzes/${this.props.match.params.id}`).then(res => {
+			const questionnaire = res.data.data;
+
+			var questionnaireFlow = this.state.questionnaireFlow;
+
+			// seed data for props from current Questionnaire
+			questionnaireFlow.find((page, index) => {
+				// populate password
+				if (page.name === 'QuestionnaireLogin') {
+					// if there is a password
+					if (questionnaire.password) {
+						questionnaireFlow[index].props.password =
+							questionnaire.password;
+					} else {
+						questionnaireFlow[index].success = true;
+					}
+				}
+
+				// populate questions
+				else if (page.name === 'QuestionnaireQuestions') {
+					questionnaireFlow[index].props.questions =
+						questionnaire.questions;
+				}
+			});
+
+			this.setState({
+				questionnaireFlow: questionnaireFlow,
+				questionnaire: questionnaire
+			});
+		});
+	}
+
+	handlePageError(err) {
+		alert(err);
+	}
+
+	handleConsolidateData(data) {
+		var consolidatedSubmissionData = this.state.consolidatedSubmissionData;
+
+		this.setState({
+			consolidatedSubmissionData: Object.assign(
+				consolidatedSubmissionData,
+				data
+			)
+		});
+	}
+
+	handleSubmitData(data) {
+		const jwtoken = localStorage.getItem('jwtoken');
+
+		var newSubmission = Object.assign(
+			this.state.consolidatedSubmissionData,
+			data,
+			{
+				submittedOn: moment()
+			}
+		);
+
+		this.setState({ consolidatedSubmissionData: newSubmission });
+
+		console.log(newSubmission);
+
+		axios
+			.post(
+				`/api/quizzes/${this.props.match.params.id}/submit`,
+				newSubmission,
+				{
+					headers: {
+						token: jwtoken
+					}
+				}
+			)
+			.then(res => {
+				if (res.data.success) {
+					let category = res.data.data;
+
+					this.setState({
+						submitSuccess: true,
+						resultCategory: category
+					});
+
+					let questionnaireFlow = this.state.questionnaireFlow;
+
+					questionnaireFlow.find((page, index) => {
+						if (page.name === 'QuestionnaireResult') {
+							questionnaireFlow[index].resultCategory = category;
+						} else if (page.name === 'QuestionnaireQuestions') {
+							questionnaireFlow[index].success = true;
+
+							this.setState({
+								questionnaireFlow: questionnaireFlow
+							});
+						}
+					});
+				} else {
+					this.setState({
+						submitSuccess: false,
+						errorMessage: 'Error Submitting'
+					});
+				}
+			});
+	}
+
+	handleSuccessfulPage(index) {
+		var currentWorkflow = this.state.questionnaireFlow;
+
+		currentWorkflow[index]['success'] = true;
+
+		this.setState({
+			questionnaireFlow: currentWorkflow
+		});
+	}
 
 	componentDidMount() {
 		axios.get(`/api/quizzes/${this.props.match.params.id}`).then(res => {
 			const questionnaire = res.data.data;
 
-			let newState = this.state;
-
-			newState.questionnaire = questionnaire;
-			newState.response.responses = questionnaire.questions.map(
-				question => {
-					return {
-						_id: question._id,
-						answered: false,
-						value: undefined,
-						type: question.type
-					};
-				}
-			);
-
-			this.setState(newState);
+			this.setState({
+				questionnaire: questionnaire
+			});
 		});
 	}
 
 	render() {
+		var currentpageindex = 0;
+
+		var page = this.state.questionnaireFlow.find((page, index) => {
+			currentpageindex = index;
+
+			return page.success === false;
+		});
+
+		var ComponentToRender = page.component;
+
 		return (
-			<div className="questionnaire">
-				{this.state.errorMessage && (
-					<Message error>{this.state.errorMessage}</Message>
+			<div>
+				{this.state.questionnaire._id ? (
+					<div className="questionnaire">
+						<ComponentToRender
+							handleSuccessfulPage={this.handleSuccessfulPage.bind(
+								this,
+								currentpageindex
+							)}
+							handleSubmitData={this.handleSubmitData}
+							handleConsolidateData={this.handleConsolidateData}
+							handlePageError={this.handlePageError}
+							{...page.props}
+							questionnaireId={this.props.match.params.id}
+							resultCategory={this.state.resultCategory}
+						/>
+					</div>
+				) : (
+					'Questionnnaire not found'
 				)}
-
-				<Modal
-					trigger={
-						<Button onClick={this.handleOpen}>Show Modal</Button>
-					}
-					open={this.state.modalOpen}
-					onClose={this.handleClose}
-					basic
-					size="small"
-				>
-					<Header
-						icon="browser"
-						content={`You are a ${this.state.resultCategory.name}!`}
-					/>
-					<Modal.Content>
-						<p>{this.state.resultCategory.resultDescription}</p>
-						<p>
-							You'll be getting an email later with more
-							information
-						</p>
-					</Modal.Content>
-					<Modal.Actions>
-						<Button
-							color="green"
-							onClick={this.handleClose}
-							inverted
-						>
-							<Icon name="checkmark" /> Got it
-						</Button>
-					</Modal.Actions>
-				</Modal>
-
-				<Form>
-					<Form.Field>
-						<label>Name</label>
-						<input
-							placeholder="Name"
-							name="name"
-							value={this.state.response.name}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Email</label>
-						<input
-							placeholder="Email"
-							name="email"
-							value={this.state.response.email}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</Form.Field>
-				</Form>
-				{this.state.questionnaire.questions.map((question, index) => {
-					switch (question.type) {
-						case 'weighted':
-							return (
-								<ViewQuestionWeighted
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'text':
-							return (
-								<ViewQuestionText
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'multipleChoice':
-							return (
-								<ViewQuestionMultipleChoice
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						default:
-							return 'Error - Wrong question type';
-					}
-				})}
-
-				<Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
 			</div>
+			//
 		);
 	}
 }

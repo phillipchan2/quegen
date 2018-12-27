@@ -11,6 +11,7 @@ class ViewResponsesText extends Component {
 			{ Header: 'Name', accessor: 'name' },
 			{ Header: 'Email', accessor: 'email' },
 			{ Header: 'Question', accessor: 'title' },
+			{ Header: 'Number', accessor: 'phone' },
 			{ Header: 'Answer', accessor: 'value' },
 			{ Header: 'Category', accessor: 'category' },
 			{
@@ -28,12 +29,10 @@ class ViewResponsesText extends Component {
 					filterable
 					data={this.props.responses}
 					defaultFilterMethod={(filter, row) => {
-						console.log(row);
-						return String(row[filter.id])
-							.toLowerCase()
-							.startsWith(String(filter.value.toLowerCase()))
-						}
-					}
+						return String(row[filter.id].toLowerCase()).includes(
+							filter.value.toLowerCase()
+						);
+					}}
 					columns={columns}
 				/>
 			</div>

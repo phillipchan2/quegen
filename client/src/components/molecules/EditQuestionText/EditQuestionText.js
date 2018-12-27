@@ -35,28 +35,14 @@ class EditQuestionText extends Component {
 
 	render() {
 		const { activeIndex } = this.state;
-		return (
-			<Accordion as={Menu} vertical fluid data-id={this.props.key}>
-				<Accordion.Title
-					active={activeIndex === 0}
-					content={
-						<div style={{ display: 'inline' }}>
+		return <Accordion as={Menu} vertical fluid data-id={this.props.key}>
+				<Accordion.Title active={activeIndex === 0} content={<div style={{ display: 'inline' }}>
 							{this.props.question.title}
-							<Label
-								color="teal"
-								style={{ float: 'right', marginRight: '1em' }}
-							>
+							<Label color="teal" style={{ float: 'right', marginRight: '1em' }}>
 								{this.props.question.type}
 							</Label>
-						</div>
-					}
-					index={0}
-					onClick={this.handleClick}
-				/>
-				<Accordion.Content
-					active={activeIndex === 0}
-					content={
-						<Segment data-index={this.props.index}>
+						</div>} index={0} onClick={this.handleClick} />
+				<Accordion.Content active={activeIndex === 0} content={<Segment data-index={this.props.index}>
 							<Menu secondary>
 								<Menu.Menu position="left">
 									Text Question
@@ -64,7 +50,17 @@ class EditQuestionText extends Component {
 
 								<Menu.Menu position="right">
 									<Menu.Item>
-										<Button basic>
+										<Button onClick={() => this.props.handleQuestionMove('up', this.props.index)}>
+											<Icon name="angle up" /> Move Up
+										</Button>
+									</Menu.Item>
+									<Menu.Item>
+										<Button onClick={() => this.props.handleQuestionMove('down', this.props.index)}>
+											<Icon name="angle down" /> Move Down
+										</Button>
+									</Menu.Item>
+									<Menu.Item>
+										<Button basic onClick={() => this.props.handleDelete(this.props.index)}>
 											<Icon name="trash" />
 											Delete
 										</Button>
@@ -74,21 +70,11 @@ class EditQuestionText extends Component {
 							<Form>
 								<Form.Field>
 									<label>Question Title</label>
-									<input
-										name="name"
-										placeholder="Question Title"
-										value={this.props.question.title}
-										onChange={this.handleTitleChange.bind(
-											this
-										)}
-									/>
+									<input name="name" placeholder="Question Title" value={this.props.question.title} onChange={this.handleTitleChange.bind(this)} />
 								</Form.Field>
 							</Form>
-						</Segment>
-					}
-				/>
-			</Accordion>
-		);
+						</Segment>} />
+			</Accordion>;
 	}
 }
 
