@@ -9,6 +9,7 @@ import { Button, Form, Message, Icon, Header } from 'semantic-ui-react';
 // pages
 import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
 import QuestionnaireRegistration from '../QuestionnaireRegistration/QuestionnaireRegistration';
+import QuestionnairePreview from '../QuestionnairePreview/QuestionnairePreview';
 import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions';
 import QuestionnaireResult from '../QuestionnaireResult/QuestionnaireResult';
 
@@ -23,17 +24,20 @@ class Questionnaire extends Component {
 			// holds all the submission info
 			consolidatedSubmissionData: {},
 			errorMessage: '',
-			questionnaire: {
-				questions: []
-			},
-			// the data structure which controls the flow of registration page
+			questionnaire: { questions: [] }, // the data structure which controls the flow of registration page
 			questionnaireFlow: [
 				{
 					success: false,
 					name: 'QuestionnaireLogin',
 					component: QuestionnaireLogin,
+					props: { password: '' }
+				},
+				{
+					success: false,
+					name: 'QuestionnairePreview',
+					component: QuestionnairePreview,
 					props: {
-						password: ''
+						description: ''
 					}
 				},
 				{
@@ -45,18 +49,13 @@ class Questionnaire extends Component {
 					success: false,
 					name: 'QuestionnaireQuestions',
 					component: QuestionnaireQuestions,
-					props: {
-						questions: [],
-						questionnaireId: ''
-					}
+					props: { questions: [], questionnaireId: '' }
 				},
 				{
 					success: false,
 					name: 'QuestionnaireResult',
 					component: QuestionnaireResult,
-					props: {
-						resultCategory: {}
-					}
+					props: { resultCategory: {} }
 				}
 			],
 			resultCategory: {},
@@ -86,6 +85,12 @@ class Questionnaire extends Component {
 					} else {
 						questionnaireFlow[index].success = true;
 					}
+				}
+
+				// populate description
+				else if (page.name === 'QuestionnairePreview') {
+					questionnaireFlow[index].props.description =
+						questionnaire.description;
 				}
 
 				// populate questions
