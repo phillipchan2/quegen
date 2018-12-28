@@ -2,8 +2,45 @@
   padding: 1rem;
   display: flex; }
 
-.questionnaire {
-  padding: 2em; }
+.view-question-weighted {
+  display: flex;
+  flex-direction: column; }
+  .view-question-weighted label {
+    margin-bottom: 1em; }
+  .view-question-weighted .answer {
+    display: block;
+    align-self: center;
+    padding: 1em;
+    width: 100%;
+    margin-bottom: 1em;
+    background: #cecece; }
+    .view-question-weighted .answer:hover {
+      cursor: pointer; }
+    .view-question-weighted .answer.selected {
+      background: blue; }
+
+.questionnaire-questions {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box; }
+  .questionnaire-questions .prev-button {
+    position: absolute;
+    left: 1em;
+    bottom: 1em; }
+  .questionnaire-questions .question {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding: 2em; }
+    .questionnaire-questions .question .fields {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: center; }
 
 #app-message {
   background: white;

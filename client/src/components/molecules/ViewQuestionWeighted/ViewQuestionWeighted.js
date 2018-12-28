@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
-import { Form, Radio } from 'semantic-ui-react';
-
 class ViewQuestionWeighted extends Component {
 	constructor(props) {
 		super(props);
@@ -11,6 +9,17 @@ class ViewQuestionWeighted extends Component {
 			value: null,
 			type: 'weighted'
 		};
+	}
+
+	handleClick(answer) {
+		this.setState(
+			{
+				value: answer
+			},
+			() => {
+				this.props.questionAnswered(this.state);
+			}
+		);
 	}
 
 	handleChange(e, { value }) {
@@ -26,25 +35,25 @@ class ViewQuestionWeighted extends Component {
 	render() {
 		const { value } = this.state;
 		return (
-			<Form.Group inline>
-				<label>
-					{this.props.index + 1}. {this.props.question.title}
-				</label>
-				<Form.Field
-					control={Radio}
-					label="Yes"
-					value={true}
-					checked={value === true}
-					onChange={this.handleChange.bind(this)}
-				/>
-				<Form.Field
-					control={Radio}
-					label="No"
-					value={false}
-					checked={value === false}
-					onChange={this.handleChange.bind(this)}
-				/>
-			</Form.Group>
+			<div className="view-question-weighted">
+				<label>{this.props.question.title}</label>
+				<a
+					className={`${
+						this.state.value === true ? 'selected' : ''
+					} answer`}
+					onClick={this.handleClick.bind(this, true)}
+				>
+					Yes
+				</a>
+				<a
+					className={`${
+						this.state.value === false ? 'selected' : ''
+					} answer`}
+					onClick={this.handleClick.bind(this, false)}
+				>
+					No
+				</a>
+			</div>
 		);
 	}
 }

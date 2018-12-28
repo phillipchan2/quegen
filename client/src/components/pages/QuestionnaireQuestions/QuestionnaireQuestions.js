@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Button, Message, } from 'semantic-ui-react';
+import { Button, Message } from 'semantic-ui-react';
+import Slider from 'react-slick';
 
 // components
 import ViewQuestionWeighted from '../../molecules/ViewQuestionWeighted/ViewQuestionWeighted';
@@ -12,8 +13,12 @@ class QuestionnaireQuestions extends Component {
 		super(props);
 
 		this.state = {
-			responses: []
+			responses: [],
+			showPrevButton: false
 		};
+
+		this.questionAnswered = this.questionAnswered.bind(this);
+		this.prev = this.prev.bind(this);
 	}
 
 	UNSAFE_componentWillMount() {
@@ -52,6 +57,11 @@ class QuestionnaireQuestions extends Component {
 			if (answer._id === responseFromQuestion._id) {
 				responses[index].answered = true;
 				responses[index].value = responseFromQuestion.value;
+
+				this.slider.slickNext();
+				this.setState({
+					showPrevButton: true
+				});
 			}
 		});
 
@@ -74,51 +84,74 @@ class QuestionnaireQuestions extends Component {
 		}
 	}
 
+	prev() {
+		this.slider.slickPrev();
+		this.setState({
+			showPrevButton: false
+		});
+	}
+
 	render() {
+		var settings = {
+			dots: false,
+			infinite: true,
+			speed: 250,
+			slidesToShow: 1,
+			slidesToScroll: 1,
+			swipe: false
+		};
 		return (
 			<div className="questionnaire-questions">
-				{this.state.errorMessage && (
-					<Message error>{this.state.errorMessage}</Message>
+				<Slider ref={c => (this.slider = c)} {...settings}>
+					{this.props.questions.map((question, index) => {
+						switch (question.type) {
+							case 'weighted':
+								return (
+									<section className="question">
+										<ViewQuestionWeighted
+											questionAnswered={this.questionAnswered.bind(
+												this
+											)}
+											index={index}
+											question={question}
+										/>
+									</section>
+								);
+							case 'text':
+								return (
+									<section className="question">
+										<ViewQuestionText
+											questionAnswered={this.questionAnswered.bind(
+												this
+											)}
+											index={index}
+											question={question}
+										/>
+									</section>
+								);
+							case 'multipleChoice':
+								return (
+									<section className="question">
+										<ViewQuestionMultipleChoice
+											questionAnswered={this.questionAnswered.bind(
+												this
+											)}
+											index={index}
+											question={question}
+										/>
+									</section>
+								);
+							default:
+								return 'Error - Wrong question type';
+						}
+					})}
+				</Slider>
+
+				{this.state.showPrevButton && (
+					<Button className="prev-button" onClick={this.prev}>
+						Prev
+					</Button>
 				)}
-
-				{this.props.questions.map((question, index) => {
-					switch (question.type) {
-						case 'weighted':
-							return (
-								<ViewQuestionWeighted
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'text':
-							return (
-								<ViewQuestionText
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						case 'multipleChoice':
-							return (
-								<ViewQuestionMultipleChoice
-									questionAnswered={this.questionAnswered.bind(
-										this
-									)}
-									index={index}
-									question={question}
-								/>
-							);
-						default:
-							return 'Error - Wrong question type';
-					}
-				})}
-
-				<Button onClick={this.handleSubmit.bind(this)}>Submit</Button>
 			</div>
 		);
 	}

@@ -1,0 +1,25 @@
+.view-question-weighted {
+	display: flex;
+	flex-direction: column;
+
+	label {
+		margin-bottom: 1em;
+	}
+
+	.answer {
+		display: block;
+		align-self: center;
+		padding: 1em;
+		width: 100%;
+		margin-bottom: 1em;
+		background: #cecece;
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		&.selected {
+			background: blue;
+		}
+	}
+}

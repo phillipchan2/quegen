@@ -1,0 +1,22 @@
+.questionnaire-questions {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  box-sizing: border-box; }
+  .questionnaire-questions .prev-button {
+    position: absolute;
+    left: 1em;
+    bottom: 1em; }
+  .questionnaire-questions .question {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    height: 100vh;
+    padding: 2em; }
+    .questionnaire-questions .question .fields {
+      display: flex;
+      width: 100%;
+      flex-direction: column;
+      align-items: center;
+      height: 100%;
+      justify-content: center; }

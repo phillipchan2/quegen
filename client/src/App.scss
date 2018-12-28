@@ -1,5 +1,7 @@
 @import './components/organisms/Navigation/Navigation.scss';
-@import './components/pages/Questionnaire//Questionnaire.scss';
+@import './components/pages/Questionnaire/Questionnaire.scss';
+@import './components/molecules/ViewQuestionWeighted/ViewQuestionWeighted.scss';
+@import './components/pages/QuestionnaireQuestions//QuestionnaireQuestions.scss';
 @import './components/molecules/AppMessage/AppMessage.scss';
 
 .admin-page {
