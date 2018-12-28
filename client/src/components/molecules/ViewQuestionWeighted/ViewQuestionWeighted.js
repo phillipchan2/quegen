@@ -22,16 +22,6 @@ class ViewQuestionWeighted extends Component {
 		);
 	}
 
-	handleChange(e, { value }) {
-		this.setState(
-			{
-				value
-			},
-			() => {
-				this.props.questionAnswered(this.state);
-			}
-		);
-	}
 	render() {
 		const { value } = this.state;
 		return (
