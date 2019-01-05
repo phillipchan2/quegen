@@ -319,11 +319,16 @@ class AddEditQuestionnaire extends Component {
 								/>
 							</Form.Field>
 							<Form.Field>
-								<label>Password (password that users have to enter to access)</label>
+								<label>
+									Password (password that users have to enter
+									to access)
+								</label>
 								<input
 									name="password"
 									placeholder="password"
-									value={this.state.currentQuestionnaire.password}
+									value={
+										this.state.currentQuestionnaire.password
+									}
 									onChange={this.handleChange.bind(this)}
 								/>
 							</Form.Field>

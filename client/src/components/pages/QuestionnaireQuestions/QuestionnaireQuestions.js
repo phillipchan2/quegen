@@ -14,11 +14,13 @@ class QuestionnaireQuestions extends Component {
 
 		this.state = {
 			responses: [],
-			showPrevButton: false
+			showPrevButton: false,
+			showSubmitButton: false
 		};
 
 		this.questionAnswered = this.questionAnswered.bind(this);
 		this.prev = this.prev.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
 	UNSAFE_componentWillMount() {
@@ -62,6 +64,17 @@ class QuestionnaireQuestions extends Component {
 				this.setState({
 					showPrevButton: true
 				});
+
+				// see if answers are all answered
+				if (this.areQuestionsAnswered() === true) {
+					this.setState({
+						showSubmitButton: true
+					});
+				} else {
+					this.setState({
+						showSubmitButton: false
+					});
+				}
 			}
 		});
 
@@ -94,7 +107,7 @@ class QuestionnaireQuestions extends Component {
 	render() {
 		var settings = {
 			dots: false,
-			infinite: true,
+			infinite: false,
 			speed: 250,
 			slidesToShow: 1,
 			slidesToScroll: 1,
@@ -150,6 +163,15 @@ class QuestionnaireQuestions extends Component {
 				{this.state.showPrevButton && (
 					<Button className="prev-button" onClick={this.prev}>
 						Prev
+					</Button>
+				)}
+
+				{this.state.showSubmitButton && (
+					<Button
+						className="submit-button"
+						onClick={this.handleSubmit}
+					>
+						Submit
 					</Button>
 				)}
 			</div>
