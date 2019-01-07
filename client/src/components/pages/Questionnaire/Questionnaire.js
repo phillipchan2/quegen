@@ -135,8 +135,6 @@ class Questionnaire extends Component {
 
 		this.setState({ consolidatedSubmissionData: newSubmission });
 
-		console.log(newSubmission);
-
 		axios
 			.post(
 				`/api/quizzes/${this.props.match.params.id}/submit`,
