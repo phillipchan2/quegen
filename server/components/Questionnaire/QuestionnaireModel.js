@@ -72,7 +72,11 @@ var questionnaireSchema = new mongoose.Schema({
 	},
 	questions: [questionSchema],
 	responses: [responseSchema],
-	password: String
+	password: String,
+	userId: {
+		required: true,
+		type: String
+	}
 });
 
 var Questionnaire = mongoose.model('Questionnaire', questionnaireSchema);

@@ -77,6 +77,10 @@ class AddEditQuestionnaire extends Component {
 					} else {
 						var newState = this.state;
 
+						this.props.AppMessagingStore.showAppMessage(
+							res.data.message
+						);
+
 						newState.currentQuestionnaire = {
 							name: '',
 							questions: []

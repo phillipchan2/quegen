@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const Questionnaire = require('./QuestionnaireModel');
+const errorMessages = require('../../utils/errorMessages');
 
 router.get('/', (req, res, next) => {
-	Questionnaire.find({}, (err, Questionnaires) => {
+	Questionnaire.find({ userId: req.user._id }, (err, Questionnaires) => {
 		if (!err) {
 			res.json({
 				success: true,
@@ -20,7 +21,20 @@ router.get('/:id', (req, res, next) => {
 
 	Questionnaire.findOne({ _id: id }, (err, questionnaire) => {
 		if (questionnaire) {
-			res.status(200).json({ success: true, data: questionnaire });
+			// make sure user views its own resources
+			if (questionnaire.userId !== String(req.user._id)) {
+				res.json({
+					success: false,
+					message: errorMessages.unauthorized
+				});
+			}
+			// sucess
+			else {
+				res.status(200).json({
+					success: true,
+					data: questionnaire
+				});
+			}
 		} else {
 			res.status(200).json({ success: false, message: 'Not Found' });
 		}
@@ -86,7 +100,9 @@ router.post('/', (req, res, next) => {
 			}
 		);
 	} else {
-		var newQuestionnaire = new Questionnaire(req.body);
+		var newQuestionnaire = new Questionnaire(
+			Object.assign(req.body, { userId: req.user._id })
+		);
 
 		newQuestionnaire.markModified('questions');
 
