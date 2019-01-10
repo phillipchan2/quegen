@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class ViewQuestionWeighted extends Component {
 	constructor(props) {
@@ -47,5 +48,10 @@ class ViewQuestionWeighted extends Component {
 		);
 	}
 }
+
+ViewQuestionWeighted.propTypes = {
+	questionAnswered: PropTypes.func,
+	question: PropTypes.string
+};
 
 export default ViewQuestionWeighted;

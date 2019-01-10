@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Redirect, Link } from 'react-router-dom';
 import moment from 'moment';
-
-// components
-import { Button, Form, Message, Icon, Header } from 'semantic-ui-react';
+import { inject, observer } from 'mobx-react';
 
 // pages
 import QuestionnaireLogin from '../QuestionnaireLogin/QuestionnaireLogin';
@@ -13,6 +10,8 @@ import QuestionnairePreview from '../QuestionnairePreview/QuestionnairePreview';
 import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions';
 import QuestionnaireResult from '../QuestionnaireResult/QuestionnaireResult';
 
+@inject('AppMessagingStore')
+@observer
 class Questionnaire extends Component {
 	constructor(props) {
 		super(props);
@@ -172,6 +171,12 @@ class Questionnaire extends Component {
 						submitSuccess: false,
 						errorMessage: 'Error Submitting'
 					});
+
+					this.handlePageError(
+						`Error Submitting Questionnaire: ${String(
+							res.data.message
+						)}`
+					);
 				}
 			});
 	}

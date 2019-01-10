@@ -125,7 +125,6 @@ class QuestionnaireQuestions extends Component {
 											questionAnswered={this.questionAnswered.bind(
 												this
 											)}
-											index={index}
 											question={question}
 										/>
 									</section>
@@ -137,7 +136,6 @@ class QuestionnaireQuestions extends Component {
 											questionAnswered={this.questionAnswered.bind(
 												this
 											)}
-											index={index}
 											question={question}
 										/>
 									</section>
@@ -149,7 +147,6 @@ class QuestionnaireQuestions extends Component {
 											questionAnswered={this.questionAnswered.bind(
 												this
 											)}
-											index={index}
 											question={question}
 										/>
 									</section>

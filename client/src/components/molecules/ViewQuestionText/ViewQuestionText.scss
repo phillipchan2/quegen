@@ -1,0 +1,29 @@
+.question-text-container {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+
+	input {
+		border: 0;
+		border-bottom: 1px solid #ccc;
+		padding: 1em;
+
+		&:focus {
+			outline: none;
+		}
+	}
+
+	form {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.question-text-next {
+		background: rgb(109, 109, 78);
+		display: block;
+		padding: 1em;
+		border-radius: 3em;
+	}
+}
