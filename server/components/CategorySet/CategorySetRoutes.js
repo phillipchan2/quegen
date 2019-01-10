@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const CategorySet = require('./CategorySetModel');
+const errorMessages = require('../../utils/errorMessages');
 
 router.get('/', (req, res, next) => {
-	CategorySet.find({}, (err, categorySets) => {
+	CategorySet.find({ userId: req.user._id }, (err, categorySets) => {
 		if (!err) {
 			res.json({
 				success: true,
@@ -20,10 +21,21 @@ router.get('/:id', (req, res, next) => {
 
 	CategorySet.findOne({ _id: id }, (err, categorySet) => {
 		if (categorySet) {
-			res.status(200).json({
-				success: true,
-				data: categorySet
-			});
+			// make sure user is viewing its own category sets
+			if (categorySet.userId !== req.user._id) {
+				console.log('unauthorized');
+				res.json({
+					success: false,
+					message: errorMessages.unauthorized
+				});
+
+				// success
+			} else {
+				res.status(200).json({
+					success: true,
+					data: categorySet
+				});
+			}
 		} else {
 			res.status(200).json({
 				success: false,
@@ -82,7 +94,9 @@ router.post('/', (req, res, next) => {
 			}
 		);
 	} else {
-		var newCategorySet = new CategorySet(req.body);
+		var newCategorySet = new CategorySet(
+			Object.assign(req.body, { userId: req.user._id })
+		);
 
 		newCategorySet.markModified('categories');
 

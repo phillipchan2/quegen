@@ -108,6 +108,8 @@ router.get('/verify', (req, res, next) => {
 							message: 'Success! JWtoken Valid',
 							user: userUtils.formatSafeUser(user._doc)
 						});
+
+						next(user._doc);
 					}
 				});
 			}

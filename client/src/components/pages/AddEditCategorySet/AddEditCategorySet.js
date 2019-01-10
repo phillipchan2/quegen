@@ -47,6 +47,10 @@ class AddEditCategorySet extends Component {
 					} else {
 						var newState = this.state;
 
+						this.props.AppMessagingStore.showAppMessage(
+							res.data.message
+						);
+
 						newState.currentCategorySet = {
 							name: '',
 							categories: []

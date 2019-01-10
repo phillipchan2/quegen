@@ -20,7 +20,11 @@ var categorySetSchema = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	categories: [categorySchema]
+	categories: [categorySchema],
+	userId: {
+		type: String,
+		required: true
+	}
 });
 
 var CategorySet = mongoose.model('CategorySet', categorySetSchema);
