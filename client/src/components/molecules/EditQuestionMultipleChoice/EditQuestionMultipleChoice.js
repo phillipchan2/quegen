@@ -32,8 +32,6 @@ class EditQuestionMultipleChoice extends Component {
 
 	handleChoiceChange(index, e) {
 		var newState = this.state;
-		console.log(e.target.value);
-		console.log(index);
 
 		newState.choices[index].name = e.target.value;
 

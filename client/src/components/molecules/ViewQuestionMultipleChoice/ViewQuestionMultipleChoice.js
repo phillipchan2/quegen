@@ -14,10 +14,10 @@ class ViewQuestionMultipleChoice extends Component {
 		};
 	}
 
-	handleChange(e, { value }) {
+	handleClick(answer) {
 		this.setState(
 			{
-				value
+				value: answer
 			},
 			() => {
 				this.props.questionAnswered(this.state);
@@ -26,23 +26,25 @@ class ViewQuestionMultipleChoice extends Component {
 	}
 	render() {
 		const { value } = this.state;
+
 		return (
-			<Form.Group inline>
-				<label>
-					{this.props.index + 1}. {this.props.question.title}
-				</label>
+			<div className="view-question-weighted">
+				<label>{this.props.question.title}</label>
 				{this.props.question.choices.map((choice, index) => {
 					return (
-						<Form.Field
-							control={Radio}
-							label={choice.name}
-							value={choice.name}
-							checked={value === choice.name}
-							onChange={this.handleChange.bind(this)}
-						/>
+						<a
+							className={`${
+								this.state.value === choice.name
+									? 'selected'
+									: ''
+							} answer`}
+							onClick={this.handleClick.bind(this, choice.name)}
+						>
+							{choice.name}
+						</a>
 					);
 				})}
-			</Form.Group>
+			</div>
 		);
 	}
 }
