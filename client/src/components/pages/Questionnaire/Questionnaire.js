@@ -34,16 +34,16 @@ class Questionnaire extends Component {
 				},
 				{
 					success: false,
+					name: 'QuestionnaireRegistration',
+					component: QuestionnaireRegistration
+				},
+				{
+					success: false,
 					name: 'QuestionnairePreview',
 					component: QuestionnairePreview,
 					props: {
 						description: ''
 					}
-				},
-				{
-					success: false,
-					name: 'QuestionnaireRegistration',
-					component: QuestionnaireRegistration
 				},
 				{
 					success: false,
