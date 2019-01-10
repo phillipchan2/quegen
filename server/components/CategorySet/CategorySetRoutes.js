@@ -21,16 +21,15 @@ router.get('/:id', (req, res, next) => {
 
 	CategorySet.findOne({ _id: id }, (err, categorySet) => {
 		if (categorySet) {
-			// make sure user is viewing its own category sets
-			if (categorySet.userId !== req.user._id) {
-				console.log('unauthorized');
+			// make sure user views its own resources
+			if (categorySet.userId !== String(req.user._id)) {
 				res.json({
 					success: false,
 					message: errorMessages.unauthorized
 				});
-
-				// success
-			} else {
+			}
+			// success
+			else {
 				res.status(200).json({
 					success: true,
 					data: categorySet
