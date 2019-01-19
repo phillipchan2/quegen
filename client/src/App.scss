@@ -1,9 +1,16 @@
+//components
 @import './components/organisms/Navigation/Navigation.scss';
 @import './components/pages/Questionnaire/Questionnaire.scss';
+@import './components/pages/Admin/Admin.scss';
 @import './components/molecules/ViewQuestionWeighted/ViewQuestionWeighted.scss';
 @import './components/molecules/ViewQuestionText/ViewQuestionText.scss';
 @import './components/pages/QuestionnaireQuestions//QuestionnaireQuestions.scss';
 @import './components/molecules/AppMessage/AppMessage.scss';
+
+body {
+	font-family: 'Wire One', sans-serif;
+	font-size: 24px;
+}
 
 .admin-page {
 	background-color: #77aa77 !important;

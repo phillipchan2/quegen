@@ -106,6 +106,7 @@ class QuestionnaireQuestions extends Component {
 
 	render() {
 		var settings = {
+			arrows: false,
 			dots: false,
 			infinite: false,
 			speed: 250,

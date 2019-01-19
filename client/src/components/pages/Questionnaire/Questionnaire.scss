@@ -1,5 +1,65 @@
 .questionnaire {
+	align-items: center;
+	background: #000;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	font-size: 30px;
+	height: 100vh;
+	padding: 2em 1em 1em;
+	width: 100vw;
+
+	& > div {
+		width: 100%;
+		max-width: 700px;
+	}
+
 	.question-text {
 		text-align: center;
+	}
+
+	.input-group {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+
+		input {
+			background: transparent;
+			border: 0;
+			border-bottom: 1px solid #fff;
+			color: #fff;
+			font-family: 'Lato';
+			font-weight: 300;
+			margin-bottom: 0.5em;
+			outline: none;
+			padding: 0.25em;
+			width: 100%;
+		}
+
+		::placeholder {
+			font-family: 'Wire One';
+		}
+
+		// webkit resets
+		input:-webkit-autofill,
+		input:-webkit-autofill:hover,
+		input:-webkit-autofill:focus textarea:-webkit-autofill,
+		textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+		select:-webkit-autofill,
+		select:-webkit-autofill:hover,
+		select:-webkit-autofill:focus {
+			border: 0;
+			border-bottom: 1px solid #fff;
+			-webkit-text-fill-color: #fff;
+			-webkit-box-shadow: 0 0 0px 1000px #000 inset;
+			transition: background-color 5000s ease-in-out 0s;
+		}
+	}
+
+	button {
+		background: none;
+		color: #fff;
+		font-family: 'Wire One';
+		width: 100%;
 	}
 }

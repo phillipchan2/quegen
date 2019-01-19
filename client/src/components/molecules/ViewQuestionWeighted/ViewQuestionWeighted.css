@@ -1,16 +1,22 @@
 .view-question-weighted {
   display: flex;
   flex-direction: column; }
+  .view-question-weighted:focus {
+    outline: none; }
   .view-question-weighted label {
     margin-bottom: 1em; }
   .view-question-weighted .answer {
     display: block;
     align-self: center;
-    padding: 1em;
+    padding: 0.5em;
+    border: 1px solid #fff;
+    color: #fff;
     width: 100%;
-    margin-bottom: 1em;
-    background: #cecece; }
+    margin-bottom: 0.5em;
+    background: transparent; }
     .view-question-weighted .answer:hover {
       cursor: pointer; }
     .view-question-weighted .answer.selected {
-      background: blue; }
+      color: yellow; }
+    .view-question-weighted .answer:focus {
+      outline: none; }

@@ -32,17 +32,17 @@ class ViewQuestionText extends Component {
 				<aside className="question-text">
 					{this.props.question.title}
 				</aside>
-				<form>
+				<div className="input-group">
 					<input type="text" onChange={e => this.handleChange(e)} />
 					{this.state.value && (
-						<a
+						<button
 							className="question-text-next"
 							onClick={this.handleClick.bind(this)}
 						>
-							>
-						</a>
+							Next
+						</button>
 					)}
-				</form>
+				</div>
 			</div>
 		);
 	}

@@ -2,46 +2,93 @@
   padding: 1rem;
   display: flex; }
 
-.questionnaire .question-text {
-  text-align: center; }
+.questionnaire {
+  align-items: center;
+  background: #000;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  font-size: 30px;
+  height: 100vh;
+  padding: 2em 1em 1em;
+  width: 100vw; }
+  .questionnaire > div {
+    width: 100%;
+    max-width: 700px; }
+  .questionnaire .question-text {
+    text-align: center; }
+  .questionnaire .input-group {
+    display: flex;
+    flex-direction: column;
+    width: 100%; }
+    .questionnaire .input-group input {
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid #fff;
+      color: #fff;
+      font-family: 'Lato';
+      font-weight: 300;
+      margin-bottom: 0.5em;
+      outline: none;
+      padding: 0.25em;
+      width: 100%; }
+    .questionnaire .input-group ::placeholder {
+      font-family: 'Wire One'; }
+    .questionnaire .input-group input:-webkit-autofill,
+    .questionnaire .input-group input:-webkit-autofill:hover,
+    .questionnaire .input-group input:-webkit-autofill:focus textarea:-webkit-autofill,
+    .questionnaire .input-group textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus,
+    .questionnaire .input-group select:-webkit-autofill,
+    .questionnaire .input-group select:-webkit-autofill:hover,
+    .questionnaire .input-group select:-webkit-autofill:focus {
+      border: 0;
+      border-bottom: 1px solid #fff;
+      -webkit-text-fill-color: #fff;
+      -webkit-box-shadow: 0 0 0px 1000px #000 inset;
+      transition: background-color 5000s ease-in-out 0s; }
+  .questionnaire button {
+    background: none;
+    color: #fff;
+    font-family: 'Wire One';
+    width: 100%; }
+
+.admin-page,
+.login-page,
+.registration-page {
+  font-family: 'Lato'; }
 
 .view-question-weighted {
   display: flex;
   flex-direction: column; }
+  .view-question-weighted:focus {
+    outline: none; }
   .view-question-weighted label {
     margin-bottom: 1em; }
   .view-question-weighted .answer {
     display: block;
     align-self: center;
-    padding: 1em;
+    padding: 0.5em;
+    border: 1px solid #fff;
+    color: #fff;
     width: 100%;
-    margin-bottom: 1em;
-    background: #cecece; }
+    margin-bottom: 0.5em;
+    background: transparent; }
     .view-question-weighted .answer:hover {
       cursor: pointer; }
     .view-question-weighted .answer.selected {
-      background: blue; }
+      color: yellow; }
+    .view-question-weighted .answer:focus {
+      outline: none; }
 
 .question-text-container {
   display: flex;
   flex-direction: column;
   align-content: center;
   justify-content: center; }
-  .question-text-container input {
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    padding: 1em; }
-    .question-text-container input:focus {
-      outline: none; }
   .question-text-container form {
     display: flex;
     justify-content: center;
     align-items: center; }
-  .question-text-container .question-text-next {
-    background: #6d6d4e;
-    display: block;
-    padding: 1em;
-    border-radius: 3em; }
 
 .questionnaire-questions {
   position: relative;
@@ -57,11 +104,9 @@
   .questionnaire-questions .prev-button {
     left: 1em; }
   .questionnaire-questions .question {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    padding: 2em; }
+    height: 100vh; }
     .questionnaire-questions .question .fields {
       display: flex;
       width: 100%;
@@ -79,6 +124,10 @@
   padding: 1em;
   position: fixed;
   width: 100%; }
+
+body {
+  font-family: 'Wire One', sans-serif;
+  font-size: 24px; }
 
 .admin-page {
   background-color: #77aa77 !important;

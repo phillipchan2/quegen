@@ -19,11 +19,9 @@
 	}
 
 	.question {
-		display: flex !important;
+		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		height: 100vh;
-		padding: 2em;
 
 		.fields {
 			display: flex;

@@ -37,11 +37,13 @@ class QuestionnaireLogin extends Component {
 			<div>
 				<div>{this.state.showError && 'Incorrect Password'}</div>
 				<div>Enter Password</div>
-				<input
-					type="text"
-					onKeyPress={this.handleKeyPress.bind(this)}
-					onChange={this.handleChange.bind(this)}
-				/>
+				<div className="input-group">
+					<input
+						type="text"
+						onKeyPress={this.handleKeyPress.bind(this)}
+						onChange={this.handleChange.bind(this)}
+					/>
+				</div>
 				<button onClick={this.checkPassword.bind(this)}>Enter</button>
 			</div>
 		);

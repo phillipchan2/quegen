@@ -3,18 +3,7 @@
   flex-direction: column;
   align-content: center;
   justify-content: center; }
-  .question-text-container input {
-    border: 0;
-    border-bottom: 1px solid #ccc;
-    padding: 1em; }
-    .question-text-container input:focus {
-      outline: none; }
   .question-text-container form {
     display: flex;
     justify-content: center;
     align-items: center; }
-  .question-text-container .question-text-next {
-    background: #6d6d4e;
-    display: block;
-    padding: 1em;
-    border-radius: 3em; }

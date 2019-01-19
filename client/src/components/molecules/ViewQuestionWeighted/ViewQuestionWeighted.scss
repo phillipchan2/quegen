@@ -2,6 +2,10 @@
 	display: flex;
 	flex-direction: column;
 
+	&:focus {
+		outline: none;
+	}
+
 	label {
 		margin-bottom: 1em;
 	}
@@ -9,17 +13,23 @@
 	.answer {
 		display: block;
 		align-self: center;
-		padding: 1em;
+		padding: 0.5em;
+		border: 1px solid #fff;
+		color: #fff;
 		width: 100%;
-		margin-bottom: 1em;
-		background: #cecece;
+		margin-bottom: 0.5em;
+		background: transparent;
 
 		&:hover {
 			cursor: pointer;
 		}
 
 		&.selected {
-			background: blue;
+			color: yellow;
+		}
+
+		&:focus {
+			outline: none;
 		}
 	}
 }

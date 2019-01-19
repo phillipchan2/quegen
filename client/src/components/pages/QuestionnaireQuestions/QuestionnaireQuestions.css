@@ -12,11 +12,9 @@
   .questionnaire-questions .prev-button {
     left: 1em; }
   .questionnaire-questions .question {
-    display: flex !important;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: 100vh;
-    padding: 2em; }
+    height: 100vh; }
     .questionnaire-questions .question .fields {
       display: flex;
       width: 100%;

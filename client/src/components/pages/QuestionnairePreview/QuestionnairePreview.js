@@ -6,12 +6,14 @@ class QuestionnairePreview extends Component {
 	render() {
 		return (
 			<div>
-				{this.props.description
-					? this.props.description
-					: 'Begin the questionnaire'}
-				<Button onClick={this.props.handleSuccessfulPage}>
+				<aside style={{ marginBottom: '1em' }}>
+					{this.props.description
+						? this.props.description
+						: 'Begin the questionnaire'}
+				</aside>
+				<button onClick={this.props.handleSuccessfulPage}>
 					Continue
-				</Button>
+				</button>
 			</div>
 		);
 	}

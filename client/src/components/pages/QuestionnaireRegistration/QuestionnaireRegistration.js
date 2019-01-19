@@ -27,36 +27,35 @@ class QuestionnaireRegistration extends Component {
 	render() {
 		return (
 			<div>
-				<Form>
-					<Form.Field>
-						<label>Name</label>
+				<form>
+					<div className="input-group">
 						<input
 							placeholder="Name"
 							name="name"
 							value={this.state.name}
 							onChange={this.handleChange.bind(this)}
 						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Email</label>
+					</div>
+
+					<div className="input-group">
 						<input
 							placeholder="Email"
 							name="email"
 							value={this.state.email}
 							onChange={this.handleChange.bind(this)}
 						/>
-					</Form.Field>
-					<Form.Field>
-						<label>Phone</label>
+					</div>
+
+					<div className="input-group">
 						<input
 							placeholder="Phone Number"
 							name="phone"
 							value={this.state.phone}
 							onChange={this.handleChange.bind(this)}
 						/>
-					</Form.Field>
-				</Form>
-				<Button onClick={this.handleSubmit.bind(this)}>Next</Button>
+					</div>
+				</form>
+				<button onClick={this.handleSubmit.bind(this)}>Next</button>
 			</div>
 		);
 	}
