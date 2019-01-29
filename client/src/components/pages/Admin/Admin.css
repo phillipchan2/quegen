@@ -1,4 +1,6 @@
 .admin-page,
 .login-page,
 .registration-page {
-  font-family: 'Lato'; }
+	font-family: 'Lato';
+	font-size: initial;
+}

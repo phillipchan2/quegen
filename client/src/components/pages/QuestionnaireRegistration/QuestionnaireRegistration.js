@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react'
+import PropTypes from 'prop-types'
 
 class QuestionnaireRegistration extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			name: '',
 			email: '',
-			phone: ''
-		};
+			phone: '',
+		}
 	}
 
 	handleChange(e) {
 		this.setState({
-			[e.target.name]: e.target.value
-		});
+			[e.target.name]: e.target.value,
+		})
 	}
 
 	handleSubmit() {
-		this.props.handleConsolidateData(this.state);
-		this.props.handleSuccessfulPage();
+		this.props.handleConsolidateData(this.state)
+		this.props.handleSuccessfulPage()
 	}
 
 	render() {
 		return (
-			<div>
+			<div style={{ padding: '1em' }}>
 				<form>
 					<div className="input-group">
 						<input
@@ -57,7 +57,7 @@ class QuestionnaireRegistration extends Component {
 				</form>
 				<button onClick={this.handleSubmit.bind(this)}>Next</button>
 			</div>
-		);
+		)
 	}
 }
 
@@ -65,7 +65,7 @@ QuestionnaireRegistration.propTypes = {
 	handleSuccessfulPage: PropTypes.func,
 	handleSubmitData: PropTypes.func,
 	handlePageError: PropTypes.func,
-	questionnaireId: PropTypes.string
-};
+	questionnaireId: PropTypes.string,
+}
 
-export default QuestionnaireRegistration;
+export default QuestionnaireRegistration

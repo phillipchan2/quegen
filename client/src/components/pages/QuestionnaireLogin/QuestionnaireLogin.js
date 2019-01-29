@@ -1,40 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class QuestionnaireLogin extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
-			userInputtedPassword: ''
-		};
+			userInputtedPassword: '',
+		}
 	}
 
 	checkPassword() {
 		if (this.state.userInputtedPassword === this.props.password) {
-			this.props.handleSuccessfulPage();
+			this.props.handleSuccessfulPage()
 		} else {
-			let errorMessage = `Incorrect password`;
+			let errorMessage = `Incorrect password`
 
-			this.props.handlePageError(errorMessage);
+			this.props.handlePageError(errorMessage)
 		}
 	}
 
 	handleKeyPress(e) {
 		if (e.key === 'Enter') {
-			this.checkPassword();
+			this.checkPassword()
 		}
 	}
 
 	handleChange(e) {
 		this.setState({
-			userInputtedPassword: e.target.value
-		});
+			userInputtedPassword: e.target.value,
+		})
 	}
 
 	render() {
 		return (
-			<div>
+			<div style={{ padding: '1em' }}>
 				<div>{this.state.showError && 'Incorrect Password'}</div>
 				<div>Enter Password</div>
 				<div className="input-group">
@@ -46,7 +46,7 @@ class QuestionnaireLogin extends Component {
 				</div>
 				<button onClick={this.checkPassword.bind(this)}>Enter</button>
 			</div>
-		);
+		)
 	}
 }
 
@@ -55,7 +55,7 @@ QuestionnaireLogin.propTypes = {
 	handleSubmitData: PropTypes.func,
 	handlePageError: PropTypes.func,
 	password: PropTypes.string,
-	questionnaireId: PropTypes.string
-};
+	questionnaireId: PropTypes.string,
+}
 
-export default QuestionnaireLogin;
+export default QuestionnaireLogin
