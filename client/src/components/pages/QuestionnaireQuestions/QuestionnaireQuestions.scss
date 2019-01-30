@@ -8,10 +8,28 @@
 	.prev-button {
 		position: absolute;
 		bottom: 1em;
+
+		&:hover {
+			cursor: pointer;
+		}
 	}
 
 	.submit-button {
 		right: 1em;
+		display: flex;
+		align-items: center;
+		border: 1px solid #fff;
+		padding: 0.25em;
+		box-sizing: border-box;
+		justify-content: center;
+	}
+
+	input:focus,
+	select:focus,
+	textarea:focus,
+	button:focus,
+	a:focus {
+		outline: none;
 	}
 
 	.prev-button {

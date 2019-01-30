@@ -1,24 +1,47 @@
 .questionnaire-questions {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  box-sizing: border-box; }
-  .questionnaire-questions .submit-button,
-  .questionnaire-questions .prev-button {
-    position: absolute;
-    bottom: 1em; }
-  .questionnaire-questions .submit-button {
-    right: 1em; }
-  .questionnaire-questions .prev-button {
-    left: 1em; }
-  .questionnaire-questions .question {
-    display: flex;
-    flex-direction: column;
-    height: 100vh; }
-    .questionnaire-questions .question .fields {
-      display: flex;
-      width: 100%;
-      flex-direction: column;
-      align-items: center;
-      height: 100%;
-      justify-content: center; }
+	position: relative;
+	height: 100vh;
+	overflow: hidden;
+	box-sizing: border-box;
+}
+.questionnaire-questions .submit-button,
+.questionnaire-questions .prev-button {
+	position: absolute;
+	bottom: 1em;
+}
+.questionnaire-questions .submit-button:hover,
+.questionnaire-questions .prev-button:hover {
+	cursor: pointer;
+}
+.questionnaire-questions .submit-button {
+	right: 1em;
+	display: flex;
+	align-items: center;
+	border: 1px solid #fff;
+	padding: 0.25em;
+	box-sizing: border-box;
+	justify-content: center;
+}
+.questionnaire-questions input:focus,
+.questionnaire-questions select:focus,
+.questionnaire-questions textarea:focus,
+.questionnaire-questions button:focus,
+.questionnaire-questions a:focus {
+	outline: none;
+}
+.questionnaire-questions .prev-button {
+	left: 1em;
+}
+.questionnaire-questions .question {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+}
+.questionnaire-questions .question .fields {
+	display: flex;
+	width: 100%;
+	flex-direction: column;
+	align-items: center;
+	height: 100%;
+	justify-content: center;
+}

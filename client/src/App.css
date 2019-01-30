@@ -134,8 +134,25 @@
 	position: absolute;
 	bottom: 1em;
 }
+.questionnaire-questions .submit-button:hover,
+.questionnaire-questions .prev-button:hover {
+	cursor: pointer;
+}
 .questionnaire-questions .submit-button {
 	right: 1em;
+	display: flex;
+	align-items: center;
+	border: 1px solid #fff;
+	padding: 0.25em;
+	box-sizing: border-box;
+	justify-content: center;
+}
+.questionnaire-questions input:focus,
+.questionnaire-questions select:focus,
+.questionnaire-questions textarea:focus,
+.questionnaire-questions button:focus,
+.questionnaire-questions a:focus {
+	outline: none;
 }
 .questionnaire-questions .prev-button {
 	left: 1em;
