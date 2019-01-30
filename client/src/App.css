@@ -11,6 +11,7 @@
 	flex-direction: column;
 	font-size: 30px;
 	height: 100vh;
+	position: relative;
 	width: 100vw;
 }
 .questionnaire > div {
@@ -64,6 +65,13 @@
 	color: #fff;
 	font-family: 'Wire One';
 	width: 100%;
+}
+.questionnaire .sound-player {
+	position: absolute;
+	bottom: 1em;
+	left: 50%;
+	transform: translateX(-50%);
+	width: 30px;
 }
 
 .admin-page,
