@@ -1,17 +1,26 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { aOrAn } from '../../../utils/stringUtils'
 
 class QuestionnaireResult extends Component {
 	render() {
 		return (
-			<div
-				style={{
-					backgroundImage: this.props.resultCategory.imageUrl,
-					backgroundSize: 'cover',
-				}}
-			>
-				<h1>You are a {this.props.resultCategory.name}</h1>
-				<p>{this.props.resultCategory.resultDescription}</p>
+			<div className="questionnaire-result">
+				<div className="result-text">
+					<h1>
+						You are {aOrAn(this.props.resultCategory.name)}{' '}
+						{this.props.resultCategory.name}
+					</h1>
+					<p>{this.props.resultCategory.resultDescription}</p>
+				</div>
+				<div
+					className="image-background"
+					style={{
+						backgroundImage: `url(${
+							this.props.resultCategory.imageUrl
+						})`,
+					}}
+				/>
 			</div>
 		)
 	}

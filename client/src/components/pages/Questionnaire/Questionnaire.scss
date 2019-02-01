@@ -11,7 +11,6 @@
 
 	& > div {
 		width: 100%;
-		max-width: 700px;
 	}
 
 	.question-text {
@@ -58,6 +57,8 @@
 
 	button {
 		background: none;
+		border: none;
+		font-weight: bold;
 		color: #fff;
 		font-family: 'Wire One';
 		width: 100%;
@@ -65,7 +66,7 @@
 
 	.sound-player {
 		position: absolute;
-		bottom: 1em;
+		top: 1em;
 		left: 50%;
 		transform: translateX(-50%);
 		width: 30px;

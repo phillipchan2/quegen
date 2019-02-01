@@ -1,9 +1,12 @@
 .question-text-container {
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  justify-content: center; }
-  .question-text-container form {
-    display: flex;
-    justify-content: center;
-    align-items: center; }
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+	height: 100vh;
+}
+.question-text-container form {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

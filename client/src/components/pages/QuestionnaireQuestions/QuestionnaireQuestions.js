@@ -115,7 +115,7 @@ class QuestionnaireQuestions extends Component {
 			swipe: false,
 		}
 		return (
-			<div className="questionnaire-questions" style={{ padding: '1em' }}>
+			<div className="questionnaire-questions">
 				<Slider ref={c => (this.slider = c)} {...settings}>
 					{this.props.questions.map((question, index) => {
 						switch (question.type) {

@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Button } from 'semantic-ui-react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Button } from 'semantic-ui-react'
 
 class QuestionnairePreview extends Component {
 	render() {
 		return (
 			<div>
-				<aside style={{ marginBottom: '1em' }}>
+				<aside style={{ padding: '3em 1em 1em 1em' }}>
 					{this.props.description
 						? this.props.description
 						: 'Begin the questionnaire'}
@@ -15,12 +15,12 @@ class QuestionnairePreview extends Component {
 					Continue
 				</button>
 			</div>
-		);
+		)
 	}
 }
 
 QuestionnairePreview.propTypes = {
-	description: PropTypes.string
-};
+	description: PropTypes.string,
+}
 
-export default QuestionnairePreview;
+export default QuestionnairePreview

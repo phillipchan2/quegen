@@ -4,24 +4,13 @@
 	overflow: hidden;
 	box-sizing: border-box;
 
-	.submit-button,
 	.prev-button {
 		position: absolute;
-		bottom: 1em;
+		top: 1em;
 
 		&:hover {
 			cursor: pointer;
 		}
-	}
-
-	.submit-button {
-		right: 1em;
-		display: flex;
-		align-items: center;
-		border: 1px solid #fff;
-		padding: 0.25em;
-		box-sizing: border-box;
-		justify-content: center;
 	}
 
 	input:focus,
@@ -39,7 +28,9 @@
 	.question {
 		display: flex;
 		flex-direction: column;
+		justify-content: center;
 		height: 100vh;
+		text-align: center;
 
 		.fields {
 			display: flex;

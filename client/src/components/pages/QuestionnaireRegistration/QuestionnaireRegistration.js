@@ -26,7 +26,7 @@ class QuestionnaireRegistration extends Component {
 
 	render() {
 		return (
-			<div style={{ padding: '1em' }}>
+			<div style={{ padding: '3em 1em 1em 1em' }}>
 				<form>
 					<div className="input-group">
 						<input

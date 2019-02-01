@@ -1,6 +1,8 @@
 .view-question-weighted {
 	display: flex;
 	flex-direction: column;
+	height: 100vh;
+	justify-content: center;
 
 	&:focus {
 		outline: none;
@@ -11,14 +13,14 @@
 	}
 
 	.answer {
-		display: block;
 		align-self: center;
-		padding: 0.5em;
-		border: 1px solid #fff;
-		color: #fff;
-		width: 100%;
-		margin-bottom: 0.5em;
 		background: transparent;
+		color: #fff;
+		display: block;
+		font-weight: bold;
+		margin-bottom: 0.5em;
+		padding: 0.5em;
+		width: 100%;
 
 		&:hover {
 			cursor: pointer;

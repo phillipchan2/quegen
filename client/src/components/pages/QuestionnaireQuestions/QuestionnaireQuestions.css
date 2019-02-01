@@ -4,23 +4,12 @@
 	overflow: hidden;
 	box-sizing: border-box;
 }
-.questionnaire-questions .submit-button,
 .questionnaire-questions .prev-button {
 	position: absolute;
-	bottom: 1em;
+	top: 1em;
 }
-.questionnaire-questions .submit-button:hover,
 .questionnaire-questions .prev-button:hover {
 	cursor: pointer;
-}
-.questionnaire-questions .submit-button {
-	right: 1em;
-	display: flex;
-	align-items: center;
-	border: 1px solid #fff;
-	padding: 0.25em;
-	box-sizing: border-box;
-	justify-content: center;
 }
 .questionnaire-questions input:focus,
 .questionnaire-questions select:focus,
@@ -35,7 +24,9 @@
 .questionnaire-questions .question {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	height: 100vh;
+	text-align: center;
 }
 .questionnaire-questions .question .fields {
 	display: flex;

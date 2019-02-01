@@ -16,7 +16,6 @@
 }
 .questionnaire > div {
 	width: 100%;
-	max-width: 700px;
 }
 .questionnaire .question-text {
 	text-align: center;
@@ -62,13 +61,15 @@
 }
 .questionnaire button {
 	background: none;
+	border: none;
+	font-weight: bold;
 	color: #fff;
 	font-family: 'Wire One';
 	width: 100%;
 }
 .questionnaire .sound-player {
 	position: absolute;
-	bottom: 1em;
+	top: 1em;
 	left: 50%;
 	transform: translateX(-50%);
 	width: 30px;
@@ -84,6 +85,8 @@
 .view-question-weighted {
 	display: flex;
 	flex-direction: column;
+	height: 100vh;
+	justify-content: center;
 }
 .view-question-weighted:focus {
 	outline: none;
@@ -92,14 +95,14 @@
 	margin-bottom: 1em;
 }
 .view-question-weighted .answer {
-	display: block;
 	align-self: center;
-	padding: 0.5em;
-	border: 1px solid #fff;
-	color: #fff;
-	width: 100%;
-	margin-bottom: 0.5em;
 	background: transparent;
+	color: #fff;
+	display: block;
+	font-weight: bold;
+	margin-bottom: 0.5em;
+	padding: 0.5em;
+	width: 100%;
 }
 .view-question-weighted .answer:hover {
 	cursor: pointer;
@@ -116,6 +119,7 @@
 	flex-direction: column;
 	align-content: center;
 	justify-content: center;
+	height: 100vh;
 }
 .question-text-container form {
 	display: flex;
@@ -129,23 +133,12 @@
 	overflow: hidden;
 	box-sizing: border-box;
 }
-.questionnaire-questions .submit-button,
 .questionnaire-questions .prev-button {
 	position: absolute;
-	bottom: 1em;
+	top: 1em;
 }
-.questionnaire-questions .submit-button:hover,
 .questionnaire-questions .prev-button:hover {
 	cursor: pointer;
-}
-.questionnaire-questions .submit-button {
-	right: 1em;
-	display: flex;
-	align-items: center;
-	border: 1px solid #fff;
-	padding: 0.25em;
-	box-sizing: border-box;
-	justify-content: center;
 }
 .questionnaire-questions input:focus,
 .questionnaire-questions select:focus,
@@ -160,7 +153,9 @@
 .questionnaire-questions .question {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	height: 100vh;
+	text-align: center;
 }
 .questionnaire-questions .question .fields {
 	display: flex;
@@ -169,6 +164,26 @@
 	align-items: center;
 	height: 100%;
 	justify-content: center;
+}
+
+.questionnaire-result {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-content: center;
+	height: 100vh;
+	text-align: center;
+}
+.questionnaire-result .result-text {
+	z-index: 3;
+}
+.questionnaire-result .image-background {
+	background-size: cover;
+	z-index: 0;
+	opacity: 0.5;
+	position: absolute;
+	width: 100%;
+	height: 100%;
 }
 
 #app-message {
