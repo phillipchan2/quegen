@@ -67,8 +67,8 @@ class QuestionnaireQuestions extends Component {
 
 				// see if answers are all answered
 				if (this.areQuestionsAnswered() === true) {
-					this.setState({
-						showSubmitButton: true,
+					this.props.handleSubmitData({
+						responses: this.state.responses,
 					})
 				} else {
 					this.setState({
@@ -166,25 +166,6 @@ class QuestionnaireQuestions extends Component {
 					>
 						<svg
 							style={{ transform: 'rotate(180deg)' }}
-							height="30"
-							fill="#FFF"
-							id="Layer_1"
-							version="1.1"
-							viewBox="0 0 512 512"
-							width="30"
-						>
-							<polygon points="160,115.4 180.7,96 352,256 180.7,416 160,396.7 310.5,256 " />
-						</svg>
-					</div>
-				)}
-
-				{this.state.showSubmitButton && (
-					<div
-						className="submit-button button"
-						onClick={this.handleSubmit}
-					>
-						Submit
-						<svg
 							height="30"
 							fill="#FFF"
 							id="Layer_1"
