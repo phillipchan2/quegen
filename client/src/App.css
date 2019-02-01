@@ -127,6 +127,32 @@
 	align-items: center;
 }
 
+.questionnaire-login {
+	height: 100vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+		url('assets/car.jpg');
+	background-size: cover;
+}
+
+.questionnaire-registration {
+	height: 100vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+		url('assets/table.jpg');
+	background-size: cover;
+}
+
+.questionnaire-preview {
+	height: 100vh;
+	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+		url('assets/table.jpg');
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	padding: 1em;
+}
+
 .questionnaire-questions {
 	position: relative;
 	height: 100vh;
@@ -175,6 +201,7 @@
 	text-align: center;
 }
 .questionnaire-result .result-text {
+	padding: 1em;
 	z-index: 3;
 }
 .questionnaire-result .image-background {

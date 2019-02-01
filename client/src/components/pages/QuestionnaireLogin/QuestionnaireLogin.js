@@ -34,7 +34,10 @@ class QuestionnaireLogin extends Component {
 
 	render() {
 		return (
-			<div style={{ padding: '3em 1em 1em 1em' }}>
+			<div
+				className="questionnaire-login"
+				style={{ padding: '3em 1em 1em 1em' }}
+			>
 				<div>{this.state.showError && 'Incorrect Password'}</div>
 				<div>Enter Password</div>
 				<div className="input-group">

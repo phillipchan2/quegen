@@ -5,8 +5,8 @@ import { Button } from 'semantic-ui-react'
 class QuestionnairePreview extends Component {
 	render() {
 		return (
-			<div>
-				<aside style={{ padding: '3em 1em 1em 1em' }}>
+			<div className="questionnaire-preview">
+				<aside>
 					{this.props.description
 						? this.props.description
 						: 'Begin the questionnaire'}
