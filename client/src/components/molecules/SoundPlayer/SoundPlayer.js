@@ -14,7 +14,7 @@ class SoundPlayer extends Component {
 		super(props)
 
 		this.state = {
-			musicMuted: true,
+			musicMuted: false,
 		}
 	}
 
