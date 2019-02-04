@@ -13,6 +13,9 @@ import QuestionnairePreview from '../QuestionnairePreview/QuestionnairePreview'
 import QuestionnaireQuestions from '../QuestionnaireQuestions/QuestionnaireQuestions'
 import QuestionnaireResult from '../QuestionnaireResult/QuestionnaireResult'
 
+// assets
+import music from '../../../assets/music.mp3'
+
 @inject('AppMessagingStore')
 @observer
 class Questionnaire extends Component {
@@ -231,7 +234,7 @@ class Questionnaire extends Component {
 							questionnaireId={this.props.match.params.id}
 							resultCategory={this.state.resultCategory}
 						/>
-						<SoundPlayer />
+						<SoundPlayer src={music} />
 					</div>
 				) : (
 					'Questionnnaire not found'

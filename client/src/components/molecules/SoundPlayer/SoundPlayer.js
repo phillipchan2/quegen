@@ -2,9 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import ReactAudioPlayer from 'react-audio-player'
 
-// mp3
-import calm from '../../../assets/calm.mp3'
-
 // icons
 import soundOn from '../../../svgs/soundOn.svg'
 import soundOff from '../../../svgs/soundOff.svg'
@@ -29,7 +26,7 @@ class SoundPlayer extends Component {
 			<div className="sound-player">
 				<ReactAudioPlayer
 					className="react-audio-player"
-					src={calm}
+					src={this.props.src}
 					autoPlay
 					muted={this.state.musicMuted}
 					controls={false}
