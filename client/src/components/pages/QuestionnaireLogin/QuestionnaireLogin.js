@@ -11,7 +11,10 @@ class QuestionnaireLogin extends Component {
 	}
 
 	checkPassword() {
-		if (this.state.userInputtedPassword === this.props.password) {
+		if (
+			this.state.userInputtedPassword.toLowerCase() ===
+			this.props.password.toLowerCase()
+		) {
 			this.props.handleSuccessfulPage()
 		} else {
 			let errorMessage = `Incorrect password`
