@@ -58,7 +58,6 @@ class QuestionnaireCard extends Component {
 						</Menu.Item>
 						<Menu.Item>
 							<Link
-								target="_blank"
 								to={`/questionnaires/${
 									this.props.questionnaire._id
 								}`}

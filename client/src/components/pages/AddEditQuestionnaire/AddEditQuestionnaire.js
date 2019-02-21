@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import axios from 'axios';
-import { inject, observer } from 'mobx-react';
-import { Link, Redirect } from 'react-router-dom';
+import React, { Component } from 'react'
+import axios from 'axios'
+import { inject, observer } from 'mobx-react'
+import { Link, Redirect } from 'react-router-dom'
 
 // components
 import {
@@ -12,43 +12,43 @@ import {
 	Icon,
 	Menu,
 	Message,
-	Dropdown
-} from 'semantic-ui-react';
-import Sortable from 'react-sortablejs';
-import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted';
-import EditQuestionText from '../../molecules/EditQuestionText/EditQuestionText';
-import EditQuestionMultipleChoice from '../../molecules/EditQuestionMultipleChoice/EditQuestionMultipleChoice';
+	Dropdown,
+} from 'semantic-ui-react'
+import Sortable from 'react-sortablejs'
+import EditQuestionWeighted from '../../molecules/EditQuestionWeighted/EditQuestionWeighted'
+import EditQuestionText from '../../molecules/EditQuestionText/EditQuestionText'
+import EditQuestionMultipleChoice from '../../molecules/EditQuestionMultipleChoice/EditQuestionMultipleChoice'
 
 @inject('AppMessagingStore')
 @observer
 class AddEditQuestionnaire extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			currentQuestionnaire: {},
 			errorMessage: '',
 			updateSuccess: false,
 			categorySets: [],
-			currentCategorySet: {}
-		};
+			currentCategorySet: {},
+		}
 	}
 
 	componentDidMount() {
-		const jwtoken = localStorage.getItem('jwtoken');
+		const jwtoken = localStorage.getItem('jwtoken')
 
 		if (this.props.match.params.id) {
 			axios
 				.get(`/api/questionnaire/${this.props.match.params.id}`, {
 					headers: {
-						token: jwtoken
-					}
+						token: jwtoken,
+					},
 				})
 				.then(res => {
 					if (res.data.success) {
 						this.setState(
 							{
-								currentQuestionnaire: res.data.data
+								currentQuestionnaire: res.data.data,
 							},
 							() => {
 								axios
@@ -59,200 +59,200 @@ class AddEditQuestionnaire extends Component {
 										}`,
 										{
 											headers: {
-												token: jwtoken
-											}
+												token: jwtoken,
+											},
 										}
 									)
 									.then(res => {
-										let newState = this.state;
-										let categorySet = res.data.data;
+										let newState = this.state
+										let categorySet = res.data.data
 
 										newState[
 											'currentCategorySet'
-										] = categorySet;
-										this.setState(newState);
-									});
+										] = categorySet
+										this.setState(newState)
+									})
 							}
-						);
+						)
 					} else {
-						var newState = this.state;
+						var newState = this.state
 
 						this.props.AppMessagingStore.showAppMessage(
 							res.data.message
-						);
+						)
 
 						newState.currentQuestionnaire = {
 							name: '',
-							questions: []
-						};
+							questions: [],
+						}
 
-						this.setState(newState);
+						this.setState(newState)
 					}
-				});
+				})
 		}
 
 		// get all category sets
 		axios
 			.get('/api/categorySet/', {
 				headers: {
-					token: jwtoken
-				}
+					token: jwtoken,
+				},
 			})
 			.then(res => {
-				let categorySets = res.data.data;
+				let categorySets = res.data.data
 
 				this.setState({
-					categorySets: categorySets
-				});
-			});
+					categorySets: categorySets,
+				})
+			})
 	}
 
 	handleAddQuestionClick(e) {
-		const questionType = e.target.dataset.type;
+		const questionType = e.target.dataset.type
 
-		var newQuestions = this.state.currentQuestionnaire.questions;
+		var newQuestions = this.state.currentQuestionnaire.questions
 
 		var newQuestion = {
 			title: '',
-			type: questionType
-		};
+			type: questionType,
+		}
 
-		newQuestions.push(newQuestion);
+		newQuestions.push(newQuestion)
 
 		this.setState({
-			questions: newQuestions
-		});
+			questions: newQuestions,
+		})
 	}
 
 	handleCategorySetChange(e, { value }) {
-		const jwtoken = localStorage.getItem('jwtoken');
-		var newState = this.state;
+		const jwtoken = localStorage.getItem('jwtoken')
+		var newState = this.state
 
 		axios
 			.get(`/api/categorySet/${value}`, {
 				headers: {
-					token: jwtoken
-				}
+					token: jwtoken,
+				},
 			})
 			.then(res => {
-				let categorySet = res.data.data;
+				let categorySet = res.data.data
 
-				newState['currentQuestionnaire']['categorySetId'] = value;
-				newState['currentCategorySet'] = categorySet;
-				this.setState(newState);
-			});
+				newState['currentQuestionnaire']['categorySetId'] = value
+				newState['currentCategorySet'] = categorySet
+				this.setState(newState)
+			})
 	}
 
 	handleChange(e) {
-		var key = e.target.name;
-		var value = e.target.value;
-		var obj = this.state.currentQuestionnaire;
+		var key = e.target.name
+		var value = e.target.value
+		var obj = this.state.currentQuestionnaire
 
-		obj[key] = value;
+		obj[key] = value
 
 		this.setState({
-			currentQuestionnaire: obj
-		});
+			currentQuestionnaire: obj,
+		})
 	}
 
 	handleDelete(index) {
-		var newState = this.state;
+		var newState = this.state
 
-		newState.currentQuestionnaire.questions.splice(index, 1);
+		newState.currentQuestionnaire.questions.splice(index, 1)
 
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleDeleteQuestion(e) {
 		var index =
-			e.target.parentNode.parentNode.parentNode.parentNode.dataset.index;
+			e.target.parentNode.parentNode.parentNode.parentNode.dataset.index
 
-		var newState = this.state;
+		var newState = this.state
 
-		newState.currentQuestionnaire.questions.splice(index, 1);
+		newState.currentQuestionnaire.questions.splice(index, 1)
 
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleQuestionMove(direction, index) {
-		var newState = this.state;
-		var currentQuestion = newState.currentQuestionnaire.questions[index];
+		var newState = this.state
+		var currentQuestion = newState.currentQuestionnaire.questions[index]
 
 		if (direction === 'up') {
-			newState.currentQuestionnaire.questions.splice(index, 1);
+			newState.currentQuestionnaire.questions.splice(index, 1)
 			newState.currentQuestionnaire.questions.splice(
 				index - 1,
 				0,
 				currentQuestion
-			);
+			)
 
-			this.setState(newState);
+			this.setState(newState)
 		} else if (direction === 'down') {
-			newState.currentQuestionnaire.questions.splice(index, 1);
+			newState.currentQuestionnaire.questions.splice(index, 1)
 			newState.currentQuestionnaire.questions.splice(
 				index + 1,
 				0,
 				currentQuestion
-			);
+			)
 
-			this.setState(newState);
+			this.setState(newState)
 		}
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleQuestionChange(questionData, index) {
-		var newState = this.state;
-		var currentQuestion = newState.currentQuestionnaire.questions[index];
-		var newQuestion = Object.assign(currentQuestion, questionData);
+		var newState = this.state
+		var currentQuestion = newState.currentQuestionnaire.questions[index]
+		var newQuestion = Object.assign(currentQuestion, questionData)
 
 		if (newQuestion.appliesToCategories) {
 			newQuestion.appliesToCategories = Array.from(
 				newQuestion.appliesToCategories
-			);
+			)
 		}
 
-		newState.currentQuestionnaire.questions[index] = newQuestion;
+		newState.currentQuestionnaire.questions[index] = newQuestion
 
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleSubmit() {
-		const jwtoken = localStorage.getItem('jwtoken');
+		const jwtoken = localStorage.getItem('jwtoken')
 
 		axios
 			.post(`/api/questionnaire/`, this.state.currentQuestionnaire, {
 				headers: {
-					token: jwtoken
-				}
+					token: jwtoken,
+				},
 			})
 			.then(res => {
 				if (res.data.success) {
 					this.setState({
 						updateSuccess: true,
-						errorMessage: ''
-					});
+						errorMessage: '',
+					})
 
 					this.props.AppMessagingStore.showAppMessage(
 						'Successfully Updated!'
-					);
+					)
 
 					setTimeout(() => {
 						this.setState({
-							updateSuccess: false
-						});
-					}, 3000);
+							updateSuccess: false,
+						})
+					}, 3000)
 				} else {
 					this.setState({
 						updateSuccess: false,
 						errorMessage:
-							'Error submitting. Make sure all fields are filled'
-					});
+							'Error submitting. Make sure all fields are filled',
+					})
 				}
-			});
+			})
 	}
 
 	render() {
-		let sortable = null;
+		let sortable = null
 		return (
 			<div>
 				{this.state.errorMessage ? (
@@ -275,7 +275,6 @@ class AddEditQuestionnaire extends Component {
 								<Menu.Item>
 									{this.state.currentQuestionnaire._id ? (
 										<Link
-											target="_blank"
 											to={`/questionnaires/${
 												this.state.currentQuestionnaire
 													._id
@@ -346,8 +345,8 @@ class AddEditQuestionnaire extends Component {
 											return {
 												key: categorySet._id,
 												text: categorySet.name,
-												value: categorySet._id
-											};
+												value: categorySet._id,
+											}
 										}
 									)}
 									defaultValue={
@@ -404,11 +403,11 @@ class AddEditQuestionnaire extends Component {
 										tag="div"
 										ref={c => {
 											if (c) {
-												sortable = c.sortable;
+												sortable = c.sortable
 											}
 										}}
 										onChange={(order, sortable, evt) => {
-											console.group(order, sortable);
+											console.group(order, sortable)
 										}}
 									>
 										{this.state.currentQuestionnaire.questions.map(
@@ -438,7 +437,7 @@ class AddEditQuestionnaire extends Component {
 																	this
 																)}
 															/>
-														);
+														)
 													case 'text':
 														return (
 															<EditQuestionText
@@ -463,7 +462,7 @@ class AddEditQuestionnaire extends Component {
 																	this
 																)}
 															/>
-														);
+														)
 													case 'multipleChoice':
 														return (
 															<EditQuestionMultipleChoice
@@ -484,10 +483,10 @@ class AddEditQuestionnaire extends Component {
 																	question
 																}
 															/>
-														);
+														)
 
 													default:
-														return 'Question';
+														return 'Question'
 												}
 											}
 										)}
@@ -502,8 +501,8 @@ class AddEditQuestionnaire extends Component {
 					</div>
 				)}
 			</div>
-		);
+		)
 	}
 }
 
-export default AddEditQuestionnaire;
+export default AddEditQuestionnaire
