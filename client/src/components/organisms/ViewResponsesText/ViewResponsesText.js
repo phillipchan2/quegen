@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import Moment from 'react-moment';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import Moment from 'react-moment'
+import PropTypes from 'prop-types'
 
 // components
-import ReactTable from 'react-table';
+import ReactTable from 'react-table'
 
 class ViewResponsesText extends Component {
 	render() {
@@ -20,28 +20,37 @@ class ViewResponsesText extends Component {
 				sort: 'desc',
 				render: props => (
 					<Moment format={'YYYY/MM/DD'} date={props.value} />
-				)
-			}
-		];
+				),
+			},
+		]
 		return (
 			<div style={{ padding: '1em' }}>
 				<ReactTable
 					filterable
 					data={this.props.responses}
 					defaultFilterMethod={(filter, row) => {
-						return String(row[filter.id].toLowerCase()).includes(
-							filter.value.toLowerCase()
-						);
+						const value = row[filter.id]
+						if (value) {
+							// if number
+							if (typeof value === 'number') {
+								return String(value).includes(filter.value)
+								// for mostly strings
+							} else {
+								return String(
+									row[filter.id].toLowerCase()
+								).includes(filter.value.toLowerCase())
+							}
+						}
 					}}
 					columns={columns}
 				/>
 			</div>
-		);
+		)
 	}
 }
 
 ViewResponsesText.propTypes = {
-	responses: PropTypes.object
-};
+	responses: PropTypes.object,
+}
 
-export default ViewResponsesText;
+export default ViewResponsesText
