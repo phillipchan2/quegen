@@ -146,6 +146,7 @@
 .questionnaire-login input ::placeholder {
 	font-family: 'Northwell';
 	font-size: 2em;
+	color: #fff;
 }
 
 .questionnaire-registration {
