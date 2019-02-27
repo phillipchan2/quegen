@@ -1,31 +1,30 @@
-import React, { Component } from 'react';
-
-import { Form, Radio } from 'semantic-ui-react';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ViewQuestionMultipleChoice extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			_id: this.props.question._id,
 			value: null,
 			type: 'multipleChoice',
-			title: this.props.question.title
-		};
+			title: this.props.question.title,
+		}
 	}
 
 	handleClick(answer) {
 		this.setState(
 			{
-				value: answer
+				value: answer,
 			},
 			() => {
-				this.props.questionAnswered(this.state);
+				this.props.questionAnswered(this.state)
 			}
-		);
+		)
 	}
 	render() {
-		const { value } = this.state;
+		const { value } = this.state
 
 		return (
 			<div className="view-question-weighted">
@@ -42,11 +41,15 @@ class ViewQuestionMultipleChoice extends Component {
 						>
 							{choice.name}
 						</a>
-					);
+					)
 				})}
 			</div>
-		);
+		)
 	}
 }
 
-export default ViewQuestionMultipleChoice;
+ViewQuestionMultipleChoice.propTypes = {
+	question: PropTypes.object,
+}
+
+export default ViewQuestionMultipleChoice
