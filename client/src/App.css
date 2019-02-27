@@ -130,8 +130,22 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/car.jpg');
+		url('assets/nest.jpg');
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+.questionnaire-login .input-group,
+.questionnaire-login input {
+	text-align: center;
+	font-family: 'Northwell';
+}
+.questionnaire-login .input-group ::placeholder,
+.questionnaire-login input ::placeholder {
+	font-family: 'Northwell';
+	font-size: 2em;
 }
 
 .questionnaire-registration {
@@ -222,6 +236,14 @@
 	padding: 1em;
 	position: fixed;
 	width: 100%;
+}
+
+@font-face {
+	font-family: 'Northwell';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Northwell.otf') format('opentype');
+	/* Super Modern Browsers */
 }
 
 body {

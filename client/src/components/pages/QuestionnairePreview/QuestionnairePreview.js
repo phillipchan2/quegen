@@ -14,6 +14,13 @@ class QuestionnairePreview extends Component {
 				<button onClick={this.props.handleSuccessfulPage}>
 					Continue
 				</button>
+				<p>
+					Please complete the upcoming questionnaire with care and
+					honesty. <br />
+					You'll be happy you did. <br />
+					Your secrets are safe with me. <br />
+					TW
+				</p>
 			</div>
 		)
 	}

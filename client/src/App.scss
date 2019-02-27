@@ -12,6 +12,13 @@
 @import './components/pages/QuestionnaireResult/QuestionnaireResult.scss';
 @import './components/molecules/AppMessage/AppMessage.scss';
 
+@font-face {
+	font-family: 'Northwell';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Northwell.otf') format('opentype'); /* Super Modern Browsers */
+}
+
 body {
 	font-family: 'Wire One', sans-serif;
 	font-size: 24px;

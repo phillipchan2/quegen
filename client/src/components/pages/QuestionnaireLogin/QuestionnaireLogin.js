@@ -42,10 +42,11 @@ class QuestionnaireLogin extends Component {
 				style={{ padding: '3em 1em 1em 1em' }}
 			>
 				<div>{this.state.showError && 'Incorrect Password'}</div>
-				<div>Enter Password</div>
 				<div className="input-group">
 					<input
+						style={{ borderBottom: 0 }}
 						type="text"
+						placeholder="Password"
 						onKeyPress={this.handleKeyPress.bind(this)}
 						onChange={this.handleChange.bind(this)}
 					/>

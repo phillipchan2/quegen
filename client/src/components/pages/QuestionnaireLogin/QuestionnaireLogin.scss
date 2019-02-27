@@ -1,6 +1,21 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/car.jpg');
+		url('assets/nest.jpg');
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+
+	.input-group,
+	input {
+		text-align: center;
+		font-family: 'Northwell';
+
+		::placeholder {
+			font-family: 'Northwell';
+			font-size: 2em;
+		}
+	}
 }
