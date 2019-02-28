@@ -1,39 +1,40 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ViewQuestionText extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			_id: this.props.question._id,
 			value: null,
-			type: 'text'
-		};
+			type: 'text',
+		}
 
-		this.handleClick = this.handleClick.bind(this);
+		this.handleClick = this.handleClick.bind(this)
 	}
 
 	handleChange(e) {
-		var value = e.target.value;
+		var value = e.target.value
 
 		this.setState({
-			value
-		});
+			value,
+		})
 	}
 
 	handleClick(e) {
-		this.props.questionAnswered(this.state);
+		this.props.questionAnswered(this.state)
 	}
 	render() {
-		const { value } = this.state;
+		const { value } = this.state
 		return (
 			<div className="question-text-container">
-				<aside className="question-text">
-					{this.props.question.title}
-				</aside>
 				<div className="input-group">
-					<input type="text" onChange={e => this.handleChange(e)} />
+					<input
+						type="text"
+						placeholder={this.props.question.title}
+						onChange={e => this.handleChange(e)}
+					/>
 					{this.state.value && (
 						<button
 							className="question-text-next"
@@ -44,13 +45,13 @@ class ViewQuestionText extends Component {
 					)}
 				</div>
 			</div>
-		);
+		)
 	}
 }
 
 ViewQuestionText.propTypes = {
 	questionAnswered: PropTypes.func,
-	question: PropTypes.string
-};
+	question: PropTypes.string,
+}
 
-export default ViewQuestionText;
+export default ViewQuestionText

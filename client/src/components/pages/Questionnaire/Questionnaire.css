@@ -22,18 +22,19 @@
 }
 .questionnaire .input-group input {
 	background: transparent;
-	border: 0;
 	border-bottom: 1px solid #fff;
+	border: 0;
 	color: #fff;
 	font-family: 'Lato';
 	font-weight: 300;
 	margin-bottom: 0.5em;
 	outline: none;
 	padding: 0.25em;
+	text-align: center;
 	width: 100%;
 }
 .questionnaire .input-group ::placeholder {
-	font-family: 'Wire One';
+	font-family: 'Ravensara';
 }
 .questionnaire .input-group input:-webkit-autofill,
 .questionnaire .input-group input:-webkit-autofill:hover,
@@ -59,7 +60,7 @@
 	border: none;
 	font-weight: bold;
 	color: #fff;
-	font-family: 'Wire One';
+	font-family: 'Ravensara';
 	width: 100%;
 }
 .questionnaire .sound-player {

@@ -19,9 +19,16 @@
 	src: url('./assets/fonts/Northwell.otf') format('opentype'); /* Super Modern Browsers */
 }
 
+@font-face {
+	font-family: 'Ravensara';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Ravensara_sans_medium.otf') format('opentype'); /* Super Modern Browsers */
+}
+
 body {
-	font-family: 'Wire One', sans-serif;
-	font-size: 24px;
+	font-family: 'Ravensara', sans-serif;
+	font-size: 14px;
 }
 
 .admin-page {

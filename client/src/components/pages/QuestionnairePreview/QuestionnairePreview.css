@@ -11,13 +11,14 @@
 }
 .questionnaire-preview .questionnaire-description {
 	font-family: 'Northwell';
+	line-height: 1.2;
 }
 .questionnaire-preview .continue-button-container {
 	padding: 1em 0;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;
-	font-size: 0.6em;
+	font-size: 0.5em;
 }
 .questionnaire-preview .signature {
 	font-family: 'Northwell';

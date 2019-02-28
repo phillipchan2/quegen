@@ -27,18 +27,19 @@
 }
 .questionnaire .input-group input {
 	background: transparent;
-	border: 0;
 	border-bottom: 1px solid #fff;
+	border: 0;
 	color: #fff;
 	font-family: 'Lato';
 	font-weight: 300;
 	margin-bottom: 0.5em;
 	outline: none;
 	padding: 0.25em;
+	text-align: center;
 	width: 100%;
 }
 .questionnaire .input-group ::placeholder {
-	font-family: 'Wire One';
+	font-family: 'Ravensara';
 }
 .questionnaire .input-group input:-webkit-autofill,
 .questionnaire .input-group input:-webkit-autofill:hover,
@@ -64,7 +65,7 @@
 	border: none;
 	font-weight: bold;
 	color: #fff;
-	font-family: 'Wire One';
+	font-family: 'Ravensara';
 	width: 100%;
 }
 .questionnaire .sound-player {
@@ -172,13 +173,14 @@
 }
 .questionnaire-preview .questionnaire-description {
 	font-family: 'Northwell';
+	line-height: 1.2;
 }
 .questionnaire-preview .continue-button-container {
 	padding: 1em 0;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;
-	font-size: 0.6em;
+	font-size: 0.5em;
 }
 .questionnaire-preview .signature {
 	font-family: 'Northwell';
@@ -268,9 +270,17 @@
 	/* Super Modern Browsers */
 }
 
+@font-face {
+	font-family: 'Ravensara';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Ravensara_sans_medium.otf') format('opentype');
+	/* Super Modern Browsers */
+}
+
 body {
-	font-family: 'Wire One', sans-serif;
-	font-size: 24px;
+	font-family: 'Ravensara', sans-serif;
+	font-size: 14px;
 }
 
 .admin-page {
