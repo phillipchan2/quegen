@@ -23,30 +23,46 @@ class ViewQuestionMultipleChoice extends Component {
 			}
 		)
 	}
+
+	determineChoicesRender() {
+		if (this.props.question.choices) {
+			return this.props.question.choices.map((choice, index) => {
+				return (
+					<a
+						className={`${
+							this.state.value === choice.name ? 'selected' : ''
+						} answer`}
+						onClick={this.handleClick.bind(this, choice.name)}
+					>
+						{choice.name}
+					</a>
+				)
+			})
+		} else {
+			this.setState(
+				{
+					value: '',
+				},
+				() => {
+					this.props.questionAnswered(this.state)
+				}
+			)
+		}
+	}
 	render() {
 		const { value } = this.state
 
 		return (
 			<div className="view-question-weighted">
 				<label>{this.props.question.title}</label>
-				{this.props.question.choices.map((choice, index) => {
-					return (
-						<a
-							className={`${
-								this.state.value === choice.name
-									? 'selected'
-									: ''
-							} answer`}
-							onClick={this.handleClick.bind(this, choice.name)}
-						>
-							{choice.name}
-						</a>
-					)
-				})}
+
+				{this.determineChoicesRender()}
 			</div>
 		)
 	}
 }
+
+ViewQuestionMultipleChoice.defaultProps = {}
 
 ViewQuestionMultipleChoice.propTypes = {
 	question: PropTypes.object,
