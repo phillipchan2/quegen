@@ -6,4 +6,11 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+
+	.error-message {
+		color: red;
+		font-size: 0.6em;
+		text-align: center;
+		padding: 1em 0;
+	}
 }

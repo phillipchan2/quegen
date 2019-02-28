@@ -159,6 +159,12 @@
 	flex-direction: column;
 	justify-content: center;
 }
+.questionnaire-registration .error-message {
+	color: red;
+	font-size: 0.6em;
+	text-align: center;
+	padding: 1em 0;
+}
 
 .questionnaire-preview {
 	height: 100vh;
