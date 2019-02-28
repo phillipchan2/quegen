@@ -234,7 +234,7 @@ class Questionnaire extends Component {
 							questionnaireId={this.props.match.params.id}
 							resultCategory={this.state.resultCategory}
 						/>
-						{/* <SoundPlayer src={music} /> */}
+						<SoundPlayer src={music} />
 					</div>
 				) : (
 					'Questionnnaire not found'
