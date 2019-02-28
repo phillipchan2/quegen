@@ -151,9 +151,12 @@
 
 .questionnaire-registration {
 	height: 100vh;
-	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.85)),
+	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35)),
 		url('assets/table.jpg');
 	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .questionnaire-preview {
@@ -223,7 +226,7 @@
 .questionnaire-result {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	align-content: center;
 	height: 100vh;
 	text-align: center;
@@ -231,6 +234,11 @@
 .questionnaire-result .result-text {
 	padding: 1em;
 	z-index: 3;
+}
+.questionnaire-result .results-closing {
+	font-size: 0.6em;
+	line-height: 1.4em;
+	padding: 1em 2em;
 }
 .questionnaire-result .image-background {
 	background-size: cover;

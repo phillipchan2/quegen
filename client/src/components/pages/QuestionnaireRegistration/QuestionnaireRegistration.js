@@ -28,36 +28,35 @@ class QuestionnaireRegistration extends Component {
 		return (
 			<div
 				className="questionnaire-registration"
-				style={{ padding: '3em 1em 1em 1em' }}
+				style={{ padding: '0 1em 0' }}
 			>
-				<form>
-					<div className="input-group">
-						<input
-							placeholder="Name"
-							name="name"
-							value={this.state.name}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</div>
+				<div className="input-group">
+					<input
+						placeholder="Name"
+						name="name"
+						value={this.state.name}
+						onChange={this.handleChange.bind(this)}
+					/>
+				</div>
 
-					<div className="input-group">
-						<input
-							placeholder="Email"
-							name="email"
-							value={this.state.email}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</div>
+				<div className="input-group">
+					<input
+						placeholder="Email"
+						name="email"
+						value={this.state.email}
+						onChange={this.handleChange.bind(this)}
+					/>
+				</div>
 
-					<div className="input-group">
-						<input
-							placeholder="Phone Number"
-							name="phone"
-							value={this.state.phone}
-							onChange={this.handleChange.bind(this)}
-						/>
-					</div>
-				</form>
+				<div className="input-group">
+					<input
+						placeholder="Phone Number"
+						name="phone"
+						value={this.state.phone}
+						onChange={this.handleChange.bind(this)}
+					/>
+				</div>
+
 				<button onClick={this.handleSubmit.bind(this)}>Next</button>
 			</div>
 		)

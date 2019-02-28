@@ -13,6 +13,10 @@ class QuestionnaireResult extends Component {
 					</h1>
 					<p>{this.props.resultCategory.resultDescription}</p>
 				</div>
+				<div className="results-closing">
+					If chosen, 30 days prior to the gathering, your golden
+					invitation will arrive both by text message and post
+				</div>
 				<div
 					className="image-background"
 					style={{

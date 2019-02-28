@@ -1,7 +1,7 @@
 .questionnaire-result {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
+	justify-content: flex-end;
 	align-content: center;
 	height: 100vh;
 	text-align: center;
@@ -9,6 +9,11 @@
 .questionnaire-result .result-text {
 	padding: 1em;
 	z-index: 3;
+}
+.questionnaire-result .results-closing {
+	font-size: 0.6em;
+	line-height: 1.4em;
+	padding: 1em 2em;
 }
 .questionnaire-result .image-background {
 	background-size: cover;

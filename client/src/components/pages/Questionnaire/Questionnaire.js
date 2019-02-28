@@ -38,7 +38,7 @@ class Questionnaire extends Component {
 					props: { password: '' },
 				},
 				{
-					success: true,
+					success: false,
 					name: 'QuestionnaireRegistration',
 					component: QuestionnaireRegistration,
 				},
