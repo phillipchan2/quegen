@@ -32,13 +32,13 @@ class Questionnaire extends Component {
 			questionnaire: { questions: [] }, // the data structure which controls the flow of registration page
 			questionnaireFlow: [
 				{
-					success: false,
+					success: true,
 					name: 'QuestionnaireLogin',
 					component: QuestionnaireLogin,
 					props: { password: '' },
 				},
 				{
-					success: false,
+					success: true,
 					name: 'QuestionnaireRegistration',
 					component: QuestionnaireRegistration,
 				},

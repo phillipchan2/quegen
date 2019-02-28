@@ -6,21 +6,24 @@ class QuestionnairePreview extends Component {
 	render() {
 		return (
 			<div className="questionnaire-preview">
-				<aside>
+				<aside className="questionnaire-description">
 					{this.props.description
 						? this.props.description
 						: 'Begin the questionnaire'}
 				</aside>
-				<button onClick={this.props.handleSuccessfulPage}>
+				<button
+					className="continue-button-container"
+					onClick={this.props.handleSuccessfulPage}
+				>
 					Continue
 				</button>
-				<p>
+				<p className="closing-note">
 					Please complete the upcoming questionnaire with care and
 					honesty. <br />
 					You'll be happy you did. <br />
 					Your secrets are safe with me. <br />
-					TW
 				</p>
+				<p className="signature">TW</p>
 			</div>
 		)
 	}
