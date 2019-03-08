@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 
 // components
 import {
@@ -8,52 +8,57 @@ import {
 	Menu,
 	Segment,
 	Accordion,
-	Label
-} from 'semantic-ui-react';
+	Label,
+} from 'semantic-ui-react'
 class EditQuestionMultipleChoice extends Component {
+	componentDidMount() {
+		this.setState({
+			choices: this.props.question.choices,
+		})
+	}
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			title: this.props.question.title,
-			choices: []
-		};
+			choices: [],
+		}
 	}
 
 	addChoice() {
-		var newState = this.state;
+		var newState = this.state
 
 		newState.choices.push({
-			name: ''
-		});
+			name: '',
+		})
 
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleChoiceChange(index, e) {
-		var newState = this.state;
+		var newState = this.state
 
-		newState.choices[index].name = e.target.value;
+		newState.choices[index].name = e.target.value
 
-		this.setState(newState);
+		this.setState(newState)
 	}
 
 	handleClick = (e, titleProps) => {
-		const { index } = titleProps;
-		const { activeIndex } = this.state;
-		const newIndex = activeIndex === index ? -1 : index;
+		const { index } = titleProps
+		const { activeIndex } = this.state
+		const newIndex = activeIndex === index ? -1 : index
 
-		this.setState({ activeIndex: newIndex });
-	};
+		this.setState({ activeIndex: newIndex })
+	}
 
 	handleTitleChange(e) {
 		this.setState({ title: e.target.value }, () => {
-			this.props.handleChange(this.state, this.props.index);
-		});
+			this.props.handleChange(this.state, this.props.index)
+		})
 	}
 
 	render() {
-		const { activeIndex } = this.state;
+		const { activeIndex } = this.state
 		return (
 			<Accordion as={Menu} vertical fluid data-id={this.props.key}>
 				<Accordion.Title
@@ -78,7 +83,7 @@ class EditQuestionMultipleChoice extends Component {
 						<Segment data-index={this.props.index}>
 							<Menu secondary>
 								<Menu.Menu position="left">
-									Text Question
+									Multiple Choice Question
 								</Menu.Menu>
 
 								<Menu.Menu position="right">
@@ -157,14 +162,14 @@ class EditQuestionMultipleChoice extends Component {
 											/>
 										</Form.Field>
 									</Form>
-								);
+								)
 							})}
 						</Segment>
 					}
 				/>
 			</Accordion>
-		);
+		)
 	}
 }
 
-export default EditQuestionMultipleChoice;
+export default EditQuestionMultipleChoice
