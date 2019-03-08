@@ -142,6 +142,7 @@
 .questionnaire-login input {
 	text-align: center;
 	font-family: 'Northwell';
+	line-height: 60px;
 }
 .questionnaire-login .input-group ::placeholder,
 .questionnaire-login input ::placeholder {
