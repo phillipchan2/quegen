@@ -48,7 +48,7 @@ class QuestionnaireCard extends Component {
 					<Menu.Menu position="right">
 						<Menu.Item>
 							<Link
-								to={`questionnaire/${
+								to={`/admin/questionnaire/${
 									this.props.questionnaire._id
 								}`}
 							>
@@ -68,7 +68,7 @@ class QuestionnaireCard extends Component {
 						</Menu.Item>
 						<Menu.Item>
 							<Link
-								to={`questionnaire/${
+								to={`/admin/questionnaire/${
 									this.props.questionnaire._id
 								}/responses`}
 							>
