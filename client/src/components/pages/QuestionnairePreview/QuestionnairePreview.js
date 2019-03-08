@@ -11,12 +11,6 @@ class QuestionnairePreview extends Component {
 						? this.props.description
 						: 'Begin the questionnaire'}
 				</aside>
-				<button
-					className="continue-button-container"
-					onClick={this.props.handleSuccessfulPage}
-				>
-					Continue
-				</button>
 				<p className="closing-note">
 					Please complete the upcoming questionnaire with care and
 					honesty. <br />
@@ -24,6 +18,12 @@ class QuestionnairePreview extends Component {
 					Your secrets are safe with me. <br />
 				</p>
 				<p className="signature">TW</p>
+				<button
+					className="continue-button-container"
+					onClick={this.props.handleSuccessfulPage}
+				>
+					Continue
+				</button>
 			</div>
 		)
 	}
