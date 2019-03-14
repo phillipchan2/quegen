@@ -79,7 +79,7 @@ class Login extends Component {
 								type="password"
 								onChange={this.handleChange.bind(this)}
 								name="password"
-								placeholder="Enter Your Password Please"
+								placeholder="Enter Your Password"
 							/>
 						</Form.Field>
 						<Button
