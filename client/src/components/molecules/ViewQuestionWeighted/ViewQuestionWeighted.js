@@ -1,30 +1,29 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 
 class ViewQuestionWeighted extends Component {
 	constructor(props) {
-		super(props);
+		super(props)
 
 		this.state = {
 			_id: this.props.question._id,
 			value: null,
-			type: 'weighted'
-		};
+			type: 'weighted',
+		}
 	}
 
 	handleClick(answer) {
 		this.setState(
 			{
-				value: answer
+				value: answer,
 			},
 			() => {
-				this.props.questionAnswered(this.state);
+				this.props.questionAnswered(this.state)
 			}
-		);
+		)
 	}
 
 	render() {
-		const { value } = this.state;
 		return (
 			<div className="view-question-weighted">
 				<label>{this.props.question.title}</label>
@@ -45,13 +44,13 @@ class ViewQuestionWeighted extends Component {
 					No
 				</a>
 			</div>
-		);
+		)
 	}
 }
 
 ViewQuestionWeighted.propTypes = {
 	questionAnswered: PropTypes.func,
-	question: PropTypes.string
-};
+	question: PropTypes.string,
+}
 
-export default ViewQuestionWeighted;
+export default ViewQuestionWeighted

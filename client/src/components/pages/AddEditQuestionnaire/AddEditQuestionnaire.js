@@ -9,7 +9,6 @@ import {
 	Divider,
 	Form,
 	Header,
-	Icon,
 	Menu,
 	Message,
 	Dropdown,
@@ -252,7 +251,6 @@ class AddEditQuestionnaire extends Component {
 	}
 
 	render() {
-		let sortable = null
 		return (
 			<div>
 				{this.state.errorMessage ? (

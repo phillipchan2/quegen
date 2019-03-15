@@ -1,17 +1,17 @@
-import { observable, action, computed } from 'mobx';
+import { observable, action } from 'mobx'
 
 class AppMessagingStore {
 	@observable
-	message = '';
+	message = ''
 
 	@action.bound
 	showAppMessage(message) {
-		this.message = message;
+		this.message = message
 
 		setTimeout(() => {
-			this.message = '';
-		}, 5000);
+			this.message = ''
+		}, 5000)
 	}
 }
 
-export default AppMessagingStore;
+export default AppMessagingStore

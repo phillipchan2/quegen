@@ -26,7 +26,6 @@ class ViewQuestionText extends Component {
 		this.props.questionAnswered(this.state)
 	}
 	render() {
-		const { value } = this.state
 		return (
 			<div className="question-text-container">
 				<div className="input-group">

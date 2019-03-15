@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Button, Form, Message, Modal, Icon, Header } from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 class QuestionnaireRegistration extends Component {

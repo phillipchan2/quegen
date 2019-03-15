@@ -22,7 +22,6 @@ class QuestionnaireResponses extends Component {
 		let responsesWeighted = []
 		let responsesMultipleChoice = []
 		let responsesText = []
-		let newState = this.state
 		const jwtoken = localStorage.getItem('jwtoken')
 
 		axios
