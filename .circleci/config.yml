@@ -26,7 +26,11 @@ jobs:
                       # fallback to using the latest cache if no exact match is found
                       - v1-dependencies-
 
-            - run: unset CI CI=false cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build
+            - run:
+                  name: Build
+                  environment:
+                      CI: false
+                  command: cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build
 
             - save_cache:
                   paths:
