@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { Button, Message } from 'semantic-ui-react'
 import Slider from 'react-slick'
 
 // components
