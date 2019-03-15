@@ -251,6 +251,7 @@ class AddEditQuestionnaire extends Component {
 	}
 
 	render() {
+		let sortable = null
 		return (
 			<div>
 				{this.state.errorMessage ? (
