@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { Button } from 'semantic-ui-react'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { Button } from 'semantic-ui-react';
 
 class QuestionnairePreview extends Component {
 	render() {
@@ -17,20 +17,20 @@ class QuestionnairePreview extends Component {
 					You'll be happy you did. <br />
 					Your secrets are safe with me. <br />
 				</p>
-				<p className="signature">TW</p>
 				<button
 					className="continue-button-container"
 					onClick={this.props.handleSuccessfulPage}
 				>
 					Continue
 				</button>
+				<p className="signature">TW</p>
 			</div>
-		)
+		);
 	}
 }
 
 QuestionnairePreview.propTypes = {
 	description: PropTypes.string,
-}
+};
 
-export default QuestionnairePreview
+export default QuestionnairePreview;
