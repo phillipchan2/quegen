@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
 // components
 import {
@@ -9,56 +9,64 @@ import {
 	Segment,
 	Accordion,
 	Label,
-} from 'semantic-ui-react'
+} from 'semantic-ui-react';
 class EditQuestionMultipleChoice extends Component {
 	componentDidMount() {
 		this.setState({
 			choices: this.props.question.choices,
-		})
+		});
 	}
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
 			title: this.props.question.title,
 			choices: [],
-		}
+		};
 	}
 
 	addChoice() {
-		var newState = this.state
+		var newState = this.state;
+
+		if (!newState.choices) {
+			newState.choices = [];
+		}
 
 		newState.choices.push({
 			name: '',
-		})
+		});
 
-		this.setState(newState)
+		this.setState(newState, () => {
+			this.props.handleChange(this.state, this.props.index);
+		});
 	}
 
 	handleChoiceChange(index, e) {
-		var newState = this.state
+		var newState = this.state;
 
-		newState.choices[index].name = e.target.value
+		newState.choices[index].name = e.target.value;
 
-		this.setState(newState)
+		this.setState(newState, () => {
+			this.props.handleChange(this.state, this.props.index);
+		});
 	}
 
 	handleClick = (e, titleProps) => {
-		const { index } = titleProps
-		const { activeIndex } = this.state
-		const newIndex = activeIndex === index ? -1 : index
+		const { index } = titleProps;
+		const { activeIndex } = this.state;
+		const newIndex = activeIndex === index ? -1 : index;
 
-		this.setState({ activeIndex: newIndex })
-	}
+		this.setState({ activeIndex: newIndex });
+	};
 
 	handleTitleChange(e) {
 		this.setState({ title: e.target.value }, () => {
-			this.props.handleChange(this.state, this.props.index)
-		})
+			this.props.handleChange(this.state, this.props.index);
+		});
 	}
 
 	render() {
-		const { activeIndex } = this.state
+		const { activeIndex } = this.state;
 		return (
 			<Accordion as={Menu} vertical fluid data-id={this.props.key}>
 				<Accordion.Title
@@ -143,33 +151,35 @@ class EditQuestionMultipleChoice extends Component {
 								Add Choice
 							</Button>
 
-							{this.state.choices.map((choice, index) => {
-								return (
-									<Form>
-										<Form.Field>
-											<label>Choice</label>
-											<input
-												name="name"
-												placeholder="Question Title"
-												value={
-													this.state.choices[index]
-														.name
-												}
-												onChange={this.handleChoiceChange.bind(
-													this,
-													index
-												)}
-											/>
-										</Form.Field>
-									</Form>
-								)
-							})}
+							{this.state.choices &&
+								this.state.choices.map((choice, index) => {
+									return (
+										<Form>
+											<Form.Field>
+												<label>Choice</label>
+												<input
+													name="name"
+													placeholder="Question Title"
+													value={
+														this.state.choices[
+															index
+														].name
+													}
+													onChange={this.handleChoiceChange.bind(
+														this,
+														index
+													)}
+												/>
+											</Form.Field>
+										</Form>
+									);
+								})}
 						</Segment>
 					}
 				/>
 			</Accordion>
-		)
+		);
 	}
 }
 
-export default EditQuestionMultipleChoice
+export default EditQuestionMultipleChoice;
