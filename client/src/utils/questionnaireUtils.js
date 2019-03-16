@@ -58,7 +58,7 @@ var questionTests = {
 	text: [],
 	multipleChoice: [
 		function hasAtLeastOneChoiceDefined(question) {
-			if (question.choices) {
+			if (question.choices && question.choices.length > 0) {
 				return true;
 			} else {
 				return 'Missing choices';

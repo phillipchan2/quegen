@@ -37,7 +37,7 @@ class EditQuestionMultipleChoice extends Component {
 		});
 
 		this.setState(newState, () => {
-			this.props.handleChange(this.state, this.props.index);
+			this.registerChangeToQuestionnaire();
 		});
 	}
 
@@ -47,7 +47,7 @@ class EditQuestionMultipleChoice extends Component {
 		newState.choices[index].name = e.target.value;
 
 		this.setState(newState, () => {
-			this.props.handleChange(this.state, this.props.index);
+			this.registerChangeToQuestionnaire();
 		});
 	}
 
@@ -61,8 +61,22 @@ class EditQuestionMultipleChoice extends Component {
 
 	handleTitleChange(e) {
 		this.setState({ title: e.target.value }, () => {
-			this.props.handleChange(this.state, this.props.index);
+			this.registerChangeToQuestionnaire();
 		});
+	}
+
+	handleDeleteChoice(index) {
+		let newState = this.state;
+
+		newState.choices.splice(index, 1);
+
+		this.setState(newState, () => {
+			this.registerChangeToQuestionnaire();
+		});
+	}
+
+	registerChangeToQuestionnaire() {
+		this.props.handleChange(this.state, this.props.index);
 	}
 
 	render() {
@@ -151,15 +165,16 @@ class EditQuestionMultipleChoice extends Component {
 								Add Choice
 							</Button>
 
+							<h2>Choices:</h2>
+
 							{this.state.choices &&
 								this.state.choices.map((choice, index) => {
 									return (
 										<Form>
-											<Form.Field>
-												<label>Choice</label>
+											<Form.Group>
 												<input
 													name="name"
-													placeholder="Question Title"
+													placeholder="Choice"
 													value={
 														this.state.choices[
 															index
@@ -170,7 +185,15 @@ class EditQuestionMultipleChoice extends Component {
 														index
 													)}
 												/>
-											</Form.Field>
+												<Button
+													onClick={this.handleDeleteChoice.bind(
+														this,
+														index
+													)}
+												>
+													<Icon name="trash" />
+												</Button>
+											</Form.Group>
 										</Form>
 									);
 								})}
