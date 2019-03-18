@@ -41,6 +41,7 @@
 	width: 100%;
 }
 .questionnaire .input-group ::placeholder {
+	color: #fff;
 	font-family: 'Ravensara';
 }
 .questionnaire .input-group input:-webkit-autofill,
