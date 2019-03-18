@@ -1,11 +1,13 @@
 .questionnaire {
 	align-items: center;
 	background: #000;
+	box-sizing: border-box;
 	color: #fff;
 	display: flex;
 	flex-direction: column;
 	font-size: 30px;
 	height: 100vh;
+	padding: 0;
 	position: relative;
 	width: 100vw;
 }
