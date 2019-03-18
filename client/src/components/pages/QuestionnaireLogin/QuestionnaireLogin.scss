@@ -8,16 +8,20 @@
 	justify-content: center;
 	text-align: center;
 
-	.input-group,
-	input {
-		text-align: center;
-		font-family: 'Northwell';
-		line-height: 85px;
-
-		::placeholder {
+	.input-group {
+		input {
+			text-align: center;
 			font-family: 'Northwell';
-			font-size: 2em;
-			color: #fff;
+			line-height: 75px;
+			padding: 1em 0;
+			font-family: 'Northwell';
+			margin-bottom: 0;
+
+			&::placeholder {
+				font-family: 'Northwell';
+				font-size: 2em;
+				color: #fff;
+			}
 		}
 	}
 }
