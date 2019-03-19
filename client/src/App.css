@@ -138,25 +138,28 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg');
+		url('assets/nest.jpg') center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 }
-.questionnaire-login .input-group input {
+.questionnaire-login textarea {
 	text-align: center;
-	font-family: 'Northwell';
+	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
-	padding: 1em 0;
-	font-family: 'Northwell';
+	padding: 1em;
 	margin-bottom: 0;
+	background: #000;
 }
-.questionnaire-login .input-group input::placeholder {
+.questionnaire-login textarea::placeholder {
 	font-family: 'Northwell';
 	font-size: 2em;
 	color: #fff;
+	position: relative;
+	white-space: pre-line;
+	text-overflow: ellipsis;
 }
 
 .questionnaire-registration {
@@ -294,17 +297,11 @@
 	/* Super Modern Browsers */
 }
 
-html,
-body {
-	overflow: hidden;
-}
-
 body {
 	font-family: 'Ravensara', sans-serif;
 	font-size: 14px;
 	line-height: 1.2;
 	padding: 0;
-	position: relative;
 }
 
 .admin-page {

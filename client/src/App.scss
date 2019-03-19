@@ -26,17 +26,11 @@
 	src: url('./assets/fonts/Ravensara_sans_medium.otf') format('opentype'); /* Super Modern Browsers */
 }
 
-html,
-body {
-	overflow: hidden;
-}
-
 body {
 	font-family: 'Ravensara', sans-serif;
 	font-size: 14px;
 	line-height: 1.2;
 	padding: 0;
-	position: relative;
 }
 
 .admin-page {
