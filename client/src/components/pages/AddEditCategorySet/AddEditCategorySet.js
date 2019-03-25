@@ -12,7 +12,8 @@ import {
 	Icon,
 	Menu,
 	Message,
-	Segment
+	Segment,
+	FormField,
 } from 'semantic-ui-react';
 
 @inject('AppMessagingStore')
@@ -24,7 +25,7 @@ class AddEditCategorySet extends Component {
 		this.state = {
 			currentCategorySet: {},
 			errorMessage: '',
-			updateSuccess: false
+			updateSuccess: false,
 		};
 	}
 
@@ -35,14 +36,14 @@ class AddEditCategorySet extends Component {
 			axios
 				.get(`/api/categorySet/${this.props.match.params.id}`, {
 					headers: {
-						token: jwtoken
-					}
+						token: jwtoken,
+					},
 				})
 				.then(res => {
 					console.log(res);
 					if (res.data.success) {
 						this.setState({
-							currentCategorySet: res.data.data
+							currentCategorySet: res.data.data,
 						});
 					} else {
 						var newState = this.state;
@@ -53,7 +54,7 @@ class AddEditCategorySet extends Component {
 
 						newState.currentCategorySet = {
 							name: '',
-							categories: []
+							categories: [],
 						};
 
 						this.setState(newState);
@@ -68,13 +69,13 @@ class AddEditCategorySet extends Component {
 		var newCategory = {
 			name: '',
 			resultDescription: '',
-			imageUrl: ''
+			imageUrl: '',
 		};
 
 		newCategories.push(newCategory);
 
 		this.setState({
-			categories: newCategories
+			categories: newCategories,
 		});
 	}
 
@@ -99,7 +100,7 @@ class AddEditCategorySet extends Component {
 		obj[key] = value;
 
 		this.setState({
-			currentCategorySet: obj
+			currentCategorySet: obj,
 		});
 	}
 
@@ -120,14 +121,14 @@ class AddEditCategorySet extends Component {
 		axios
 			.post(`/api/categorySet/`, this.state.currentCategorySet, {
 				headers: {
-					token: jwtoken
-				}
+					token: jwtoken,
+				},
 			})
 			.then(res => {
 				if (res.data.success) {
 					this.setState({
 						updateSuccess: true,
-						errorMessage: ''
+						errorMessage: '',
 					});
 
 					this.props.AppMessagingStore.showAppMessage(
@@ -136,7 +137,7 @@ class AddEditCategorySet extends Component {
 				} else {
 					this.setState({
 						errorMessage:
-							'Error submitting. Make sure all fields are filled'
+							'Error submitting. Make sure all fields are filled',
 					});
 				}
 			});
@@ -227,6 +228,19 @@ class AddEditCategorySet extends Component {
 																this
 															)}
 														/>
+													</Form.Field>
+													<Form.Field>
+														<label>
+															Image Preview
+														</label>
+														{category.imageUrl && (
+															<img
+																src={
+																	category.imageUrl
+																}
+																width="300"
+															/>
+														)}
 													</Form.Field>
 													<Form.Field>
 														<label>
