@@ -11,7 +11,7 @@
 }
 .questionnaire-preview .closing-section {
 	position: absolute;
-	bottom: 1em;
+	bottom: 100px;
 	left: 0;
 }
 .questionnaire-preview .continue-button-container {
