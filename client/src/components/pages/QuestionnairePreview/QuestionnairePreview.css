@@ -9,12 +9,17 @@
 	text-align: center;
 	padding: 1em;
 }
+.questionnaire-preview .closing-section {
+	position: absolute;
+	bottom: 1em;
+	left: 0;
+}
+.questionnaire-preview .continue-button-container {
+	font-size: 16px;
+}
 .questionnaire-preview .questionnaire-description {
 	font-family: 'Northwell';
 	line-height: 1.2;
-}
-.questionnaire-preview .continue-button-container {
-	padding: 1em 0;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;

@@ -138,14 +138,14 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg') center;
+		url('assets/nest.jpg') center center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 }
-.questionnaire-login textarea {
+.questionnaire-login input {
 	text-align: center;
 	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
@@ -153,10 +153,9 @@
 	margin-bottom: 0;
 	background: #000;
 }
-.questionnaire-login textarea::placeholder {
+.questionnaire-login input::placeholder {
 	font-family: 'Northwell';
-	font-size: 2em;
-	color: #fff;
+	color: red;
 	position: relative;
 	white-space: pre-line;
 	text-overflow: ellipsis;
@@ -189,12 +188,17 @@
 	text-align: center;
 	padding: 1em;
 }
+.questionnaire-preview .closing-section {
+	position: absolute;
+	bottom: 1em;
+	left: 0;
+}
+.questionnaire-preview .continue-button-container {
+	font-size: 16px;
+}
 .questionnaire-preview .questionnaire-description {
 	font-family: 'Northwell';
 	line-height: 1.2;
-}
-.questionnaire-preview .continue-button-container {
-	padding: 1em 0;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;
@@ -252,17 +256,21 @@
 	text-align: center;
 }
 .questionnaire-result .result-text {
+	font-family: 'Windsong';
 	padding: 1em;
 	z-index: 3;
-	font-size: 20px;
+	font-size: 30px;
 }
 .questionnaire-result .results-closing {
 	font-size: 14px;
 	line-height: 1.4em;
 	padding: 1em 2em;
+	position: absolute;
+	bottom: 1.5em;
 }
 .questionnaire-result .image-background {
 	background-size: cover;
+	background-position: center center;
 	z-index: 0;
 	opacity: 0.5;
 	position: absolute;
@@ -294,6 +302,14 @@
 	font-style: normal;
 	font-weight: 400;
 	src: url('./assets/fonts/Ravensara_sans_medium.otf') format('opentype');
+	/* Super Modern Browsers */
+}
+
+@font-face {
+	font-family: 'Windsong';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Windsong.ttf') format('truetype');
 	/* Super Modern Browsers */
 }
 

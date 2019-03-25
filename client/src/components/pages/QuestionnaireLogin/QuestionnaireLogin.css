@@ -1,14 +1,14 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg') center;
+		url('assets/nest.jpg') center center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 }
-.questionnaire-login textarea {
+.questionnaire-login input {
 	text-align: center;
 	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
@@ -16,10 +16,9 @@
 	margin-bottom: 0;
 	background: #000;
 }
-.questionnaire-login textarea::placeholder {
+.questionnaire-login input::placeholder {
 	font-family: 'Northwell';
-	font-size: 2em;
-	color: #fff;
+	color: red;
 	position: relative;
 	white-space: pre-line;
 	text-overflow: ellipsis;

@@ -7,19 +7,23 @@
 	text-align: center;
 
 	.result-text {
+		font-family: 'Windsong';
 		padding: 1em;
 		z-index: 3;
-		font-size: 20px;
+		font-size: 30px;
 	}
 
 	.results-closing {
 		font-size: 14px;
 		line-height: 1.4em;
 		padding: 1em 2em;
+		position: absolute;
+		bottom: 1.5em;
 	}
 
 	.image-background {
 		background-size: cover;
+		background-position: center center;
 		z-index: 0;
 		opacity: 0.5;
 		position: absolute;

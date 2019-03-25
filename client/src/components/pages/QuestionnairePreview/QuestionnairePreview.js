@@ -11,19 +11,20 @@ class QuestionnairePreview extends Component {
 						? this.props.description
 						: 'Begin the questionnaire'}
 				</aside>
-				<p className="closing-note">
-					Please complete the upcoming questionnaire with care and
-					honesty. <br />
-					You'll be happy you did. <br />
-					Your secrets are safe with me. <br />
-				</p>
-				<button
-					className="continue-button-container"
-					onClick={this.props.handleSuccessfulPage}
-				>
-					Continue
-				</button>
-				<p className="signature">TW</p>
+				<div className="closing-section">
+					<p className="closing-note">
+						Please complete the upcoming questionnaire with care and
+						honesty. <br />
+						You'll be happy you did. <br />
+						Your secrets are safe with me. <br />
+					</p>
+					<button
+						className="continue-button-container"
+						onClick={this.props.handleSuccessfulPage}
+					>
+						Continue
+					</button>
+				</div>
 			</div>
 		);
 	}

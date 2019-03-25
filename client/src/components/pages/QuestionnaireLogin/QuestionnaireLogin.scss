@@ -1,28 +1,28 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg') center;
+		url('assets/nest.jpg') center center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
 
-	textarea {
+	input {
 		text-align: center;
 		font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 		line-height: 75px;
 		padding: 1em;
 		margin-bottom: 0;
 		background: #000;
+	}
 
-		&::placeholder {
-			font-family: 'Northwell';
-			font-size: 2em;
-			color: #fff;
-			position: relative;
-			white-space: pre-line;
-			text-overflow: ellipsis;
-		}
+	input::placeholder {
+		font-family: 'Northwell';
+		// font-size: 1em;
+		color: red;
+		position: relative;
+		white-space: pre-line;
+		text-overflow: ellipsis;
 	}
 }

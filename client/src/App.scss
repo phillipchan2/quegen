@@ -26,6 +26,13 @@
 	src: url('./assets/fonts/Ravensara_sans_medium.otf') format('opentype'); /* Super Modern Browsers */
 }
 
+@font-face {
+	font-family: 'Windsong';
+	font-style: normal;
+	font-weight: 400;
+	src: url('./assets/fonts/Windsong.ttf') format('truetype'); /* Super Modern Browsers */
+}
+
 body {
 	font-family: 'Ravensara', sans-serif;
 	font-size: 14px;

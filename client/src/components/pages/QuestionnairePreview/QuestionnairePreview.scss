@@ -9,13 +9,19 @@
 	text-align: center;
 	padding: 1em;
 
-	.questionnaire-description {
-		font-family: 'Northwell';
-		line-height: 1.2;
+	.closing-section {
+		position: absolute;
+		bottom: 1em;
+		left: 0;
 	}
 
 	.continue-button-container {
-		padding: 1em 0;
+		font-size: 16px;
+	}
+
+	.questionnaire-description {
+		font-family: 'Northwell';
+		line-height: 1.2;
 	}
 
 	.closing-note {
