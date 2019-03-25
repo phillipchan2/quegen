@@ -8,21 +8,23 @@
 	justify-content: center;
 	text-align: center;
 
-	input {
-		text-align: center;
-		font-family: 'Ravensara', Arial, Helvetica, sans-serif;
-		line-height: 75px;
-		padding: 1em;
-		margin-bottom: 0;
-		background: #000;
-	}
+	.input-group {
+		input {
+			text-align: center;
+			font-family: 'Ravensara', Arial, Helvetica, sans-serif;
+			line-height: 75px;
+			background: transparent;
+			padding: 1em;
+			margin-bottom: 0;
+		}
 
-	input::placeholder {
-		font-family: 'Northwell';
-		// font-size: 1em;
-		color: red;
-		position: relative;
-		white-space: pre-line;
-		text-overflow: ellipsis;
+		input::placeholder {
+			font-family: 'Northwell';
+			font-size: 70px;
+			// color: red;
+			// position: relative;
+			// white-space: pre-line;
+			// text-overflow: ellipsis;
+		}
 	}
 }

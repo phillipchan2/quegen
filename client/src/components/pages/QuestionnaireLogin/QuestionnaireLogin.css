@@ -8,18 +8,15 @@
 	justify-content: center;
 	text-align: center;
 }
-.questionnaire-login input {
+.questionnaire-login .input-group input {
 	text-align: center;
 	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
+	background: transparent;
 	padding: 1em;
 	margin-bottom: 0;
-	background: #000;
 }
-.questionnaire-login input::placeholder {
+.questionnaire-login .input-group input::placeholder {
 	font-family: 'Northwell';
-	color: red;
-	position: relative;
-	white-space: pre-line;
-	text-overflow: ellipsis;
+	font-size: 70px;
 }

@@ -12,7 +12,7 @@ class QuestionnaireLogin extends Component {
 
 	checkPassword() {
 		if (
-			this.state.userInputtedPassword.toLowerCase() ===
+			this.state.userInputtedPassword.toLowerCase().trim() ===
 			this.props.password.toLowerCase()
 		) {
 			this.props.handleSuccessfulPage();
