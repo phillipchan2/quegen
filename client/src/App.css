@@ -145,17 +145,24 @@
 	justify-content: center;
 	text-align: center;
 }
+.questionnaire-login .input-group {
+	position: relative;
+}
 .questionnaire-login .input-group input {
 	text-align: center;
 	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
 	background: transparent;
-	padding: 1em;
 	margin-bottom: 0;
+	z-index: 2;
 }
-.questionnaire-login .input-group input::placeholder {
+.questionnaire-login .input-group .placeholder {
+	position: absolute;
 	font-family: 'Northwell';
-	font-size: 70px;
+	font-size: 80px;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 }
 
 .questionnaire-registration {
