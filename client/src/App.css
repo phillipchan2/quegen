@@ -190,12 +190,14 @@
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
-	padding: 1em;
+	padding: 0 1em;
 }
 .questionnaire-preview .closing-section {
-	position: absolute;
-	bottom: 100px;
+	bottom: 1em;
+	box-sizing: border-box;
 	left: 0;
+	padding: 0 1em;
+	position: absolute;
 }
 .questionnaire-preview .continue-button-container {
 	font-size: 16px;
@@ -203,6 +205,7 @@
 .questionnaire-preview .questionnaire-description {
 	font-family: 'Northwell';
 	line-height: 1.2;
+	font-size: 40px;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;
