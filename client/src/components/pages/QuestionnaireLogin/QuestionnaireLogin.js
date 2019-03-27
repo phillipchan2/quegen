@@ -59,7 +59,11 @@ class QuestionnaireLogin extends Component {
 							<div className="placeholder">Password</div>
 						)}
 				</div>
-				<button onClick={this.checkPassword.bind(this)}>Enter</button>
+				{this.state.userInputtedPassword.length > 0 && (
+					<button onClick={this.checkPassword.bind(this)}>
+						Enter
+					</button>
+				)}
 			</div>
 		);
 	}
