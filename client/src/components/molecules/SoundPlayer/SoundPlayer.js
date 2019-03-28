@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import ReactAudioPlayer from 'react-audio-player'
+import React, { Component } from 'react';
+import ReactAudioPlayer from 'react-audio-player';
 
 class SoundPlayer extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
-			musicMuted: false,
-		}
+			musicMuted: true,
+		};
 	}
 
 	handleClick = () => {
 		this.setState({
 			musicMuted: !this.state.musicMuted,
-		})
-	}
+		});
+	};
 
 	render() {
 		return (
@@ -54,10 +54,10 @@ class SoundPlayer extends Component {
 					)}
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
-SoundPlayer.propTypes = {}
+SoundPlayer.propTypes = {};
 
-export default SoundPlayer
+export default SoundPlayer;
