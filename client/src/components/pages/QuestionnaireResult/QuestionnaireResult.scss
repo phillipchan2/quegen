@@ -15,12 +15,13 @@
 
 	.results-closing {
 		bottom: 1em;
-		font-size: 14px;
+		font-size: 18px;
 		left: 50%;
 		line-height: 1.4em;
 		padding: 1em 2em;
 		position: fixed;
 		transform: translateX(-50%);
+		width: 100%;
 	}
 
 	.image-background {
