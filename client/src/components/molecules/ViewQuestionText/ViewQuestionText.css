@@ -10,7 +10,3 @@
 	justify-content: center;
 	align-items: center;
 }
-.question-text-container form input::placeholder {
-	color: #fff;
-	font-family: 'Ravensara';
-}

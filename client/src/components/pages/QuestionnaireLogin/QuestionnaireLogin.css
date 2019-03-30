@@ -1,12 +1,19 @@
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg') center center;
+		url('assets/nest.jpg') center top no-repeat;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+	background-color: #0e0c06;
+}
+@media (max-width: 500px) {
+	.questionnaire-login {
+		background-size: 90vh;
+		background-position: center 100px;
+	}
 }
 .questionnaire-login .input-group {
 	position: relative;

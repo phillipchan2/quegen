@@ -36,6 +36,7 @@ class ViewQuestionText extends Component {
 							color: '#FFF',
 							'font-family': 'Ravensara',
 							padding: '1em',
+							textAlign: 'center',
 						}}
 						onChange={e => this.handleChange(e)}
 						placeholder={this.props.question.title}

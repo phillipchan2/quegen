@@ -130,20 +130,23 @@
 	justify-content: center;
 	align-items: center;
 }
-.question-text-container form input::placeholder {
-	color: #fff;
-	font-family: 'Ravensara';
-}
 
 .questionnaire-login {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-		url('assets/nest.jpg') center center;
+		url('assets/nest.jpg') center top no-repeat;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+	background-color: #0e0c06;
+}
+@media (max-width: 500px) {
+	.questionnaire-login {
+		background-size: 90vh;
+		background-position: center 100px;
+	}
 }
 .questionnaire-login .input-group {
 	position: relative;
@@ -191,13 +194,15 @@
 	justify-content: center;
 	text-align: center;
 	padding: 0 1em;
+	position: relative;
 }
 .questionnaire-preview .closing-section {
-	bottom: 5em;
+	bottom: 1em;
 	box-sizing: border-box;
-	left: 0;
+	left: 50%;
 	padding: 0 1em;
-	position: absolute;
+	position: fixed;
+	transform: translateX(-50%);
 }
 .questionnaire-preview .continue-button-container {
 	font-size: 16px;
@@ -269,11 +274,13 @@
 	font-size: 40px;
 }
 .questionnaire-result .results-closing {
+	bottom: 1em;
 	font-size: 14px;
+	left: 50%;
 	line-height: 1.4em;
 	padding: 1em 2em;
-	position: absolute;
-	bottom: 150px;
+	position: fixed;
+	transform: translateX(-50%);
 }
 .questionnaire-result .image-background {
 	background-size: cover;

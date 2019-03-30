@@ -14,11 +14,13 @@
 	}
 
 	.results-closing {
+		bottom: 1em;
 		font-size: 14px;
+		left: 50%;
 		line-height: 1.4em;
 		padding: 1em 2em;
-		position: absolute;
-		bottom: 150px;
+		position: fixed;
+		transform: translateX(-50%);
 	}
 
 	.image-background {
