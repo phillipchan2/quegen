@@ -144,8 +144,8 @@
 }
 @media (max-width: 500px) {
 	.questionnaire-login {
-		background-size: 90vh;
-		background-position: center 100px;
+		background-size: 75vh;
+		background-position: center 120px;
 	}
 }
 .questionnaire-login .input-group {
