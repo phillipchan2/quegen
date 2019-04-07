@@ -101,25 +101,21 @@ class QuestionnaireRegistration extends Component {
 					</div>
 				)}
 
-				<div className="input-group">
+				<div className="registration-input-container input-group">
 					<input
 						placeholder="Name"
 						name="name"
 						value={this.state.name}
 						onChange={this.handleChange.bind(this)}
 					/>
-				</div>
 
-				<div className="input-group">
 					<input
 						placeholder="Email"
 						name="email"
 						value={this.state.email}
 						onChange={this.handleChange.bind(this)}
 					/>
-				</div>
 
-				<div className="input-group">
 					<input
 						placeholder="Phone Number"
 						name="phone"
@@ -127,9 +123,8 @@ class QuestionnaireRegistration extends Component {
 						value={this.state.phone}
 						onChange={this.handleChange.bind(this)}
 					/>
+					<button onClick={this.handleSubmit.bind(this)}>Next</button>
 				</div>
-
-				<button onClick={this.handleSubmit.bind(this)}>Next</button>
 			</div>
 		);
 	}

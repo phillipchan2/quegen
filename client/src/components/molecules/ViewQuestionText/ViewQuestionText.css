@@ -5,8 +5,15 @@
 	justify-content: center;
 	height: 100vh;
 }
-.question-text-container form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.question-text-container .input-group {
+	margin-bottom: 1em;
+}
+.question-text-container [contenteditable='true']:empty::before {
+	content: attr(placeholder);
+}
+.question-text-container input,
+.question-text-container textarea,
+.question-text-container [contenteditable] {
+	-webkit-user-select: text;
+	user-select: text;
 }

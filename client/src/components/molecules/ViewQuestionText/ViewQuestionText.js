@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ContentEditable from 'react-contenteditable';
 
 class ViewQuestionText extends Component {
 	constructor(props) {
 		super(props);
+
+		this.contentEditable = React.createRef();
 
 		this.state = {
 			_id: this.props.question._id,
@@ -29,17 +32,13 @@ class ViewQuestionText extends Component {
 		return (
 			<div className="question-text-container">
 				<div className="input-group">
-					<textarea
-						style={{
-							background: '#000',
-							border: 0,
-							color: '#FFF',
-							'font-family': 'Ravensara',
-							padding: '1em',
-							textAlign: 'center',
-						}}
-						onChange={e => this.handleChange(e)}
+					<ContentEditable
+						innerRef={this.contentEditable}
+						html={this.state.value} // innerHTML of the editable div
+						onChange={this.handleChange.bind(this)} // handle innerHTML change
+						tagName="article" // Use a custom HTML tag (uses a div by default)
 						placeholder={this.props.question.title}
+						style={{ textAlign: 'center' }}
 					/>
 
 					{this.state.value && (

@@ -5,9 +5,18 @@
 	justify-content: center;
 	height: 100vh;
 
-	form {
-		display: flex;
-		justify-content: center;
-		align-items: center;
+	.input-group {
+		margin-bottom: 1em;
+	}
+
+	[contenteditable='true']:empty::before {
+		content: attr(placeholder);
+	}
+
+	input,
+	textarea,
+	[contenteditable] {
+		-webkit-user-select: text;
+		user-select: text;
 	}
 }

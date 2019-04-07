@@ -125,10 +125,17 @@
 	justify-content: center;
 	height: 100vh;
 }
-.question-text-container form {
-	display: flex;
-	justify-content: center;
-	align-items: center;
+.question-text-container .input-group {
+	margin-bottom: 1em;
+}
+.question-text-container [contenteditable='true']:empty::before {
+	content: attr(placeholder);
+}
+.question-text-container input,
+.question-text-container textarea,
+.question-text-container [contenteditable] {
+	-webkit-user-select: text;
+	user-select: text;
 }
 
 .questionnaire-login {
@@ -169,13 +176,22 @@
 }
 
 .questionnaire-registration {
-	height: 100vh;
-	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35)),
-		url('assets/car.jpg');
+	background-position: center center;
 	background-size: cover;
+	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.35))
+		url('assets/car.jpg') no-repeat;
 	display: flex;
 	flex-direction: column;
+	height: 100vh;
 	justify-content: center;
+}
+@media (max-width: 500px) {
+	.questionnaire-registration {
+		background-size: 100%;
+	}
+}
+.questionnaire-registration .registration-input-container {
+	margin-bottom: 1em;
 }
 .questionnaire-registration .error-message {
 	color: red;
@@ -187,7 +203,7 @@
 .questionnaire-preview {
 	height: 100vh;
 	background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.15)),
-		url('assets/table.jpg');
+		url('assets/table.jpg') center center;
 	background-size: cover;
 	display: flex;
 	flex-direction: column;
@@ -212,6 +228,7 @@
 	font-family: 'Northwell';
 	line-height: 1.2;
 	font-size: 40px;
+	margin-bottom: 1em;
 }
 .questionnaire-preview .closing-note {
 	line-height: 1;
