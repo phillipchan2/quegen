@@ -91,7 +91,7 @@
 	flex-direction: column;
 	height: 100vh;
 	justify-content: center;
-	padding: 0 0.5em;
+	padding: 0 0.5sem;
 }
 .view-question-weighted:focus {
 	outline: none;
@@ -294,12 +294,14 @@
 }
 .questionnaire-result .result-text {
 	font-family: 'Windsong';
-	padding: 1em;
-	z-index: 3;
 	font-size: 38px;
+	padding: 0 1em;
 	position: fixed;
+	text-align: center;
 	top: 50%;
 	transform: translateY(-50%);
+	width: 100vw;
+	z-index: 3;
 }
 .questionnaire-result .results-closing {
 	bottom: 1em;
