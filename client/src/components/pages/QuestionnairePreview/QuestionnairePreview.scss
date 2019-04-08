@@ -29,6 +29,11 @@
 		line-height: 1.2;
 		font-size: 40px;
 		margin-bottom: 1em;
+		padding: 0 1em;
+		position: fixed;
+		top: 50%;
+		transform: translateY(-50%);
+		left: 0;
 	}
 
 	.closing-note {

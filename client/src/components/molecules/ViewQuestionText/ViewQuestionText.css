@@ -1,9 +1,10 @@
 .question-text-container {
-	display: flex;
-	flex-direction: column;
-	align-content: center;
-	justify-content: center;
-	height: 100vh;
+	box-sizing: border-box;
+	padding: 0 1em;
+	position: fixed;
+	top: 45%;
+	transform: translateY(-50%);
+	width: 100vw;
 }
 .question-text-container .input-group {
 	margin-bottom: 1em;
@@ -16,4 +17,5 @@
 .question-text-container [contenteditable] {
 	-webkit-user-select: text;
 	user-select: text;
+	text-align: center;
 }

@@ -89,10 +89,7 @@ class QuestionnaireRegistration extends Component {
 
 	render() {
 		return (
-			<div
-				className="questionnaire-registration"
-				style={{ padding: '0 1em 0' }}
-			>
+			<div className="questionnaire-registration">
 				{this.state.errorMessages.length > 0 && (
 					<div className="error-message">
 						{this.state.errorMessages.map(message => {
