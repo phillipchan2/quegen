@@ -24,15 +24,28 @@
 			background: transparent;
 			margin-bottom: 0;
 			z-index: 2;
+			position: fixed;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 100vw;
 		}
 
 		.placeholder {
-			position: absolute;
+			position: fixed;
 			font-family: 'Northwell';
 			font-size: 80px;
 			top: 50%;
 			left: 50%;
 			transform: translate(-50%, -50%);
+			width: 100vw;
+			opacity: 1;
+
+			&.focused {
+				opacity: 0;
+				transition: 0.1s opacity ease-in-out;
+				appearance: none;
+			}
 		}
 	}
 }

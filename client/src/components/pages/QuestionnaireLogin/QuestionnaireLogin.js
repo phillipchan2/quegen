@@ -54,13 +54,20 @@ class QuestionnaireLogin extends Component {
 							this.setState({ inputFocused: false });
 						}}
 					/>
-					{!this.state.inputFocused &&
-						!this.state.userInputtedPassword.length > 0 && (
-							<div className="placeholder">Password</div>
-						)}
+
+					<div
+						className={`placeholder ${
+							this.state.inputFocused ? 'focused' : ''
+						}`}
+					>
+						Password
+					</div>
 				</div>
 				{this.state.userInputtedPassword.length > 0 && (
-					<button onClick={this.checkPassword.bind(this)}>
+					<button
+						style={{ marginTop: '2em' }}
+						onClick={this.checkPassword.bind(this)}
+					>
 						Enter
 					</button>
 				)}
