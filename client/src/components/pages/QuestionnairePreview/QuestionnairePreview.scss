@@ -8,6 +8,7 @@
 	justify-content: center;
 	text-align: center;
 	padding: 0 1em;
+
 	position: relative;
 
 	.closing-section {
@@ -31,9 +32,10 @@
 		margin-bottom: 1em;
 		padding: 0 1em;
 		position: fixed;
+		max-width: 960px;
+		left: 50%;
 		top: 50%;
-		transform: translateY(-50%);
-		left: 0;
+		transform: translate(-50%, -50%);
 	}
 
 	.closing-note {
