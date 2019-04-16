@@ -44,7 +44,6 @@ class QuestionnaireLogin extends Component {
 					<input
 						style={{ borderBottom: 0 }}
 						type="text"
-						// placeholder="Password"
 						onKeyPress={this.handleKeyPress.bind(this)}
 						onChange={this.handleChange.bind(this)}
 						onFocus={() => {
@@ -57,7 +56,10 @@ class QuestionnaireLogin extends Component {
 
 					<div
 						className={`placeholder ${
-							this.state.inputFocused ? 'focused' : ''
+							this.state.inputFocused ||
+							this.state.userInputtedPassword.length > 0
+								? 'focused'
+								: ''
 						}`}
 					>
 						Password
@@ -65,7 +67,7 @@ class QuestionnaireLogin extends Component {
 				</div>
 				{this.state.userInputtedPassword.length > 0 && (
 					<button
-						style={{ marginTop: '2em' }}
+						className="login-button"
 						onClick={this.checkPassword.bind(this)}
 					>
 						Enter

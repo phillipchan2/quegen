@@ -158,6 +158,12 @@
 		background-position: center 120px;
 	}
 }
+.questionnaire-login .login-button {
+	position: fixed;
+	top: calc(50% + 2em);
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
 .questionnaire-login .input-group {
 	position: relative;
 }
@@ -166,7 +172,7 @@
 	font-family: 'Ravensara', Arial, Helvetica, sans-serif;
 	line-height: 75px;
 	background: transparent;
-	margin-bottom: 0;
+	margin-bottom: 1em;
 	z-index: 2;
 	position: fixed;
 	top: 50%;
