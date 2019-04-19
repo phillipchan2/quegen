@@ -364,6 +364,7 @@ class AddEditQuestionnaire extends Component {
 								/>
 							</Form.Field>
 							<Form.Field>
+								<label>Associated Category Set</label>
 								<Dropdown
 									fluid
 									selection
