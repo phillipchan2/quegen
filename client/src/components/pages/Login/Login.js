@@ -1,56 +1,55 @@
 // libraries
-import React, { Component } from 'react'
-import axios from 'axios'
-import { inject, observer } from 'mobx-react'
-import { Redirect, Link } from 'react-router-dom'
+import React, { Component } from 'react';
+import axios from 'axios';
+import { inject, observer } from 'mobx-react';
+import { Redirect, Link } from 'react-router-dom';
 
 // components
-import { Button, Header, Form, Message } from 'semantic-ui-react'
+import { Button, Header, Form, Message } from 'semantic-ui-react';
 
 @inject('AuthStore')
 @observer
 class Login extends Component {
 	constructor(props) {
-		super(props)
+		super(props);
 
 		this.state = {
 			loginSuccess: false,
 			errorMessage: '',
-		}
-		this.handleChange.bind(this)
+		};
+		this.handleChange.bind(this);
 	}
 
 	handleChange(e) {
-		var key = e.target.name
-		var value = e.target.value
-		var obj = {}
+		var key = e.target.name;
+		var value = e.target.value;
+		var obj = {};
 
-		obj[key] = value
+		obj[key] = value;
 
-		this.setState(obj)
+		this.setState(obj);
 	}
 
 	handleSubmit() {
 		axios.post(`/api/auth/login`, this.state).then(res => {
-			console.log(res)
 			if (res.data.success) {
 				this.setState({
 					loginSuccess: true,
-				})
+				});
 
-				this.props.AuthStore.login(res.data.user, res.data.token)
+				this.props.AuthStore.login(res.data.user, res.data.token);
 			} else {
 				this.setState({
 					loginSuccess: false,
 					errorMessage: res.data.message,
-				})
+				});
 			}
-		})
+		});
 	}
 
 	render() {
 		if (this.props.AuthStore.isAuthenticated) {
-			return <Redirect to="/admin/questionnaires" />
+			return <Redirect to="/admin/questionnaires" />;
 		} else {
 			return (
 				<div className="login-page" style={{ padding: '3em' }}>
@@ -92,9 +91,9 @@ class Login extends Component {
 						<Link to={'/admin/register'}>Register for one</Link>
 					</Form>
 				</div>
-			)
+			);
 		}
 	}
 }
 
-export default Login
+export default Login;

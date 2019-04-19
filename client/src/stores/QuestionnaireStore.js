@@ -13,12 +13,10 @@ class QuestionnaireStore {
 			axios
 				.get(`/api/questionnaire/`, {
 					headers: {
-						token: jwtoken
-					}
+						token: jwtoken,
+					},
 				})
 				.then(res => {
-					console.log(res);
-
 					if (res.data.success) {
 						this.questionnaires = res.data.data;
 					}

@@ -26,16 +26,13 @@ class Register extends Component {
 
 	handleSubmit() {
 		axios.post(`/api/auth/register`, this.state).then(res => {
-			console.log(res);
 			if (res.data.success) {
 				this.setState({
-					registerSuccess: true
+					registerSuccess: true,
 				});
-
-				console.log('success resgister');
 			} else {
 				this.setState({
-					errorMessage: res.data.message
+					errorMessage: res.data.message,
 				});
 			}
 

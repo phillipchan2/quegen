@@ -8,7 +8,7 @@ router.get('/', (req, res, next) => {
 		if (!err) {
 			res.json({
 				success: true,
-				data: Questionnaires
+				data: Questionnaires,
 			});
 		} else {
 			res.status(400).json({ success: false, message: err });
@@ -25,14 +25,14 @@ router.get('/:id', (req, res, next) => {
 			if (questionnaire.userId !== String(req.user._id)) {
 				res.json({
 					success: false,
-					message: errorMessages.unauthorized
+					message: errorMessages.unauthorized,
 				});
 			}
 			// sucess
 			else {
 				res.status(200).json({
 					success: true,
-					data: questionnaire
+					data: questionnaire,
 				});
 			}
 		} else {
@@ -48,7 +48,7 @@ router.get('/:id/responses', (req, res, next) => {
 		if (questionnaire) {
 			res.status(200).json({
 				success: true,
-				data: questionnaire.responses
+				data: questionnaire.responses,
 			});
 		} else {
 			res.status(200).json({ success: false, message: 'Not Found' });
@@ -59,11 +59,9 @@ router.get('/:id/responses', (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
 	var id = req.params.id;
 
-	console.log('id', id);
-
 	Questionnaire.findOneAndDelete(
 		{
-			_id: id
+			_id: id,
 		},
 		(err, query) => {
 			if (query) {
@@ -85,7 +83,7 @@ router.post('/', (req, res, next) => {
 
 		Questionnaire.findOneAndUpdate(
 			{
-				_id: id
+				_id: id,
 			},
 			updateParams,
 			(err, query) => {
@@ -94,7 +92,7 @@ router.post('/', (req, res, next) => {
 				} else {
 					res.status(200).json({
 						success: false,
-						message: 'Not found'
+						message: 'Not found',
 					});
 				}
 			}

@@ -40,7 +40,6 @@ class AddEditCategorySet extends Component {
 					},
 				})
 				.then(res => {
-					console.log(res);
 					if (res.data.success) {
 						this.setState({
 							currentCategorySet: res.data.data,
@@ -84,8 +83,6 @@ class AddEditCategorySet extends Component {
 		var key = e.target.name;
 		var value = e.target.value;
 		var newState = this.state;
-
-		console.log(index);
 
 		newState['currentCategorySet']['categories'][index][key] = value;
 

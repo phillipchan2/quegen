@@ -262,7 +262,6 @@ class AddEditQuestionnaire extends Component {
 							}
 						});
 				} else {
-					console.log('errorMessages', errorMessages);
 					this.setState({
 						errorMessages: errorMessages,
 					});

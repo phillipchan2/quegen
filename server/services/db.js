@@ -13,15 +13,10 @@ if (process.env.NODE_ENV === 'dev') {
 	}/${config.db_name}`;
 }
 
-console.log('dbURL', dbURL);
-
-mongoose.connect(
-	dbURL,
-	err => {
-		if (err) {
-			console.log('Failed to connect to mongodb at ' + dbURL);
-		} else {
-			console.log('Successfully connected to mongodb at ' + dbURL);
-		}
+mongoose.connect(dbURL, err => {
+	if (err) {
+		console.log('Failed to connect to mongodb at ' + dbURL);
+	} else {
+		console.log('Successfully connected to mongodb at ' + dbURL);
 	}
-);
+});

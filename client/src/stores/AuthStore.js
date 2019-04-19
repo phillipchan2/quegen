@@ -43,12 +43,10 @@ class AuthStore {
 			axios
 				.get(`/api/auth/verify`, {
 					headers: {
-						token: jwtoken
-					}
+						token: jwtoken,
+					},
 				})
 				.then(res => {
-					console.log('login', res);
-
 					if (res.data.success) {
 						success = true;
 						this.login(res.data.user, jwtoken);
