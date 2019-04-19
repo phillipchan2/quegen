@@ -378,9 +378,7 @@ class AddEditQuestionnaire extends Component {
 											};
 										}
 									)}
-									defaultValue={
-										this.state.currentCategorySet._id
-									}
+									value={this.state.currentCategorySet._id}
 									onChange={this.handleCategorySetChange.bind(
 										this
 									)}
