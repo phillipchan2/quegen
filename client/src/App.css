@@ -413,3 +413,7 @@ body {
 .admin-container .router {
 	padding: 2rem;
 }
+
+*:focus {
+	outline: none;
+}
