@@ -1,3 +1,5 @@
+var _ = require('lodash');
+
 var getCategoryIdWithMostResponses = (questionnaire, responses) => {
 	var tally = [];
 
@@ -15,7 +17,7 @@ var getCategoryIdWithMostResponses = (questionnaire, responses) => {
 				if (indexOfCategoryInTally === -1) {
 					tally.push({
 						_id: category,
-						tally: 1
+						tally: 1,
 					});
 				} else {
 					tally[indexOfCategoryInTally].tally++;
@@ -24,9 +26,8 @@ var getCategoryIdWithMostResponses = (questionnaire, responses) => {
 		});
 	});
 
-	var categoryIdWithMostTallies = tally.reduce((total, currentValue) => {
-		return currentValue > total ? currentValue : total;
-	});
+	const sortedTallies = _.sortBy(tally, 'tally');
+	const categoryIdWithMostTallies = sortedTallies[sortedTallies.length - 1];
 
 	return categoryIdWithMostTallies._id;
 };

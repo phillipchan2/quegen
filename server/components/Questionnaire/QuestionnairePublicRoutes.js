@@ -15,7 +15,7 @@ router.get('/:id', (req, res, next) => {
 
 			res.status(200).json({
 				success: true,
-				data: formattedQuestionnaire
+				data: formattedQuestionnaire,
 			});
 		} else {
 			res.status(400).json({ success: false, message: 'Not Found' });
@@ -31,7 +31,7 @@ router.post('/:id/submit', (req, res, next) => {
 
 		Questionnaire.findOne(
 			{
-				_id: id
+				_id: id,
 			},
 			(err, questionnaire) => {
 				if (!err) {
@@ -44,9 +44,14 @@ router.post('/:id/submit', (req, res, next) => {
 						weightedResponses
 					);
 
+					console.log(
+						'TCL: categoryIdWithMostReponses',
+						categoryIdWithMostReponses
+					);
+
 					CategorySet.findOne(
 						{
-							'categories._id': categoryIdWithMostReponses
+							'categories._id': categoryIdWithMostReponses,
 						},
 						(err, categorySet) => {
 							let category = categorySet.categories.find(
@@ -65,12 +70,12 @@ router.post('/:id/submit', (req, res, next) => {
 								if (!err) {
 									res.status(200).json({
 										success: true,
-										data: category
+										data: category,
 									});
 								} else {
 									res.status(200).json({
 										success: false,
-										message: err
+										message: err,
 									});
 								}
 							});
@@ -79,7 +84,7 @@ router.post('/:id/submit', (req, res, next) => {
 				} else {
 					res.status(400).json({
 						success: false,
-						message: err
+						message: err,
 					});
 				}
 			}
@@ -87,7 +92,7 @@ router.post('/:id/submit', (req, res, next) => {
 	} else {
 		res.status(400).json({
 			success: false,
-			message: 'Not found'
+			message: 'Not found',
 		});
 	}
 });
