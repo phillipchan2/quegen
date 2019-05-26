@@ -71,6 +71,18 @@ class QuestionnaireRegistration extends Component {
 		});
 	}
 
+	updateNumber = e => {
+		const val = e.target.value;
+		// If the current value passes the validity test then apply that to state
+		if (e.target.validity.valid)
+			this.setState({ [e.target.name]: e.target.value });
+		// If the current val is just the negation sign, or it's been provided an empty string,
+		// then apply that value to state - we still have to validate this input before processing
+		// it to some other component or data structure, but it frees up our input the way a user
+		// would expect to interact with this component
+		else if (val === '' || val === '-') this.setState({ message: val });
+	};
+
 	handleSubmit() {
 		this.validateForm((success, message) => {
 			if (success === true) {
@@ -116,9 +128,11 @@ class QuestionnaireRegistration extends Component {
 					<input
 						placeholder="Phone Number"
 						name="phone"
+						type="tel"
+						pattern="^-?[0-9]\d*\.?\d*$"
 						maxLength="10"
 						value={this.state.phone}
-						onChange={this.handleChange.bind(this)}
+						onChange={this.updateNumber.bind(this)}
 					/>
 					<button onClick={this.handleSubmit.bind(this)}>Next</button>
 				</div>
